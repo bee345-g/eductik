@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Administration privée des ressources ABFLEX.">
+<title>Administration — ABFLEX</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--pink:#f7b4c8;--pink-light:#fff0f5;--yellow:#ffdf70;--orange:#ff9d55;--red:#e94b62;--dark:#382b36;--text:#665561;--shadow:0 10px 30px rgba(80,40,60,.09);--radius:22px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fffafc;line-height:1.7}
+a{color:inherit;text-decoration:none}
+.container{width:min(900px,92%);margin:auto}
+header{background:rgba(255,255,255,.96);box-shadow:0 3px 18px rgba(80,40,60,.06)}
+.navbar{min-height:82px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:53px;height:53px;display:flex;justify-content:center;align-items:center;border-radius:17px;color:white;font-size:21px;font-weight:900;background:linear-gradient(135deg,var(--red),var(--orange),var(--yellow));box-shadow:0 5px 15px rgba(233,75,98,.22)}
+.logo-name{font-size:25px;font-weight:900;letter-spacing:1px;color:var(--red);line-height:1.2}
+.logo-tagline{display:block;color:var(--text);font-size:11px}
+.navlink{font-size:14px;font-weight:700;color:var(--red)}
+.hero{padding:45px 0 20px;text-align:center}
+.eyebrow{display:inline-block;padding:7px 15px;margin-bottom:15px;border-radius:30px;color:#c83d58;background:#ffe5ed;font-size:13px;font-weight:800}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.2;margin-bottom:12px}
+h1 span{color:var(--red)}
+.hero p{color:var(--text)}
+main{padding-bottom:65px}
+.panel{background:#fff;border:1px solid #f8e6ed;border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin:22px auto}
+.panel h2{font-size:22px;margin-bottom:8px}
+.muted{color:var(--text);font-size:14px;margin-bottom:18px}
+form{display:grid;gap:14px}
+label{font-weight:700;font-size:14px;display:grid;gap:6px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #ecdde4;border-radius:12px;background:#fffafc;color:var(--dark);font:inherit;font-size:14px}
+textarea{min-height:100px;resize:vertical}
+button{border:0;border-radius:25px;padding:12px 18px;font-weight:800;font-size:14px;cursor:pointer}
+.primary{background:var(--red);color:white}
+.primary:hover{background:#d93651}
+.secondary{background:#fff0f5;color:#b33c54}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.status{padding:12px 15px;border-radius:12px;background:#fff0f5;color:#8f3047;font-size:14px;display:none;overflow-wrap:anywhere}
+.status.show{display:block}
+.status.success{background:#eaf8ef;color:#236b3c}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.small{font-size:12px;color:var(--text)}
+.hidden{display:none!important}
+footer{text-align:center;padding:25px;color:var(--text);font-size:12px}
+@media(max-width:600px){.navbar{padding:12px 0;flex-wrap:wrap}.row{grid-template-columns:1fr}.panel{padding:20px}.logo-name{font-size:22px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">AB</div>
+      <div><div class="logo-name">ABFLEX</div><span class="logo-tagline">Votre partenaire en français</span></div>
+    </a>
+    <a class="navlink" href="ressources.html">Voir les ressources ↗</a>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow">Espace privé</span>
+  <h1>Administration <span>ABFLEX</span></h1>
+  <p>Connectez-vous pour ajouter et publier des ressources pédagogiques.</p>
+</section>
+
+<main class="container">
+  <section class="panel" id="loginPanel">
+    <h2>Connexion administrateur</h2>
+    <p class="muted">Utilisez l’adresse e-mail et le mot de passe du compte créé dans Supabase.</p>
+    <form id="loginForm">
+      <label>Adresse e-mail
+        <input id="email" type="email" autocomplete="username" required placeholder="votre adresse e-mail">
+      </label>
+      <label>Mot de passe
+        <input id="password" type="password" autocomplete="current-password" required placeholder="Votre mot de passe">
+      </label>
+      <button class="primary" type="submit">Se connecter</button>
+      <div class="status" id="loginStatus" role="status"></div>
+    </form>
+  </section>
+
+  <section class="panel hidden" id="adminPanel">
+    <div class="toolbar">
+      <div>
+        <h2>Ajouter une ressource</h2>
+        <p class="muted">Complétez les informations puis choisissez le fichier à publier.</p>
+      </div>
+      <button class="secondary" type="button" id="logoutBtn">Déconnexion</button>
+    </div>
+    <form id="resourceForm">
+      <label>Titre de la ressource
+        <input id="titre" maxlength="180" required placeholder="Ex. Fiche de compréhension de l’écrit">
+      </label>
+      <label>Description
+        <textarea id="description" maxlength="1500" placeholder="Présentez brièvement le contenu de la ressource"></textarea>
+      </label>
+      <div class="row">
+        <label>Niveau
+          <select id="niveau" required>
+            <option value="">Choisir un niveau</option>
+            <option value="1AS">1AS</option><option value="2AS">2AS</option><option value="3AS">3AS</option>
+          </select>
+        </label>
+        <label>Compétence
+          <select id="competence" required>
+            <option value="">Choisir une compétence</option>
+            <option>Compréhension de l’écrit</option>
+            <option>Compréhension de l’oral</option>
+            <option>Production écrite</option>
+            <option>Production orale</option>
+            <option>Points de langue</option>
+            <option>Autres</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Type de ressource
+          <select id="typeRessource" required>
+            <option value="">Choisir un type</option>
+            <option>Fiche pédagogique</option>
+            <option>Support textuel</option>
+            <option>Activité / exercice</option>
+            <option>Évaluation</option>
+            <option>Audio</option>
+            <option>Vidéo</option>
+            <option>Autre</option>
+          </select>
+        </label>
+        <label>Fichier (PDF, image, audio, vidéo…)
+          <input id="fichier" type="file" required accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.webp,.mp3,.wav,.ogg,.mp4,.webm">
+        </label>
+      </div>
+      <p class="small">Limite actuelle : 50 Mo par fichier. Le bucket est public : les personnes qui disposent du lien peuvent ouvrir le fichier.</p>
+      <button class="primary" id="publishBtn" type="submit">Téléverser et publier</button>
+      <div class="status" id="formStatus" role="status"></div>
+    </form>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> ABFLEX — Administration privée</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Configuration publique Supabase : ne jamais mettre une clé secret ici. */
+const SUPABASE_URL = "https://gxztteylmztlxikhrhwo.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_sDtCL2dhLqT8iZzAkhjegg_K2p7Kz_d";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+const loginPanel = document.getElementById("loginPanel");
+const adminPanel = document.getElementById("adminPanel");
+const loginStatus = document.getElementById("loginStatus");
+const formStatus = document.getElementById("formStatus");
+const publishBtn = document.getElementById("publishBtn");
+
+function showStatus(element, message, success=false) {
+  element.textContent = message;
+  element.className = "status show" + (success ? " success" : "");
+}
+function setLoggedIn(isLoggedIn) {
+  loginPanel.classList.toggle("hidden", isLoggedIn);
+  adminPanel.classList.toggle("hidden", !isLoggedIn);
+}
+async function refreshSession() {
+  const { data } = await supabaseClient.auth.getSession();
+  setLoggedIn(!!data.session);
+}
+document.getElementById("loginForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  loginStatus.className = "status";
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+  if (error) {
+    showStatus(loginStatus, "Connexion impossible : " + error.message);
+    return;
+  }
+  showStatus(loginStatus, "Connexion réussie.", true);
+  setLoggedIn(true);
+});
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await supabaseClient.auth.signOut();
+  setLoggedIn(false);
+  document.getElementById("password").value = "";
+});
+
+document.getElementById("resourceForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  formStatus.className = "status";
+  const file = document.getElementById("fichier").files[0];
+  if (!file) {
+    showStatus(formStatus, "Choisissez un fichier à téléverser.");
+    return;
+  }
+  if (file.size > 50 * 1024 * 1024) {
+    showStatus(formStatus, "Le fichier dépasse la limite de 50 Mo.");
+    return;
+  }
+  publishBtn.disabled = true;
+  publishBtn.textContent = "Téléversement en cours…";
+  try {
+    const safeName = file.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filePath = Date.now() + "-" + crypto.randomUUID() + "-" + safeName;
+    const { error: uploadError } = await supabaseClient.storage.from("ressources").upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: false,
+      contentType: file.type || "application/octet-stream"
+    });
+    if (uploadError) throw uploadError;
+
+    const { data: publicData } = supabaseClient.storage.from("ressources").getPublicUrl(filePath);
+    const { error: insertError } = await supabaseClient.from("ressources").insert({
+      titre: document.getElementById("titre").value.trim(),
+      description: document.getElementById("description").value.trim() || null,
+      niveau: document.getElementById("niveau").value,
+      competence: document.getElementById("competence").value,
+      type_ressource: document.getElementById("typeRessource").value,
+      fichier_url: publicData.publicUrl,
+      publie: true
+    });
+    if (insertError) throw insertError;
+
+    showStatus(formStatus, "Ressource publiée avec succès ! Elle apparaîtra dans la bibliothèque après la mise à jour de la page Ressources.", true);
+    document.getElementById("resourceForm").reset();
+  } catch (error) {
+    showStatus(formStatus, "Une erreur est survenue : " + (error.message || "veuillez réessayer."));
+  } finally {
+    publishBtn.disabled = false;
+    publishBtn.textContent = "Téléverser et publier";
+  }
+});
+
+refreshSession();
+</script>
+</body>
+</html>
