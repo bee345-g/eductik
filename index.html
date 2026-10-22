@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="description" content="ABFLEX, votre partenaire en français. Découvrez un espace dédié aux enseignants et aux ressources pédagogiques en FLE.">
-
   <title>ABFLEX — Votre partenaire en français</title>
 
   <style>
@@ -84,12 +82,7 @@
       color: white;
       font-size: 21px;
       font-weight: 900;
-      background: linear-gradient(
-        135deg,
-        var(--red),
-        var(--orange),
-        var(--yellow)
-      );
+      background: linear-gradient(135deg, var(--red), var(--orange), var(--yellow));
       box-shadow: 0 5px 15px rgba(233, 75, 98, 0.22);
     }
 
@@ -145,16 +138,8 @@
       padding: 85px 0 90px;
       overflow: hidden;
       background:
-        radial-gradient(
-          circle at 90% 15%,
-          rgba(255, 223, 112, 0.38),
-          transparent 25%
-        ),
-        radial-gradient(
-          circle at 5% 90%,
-          rgba(247, 180, 200, 0.38),
-          transparent 28%
-        ),
+        radial-gradient(circle at 90% 15%, rgba(255, 223, 112, 0.38), transparent 25%),
+        radial-gradient(circle at 5% 90%, rgba(247, 180, 200, 0.38), transparent 28%),
         linear-gradient(135deg, #fff8fb, #fffaf0);
     }
 
@@ -270,12 +255,7 @@
       justify-content: center;
       align-items: center;
       border-radius: 20px;
-      background: linear-gradient(
-        135deg,
-        var(--pink),
-        var(--orange),
-        var(--yellow)
-      );
+      background: linear-gradient(135deg, var(--pink), var(--orange), var(--yellow));
       color: white;
       font-size: 23px;
       font-weight: 900;
@@ -419,11 +399,7 @@
       align-items: center;
       padding: 35px;
       border-radius: 30px;
-      background: linear-gradient(
-        135deg,
-        #ffe9f0,
-        #fff2d6
-      );
+      background: linear-gradient(135deg, #ffe9f0, #fff2d6);
     }
 
     .about-illustration {
@@ -508,12 +484,7 @@
 
     .cta-section {
       padding: 70px 0;
-      background: linear-gradient(
-        120deg,
-        #f9bdce,
-        #ffd97d,
-        #ffb16d
-      );
+      background: linear-gradient(120deg, #f9bdce, #ffd97d, #ffb16d);
     }
 
     .cta-box {
@@ -541,22 +512,18 @@
     /* FOOTER */
 
     footer {
-      padding: 40px 0 20px;
+      padding: 45px 0 20px;
       color: white;
       background: #382b36;
     }
 
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-      flex-wrap: wrap;
-      padding-bottom: 25px;
+    .footer-brand {
+      text-align: center;
+      padding-bottom: 30px;
     }
 
     .footer-logo {
-      font-size: 25px;
+      font-size: 27px;
       font-weight: 900;
       letter-spacing: 1px;
     }
@@ -567,25 +534,69 @@
 
     .footer-description {
       max-width: 360px;
-      margin-top: 5px;
+      margin: 8px auto 0;
       color: #e9dce4;
       font-size: 13px;
     }
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
+    /* CONTACT CARD */
+
+    .contact-card {
+      max-width: 540px;
+      margin: 10px auto 32px;
+      padding: 32px 22px;
+      text-align: center;
+      background: #ffffff;
+      border: 2px solid #ffe1eb;
+      border-radius: 26px;
+      box-shadow: 0 10px 30px rgba(247, 180, 200, 0.18);
+      transition: 0.25s;
     }
 
-    .footer-links a {
-      color: #f6eaf0;
-      font-size: 13px;
-      transition: 0.2s;
+    .contact-card:hover {
+      box-shadow: 0 14px 35px rgba(247, 180, 200, 0.25);
     }
 
-    .footer-links a:hover {
-      color: var(--yellow);
+    .contact-card h2 {
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-size: clamp(21px, 4vw, 27px);
+      line-height: 1.4;
+    }
+
+    .contact-intro {
+      margin-bottom: 20px;
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      max-width: 100%;
+      padding: 13px 22px;
+      border-radius: 30px;
+      background: #fff0f5;
+      border: 1px solid #ffd5e2;
+      color: #d93651;
+      font-size: 16px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+      transition: 0.25s;
+    }
+
+    .contact-button:hover {
+      background: #ffe1eb;
+      box-shadow: 0 6px 15px rgba(233, 75, 98, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .contact-note {
+      margin-top: 15px;
+      color: var(--text);
+      font-size: 12px;
     }
 
     .footer-bottom {
@@ -694,9 +705,13 @@
         padding: 20px;
       }
 
-      .footer-content {
-        flex-direction: column;
-        align-items: flex-start;
+      .contact-card {
+        padding: 27px 14px;
+      }
+
+      .contact-button {
+        padding: 12px 14px;
+        font-size: 14px;
       }
     }
   </style>
@@ -728,7 +743,6 @@
 
     </div>
   </header>
-
 
   <main>
 
@@ -769,7 +783,6 @@
           </div>
 
         </div>
-
 
         <div class="hero-visual">
 
@@ -827,7 +840,6 @@
 
     </section>
 
-
     <!-- À PROPOS -->
     <section class="section about-section" id="apropos">
 
@@ -849,7 +861,6 @@
           </div>
 
         </div>
-
 
         <div class="about-content">
 
@@ -879,7 +890,6 @@
           <div class="about-points">
 
             <div class="about-point">
-
               <div class="check-icon">✓</div>
 
               <div>
@@ -889,12 +899,9 @@
                   et la préparation des cours.
                 </p>
               </div>
-
             </div>
 
-
             <div class="about-point">
-
               <div class="check-icon">✓</div>
 
               <div>
@@ -904,12 +911,9 @@
                   pédagogiques du terrain.
                 </p>
               </div>
-
             </div>
 
-
             <div class="about-point">
-
               <div class="check-icon">✓</div>
 
               <div>
@@ -919,7 +923,6 @@
                   audio et vidéo dans l’enseignement du FLE.
                 </p>
               </div>
-
             </div>
 
           </div>
@@ -929,7 +932,6 @@
       </div>
 
     </section>
-
 
     <!-- CALL TO ACTION -->
     <section class="cta-section">
@@ -956,50 +958,53 @@
 
   </main>
 
-
   <!-- FOOTER -->
   <footer>
 
     <div class="container">
 
-      <div class="footer-content">
+      <div class="footer-brand">
 
-        <div>
+        <a href="index.html" class="footer-logo">
+          AB<span>FLEX</span>
+        </a>
 
-          <a href="index.html" class="footer-logo">
-            AB<span>FLEX</span>
-          </a>
-
-          <p class="footer-description">
-            Votre partenaire en français : un espace dédié
-            aux ressources didactiques et à l’enseignement du FLE.
-          </p>
-
-        </div>
-
-
-              <a href="index.html">Accueil</a>
-      <a href="niveaux.html">Les niveaux</a>
-      <a href="competences.html">Compétences</a>
-      <a href="ressources.html">Ressources</a>
-      <a href="index.html#apropos">Découvrir ABFLEX</a>
-      <a href="mailto:abflexdz213@gmail.com">✉️ abflexdz213@gmail.com</a>
-
-    </nav>
+        <p class="footer-description">
+          Votre partenaire en français : un espace dédié
+          aux ressources didactiques et à l’enseignement du FLE.
+        </p>
 
       </div>
 
+      <!-- CONTACT CARD -->
+      <div class="contact-card">
+
+        <h2>Une question ou une suggestion ?</h2>
+
+        <p class="contact-intro">
+          Contactez-nous ⬇️
+        </p>
+
+        <a
+          href="mailto:abflexdz213@gmail.com"
+          class="contact-button"
+        >
+          ✉️ abflexdz213@gmail.com
+        </a>
+
+        <p class="contact-note">
+          Nous serons ravis de recevoir vos messages et suggestions.
+        </p>
+
+      </div>
 
       <div class="footer-bottom">
-
         © <span id="year"></span> ABFLEX — Tous droits réservés.
-
       </div>
 
     </div>
 
   </footer>
-
 
   <script>
     document.getElementById("year").textContent =
