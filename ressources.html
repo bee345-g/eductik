@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ressources | ABFLEX</title>
+
+  <meta name="description" content="Découvrez les ressources pédagogiques en français sur ABFLEX.">
+
+  <style>
+    :root {
+      --pink: #f7b6d2;
+      --pink-dark: #e85d96;
+      --yellow: #ffe477;
+      --orange: #ffad70;
+      --red: #f16b70;
+      --cream: #fffaf5;
+      --text: #42313a;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background: var(--white);
+      padding: 16px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      box-shadow: 0 3px 15px #0000000a;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--pink-dark);
+      letter-spacing: -2px;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--pink-dark);
+    }
+
+    .hero {
+      padding: 65px 6%;
+      text-align: center;
+      background: linear-gradient(
+        120deg,
+        #ffe8f1,
+        #fff2bd,
+        #ffe0c7
+      );
+    }
+
+    .badge {
+      display: inline-block;
+      background: white;
+      padding: 7px 16px;
+      border-radius: 30px;
+      color: var(--pink-dark);
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: var(--pink-dark);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: #685560;
+      font-size: 16px;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: auto;
+      padding: 45px 6%;
+    }
+
+    .section-title {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .section-description {
+      color: #796b73;
+      margin-bottom: 25px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .filter-box {
+      background: white;
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid #f2e3e9;
+    }
+
+    .filter-box label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #e8dce2;
+      border-radius: 10px;
+      background: white;
+      color: var(--text);
+      font-size: 15px;
+      outline-color: var(--pink-dark);
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .resource-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #f2e3e9;
+      box-shadow: 0 5px 18px #00000006;
+      transition: transform 0.2s;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-top {
+      padding: 24px;
+      text-align: center;
+      font-size: 38px;
+    }
+
+    .pink-bg {
+      background: #ffe4ef;
+    }
+
+    .yellow-bg {
+      background: #fff3bf;
+    }
+
+    .orange-bg {
+      background: #ffe4d1;
+    }
+
+    .red-bg {
+      background: #ffe0df;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      background: #fff0f6;
+      color: #c9477b;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-content h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card-content p {
+      color: #796b73;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .resource-type {
+      font-size: 12px;
+      color: #8a7b83;
+      margin-bottom: 15px;
+    }
+
+    .resource-button {
+      display: inline-block;
+      padding: 10px 16px;
+      background: var(--pink-dark);
+      color: white;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .resource-button:hover {
+      background: #cf477e;
+    }
+
+    .empty-message {
+      display: none;
+      padding: 30px;
+      text-align: center;
+      background: white;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 6%;
+      background: white;
+      color: #796b73;
+      margin-top: 40px;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: var(--pink-dark);
+    }
+
+    @media (max-width: 800px) {
+      .resource-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      header {
+        justify-content: center;
+      }
+
+      nav {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .filters,
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 45px 6%;
+      }
+
+      nav {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo">AB<span>FLEX</span></a>
+
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="niveaux.html">Les niveaux</a>
+      <a href="competences.html">Compétences</a>
+      <a href="ressources.html" class="active">Ressources</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="badge">L'univers pédagogique ABFLEX</span>
+
+    <h1>
+      Explorez nos <span>ressources</span>
+    </h1>
+
+    <p>
+      Des ressources pédagogiques pour accompagner les enseignants
+      de français et faciliter la préparation des cours.
+      Choisissez votre niveau et découvrez les supports adaptés
+      à vos besoins.
+    </p>
+  </section>
+
+  <main>
+
+    <h2 class="section-title">Trouvez votre ressource</h2>
+
+    <p class="section-description">
+      Filtrez les ressources selon le niveau, la compétence
+      et le type de support recherché.
+    </p>
+
+    <div class="filters">
+
+      <div class="filter-box">
+        <label for="niveau">Niveau scolaire</label>
+
+        <select id="niveau">
+          <option value="">Tous les niveaux</option>
+          <option value="1AS">1AS</option>
+          <option value="2AS">2AS</option>
+          <option value="3AS">3AS</option>
+        </select>
+      </div>
+
+      <div class="filter-box">
+        <label for="competence">Compétence</label>
+
+        <select id="competence">
+          <option value="">Toutes les compétences</option>
+          <option value="Compréhension de l'écrit">
+            Compréhension de l'écrit
+          </option>
+          <option value="Compréhension de l'oral">
+            Compréhension de l'oral
+          </option>
+          <option value="Production écrite">
+            Production écrite
+          </option>
+          <option value="Production orale">
+            Production orale
+          </option>
+          <option value="Points de langue">
+            Points de langue
+          </option>
+          <option value="Autre">Autre</option>
+        </select>
+      </div>
+
+      <div class="filter-box">
+        <label for="type">Type de ressource</label>
+
+        <select id="type">
+          <option value="">Tous les types</option>
+          <option value="Fiche pédagogique">Fiche pédagogique</option>
+          <option value="Support textuel">Support textuel</option>
+          <option value="Activité / exercice">Activité / exercice</option>
+          <option value="Évaluation">Évaluation</option>
+          <option value="Audio">Audio</option>
+          <option value="Vidéo">Vidéo</option>
+        </select>
+      </div>
+
+      <div class="filter-box">
+        <label for="recherche">Recherche par mot-clé</label>
+
+        <input
+          type="search"
+          id="recherche"
+          placeholder="Ex. : production écrite..."
+        >
+      </div>
+
+    </div>
+
+    <h2 class="section-title">Bibliothèque pédagogique</h2>
+
+    <p class="section-description" id="compteur">
+      Découvrez les ressources disponibles.
+    </p>
+
+    <div class="resource-grid" id="resourceGrid">
+
+      <article class="resource-card"
+        data-niveau="1AS"
+        data-competence="Compréhension de l'écrit"
+        data-type="Fiche pédagogique">
+
+        <div class="card-top pink-bg">📚</div>
+
+        <div class="card-content">
+          <span class="tag">1AS</span>
+
+          <h3>Compréhension de l'écrit</h3>
+
+          <p>
+            Préparez une séance de lecture et accompagnez
+            les apprenants dans la compréhension du texte.
+          </p>
+
+          <div class="resource-type">Fiche pédagogique</div>
+
+          <a href="#" class="resource-button"
+             onclick="return false;">
+            Ressource bientôt disponible
+          </a>
+        </div>
+      </article>
+
+      <article class="resource-card"
+        data-niveau="1AS"
+        data-competence="Production écrite"
+        data-type="Activité / exercice">
+
+        <div class="card-top yellow-bg">✍️</div>
+
+        <div class="card-content">
+          <span class="tag">1AS</span>
+
+          <h3>Production écrite</h3>
+
+          <p>
+            Des activités pour aider les apprenants à organiser
+            leurs idées et à rédiger un texte cohérent.
+          </p>
+
+          <div class="resource-type">Activité / exercice</div>
+
+          <a href="#" class="resource-button"
+             onclick="return false;">
+            Ressource bientôt disponible
+          </a>
+        </div>
+      </article>
+
+      <article class="resource-card"
+        data-niveau="2AS"
+        data-competence="Compréhension de l'oral"
+        data-type="Audio">
+
+        <div class="card-top orange-bg">🎧</div>
+
+        <div class="card-content">
+          <span class="tag">2AS</span>
+
+          <h3>Compréhension de l'oral</h3>
+
+          <p>
+            Préparez des activités d'écoute pour développer
+            les stratégies de compréhension orale.
+          </p>
+
+          <div class="resource-type">Audio</div>
+
+          <a href="#" class="resource-button"
+             onclick="return false;">
+            Ressource bientôt disponible
+          </a>
+        </div>
+      </article>
+
+      <article class="resource-card"
+        data-niveau="2AS"
+        data-competence="Points de langue"
+        data-type="Fiche pédagogique">
+
+        <div class="card-top red-bg">📝</div>
+
+        <div class="card-content">
+          <span class="tag">2AS</span>
+
+          <h3>Points de langue</h3>
+
+          <p>
+            Des pistes pédagogiques pour travailler les notions
+            grammaticales et linguistiques en contexte.
+          </p>
+
+          <div class="resource-type">Fiche pédagogique</div>
+
+          <a href="#" class="resource-button"
+             onclick="return false;">
+            Ressource bientôt disponible
+          </a>
+        </div>
+      </article>
+
+      <article class="resource-card"
+        data-niveau="3AS"
+        data-competence="Production orale"
+        data-type="Activité / exercice">
+
+        <div class="card-top pink-bg">💬</div>
+
+        <div class="card-content">
+          <span class="tag">3AS</span>
+
+          <h3>Production orale</h3>
+
+          <p>
+            Des activités pour développer l'expression orale,
+            l'argumentation et les échanges en classe.
+          </p>
+
+          <div class="resource-type">Activité / exercice</div>
+
+          <a href="#" class="resource-button"
+             onclick="return false;">
+            Ressource bientôt disponible
+          </a>
+        </div>
+      </article>
+
+      <article class="resource-card"
+        data-niveau="3AS"
+        data-competence="Compréhension de l'écrit"
+        data-type="Évaluation">
+
+        <div class="card-top yellow-bg">✅</div>
+
+        <div class="card-content">
+          <span class="tag">3AS</span>
+
+          <h3>Évaluation des acquis</h3>
+
+          <p>
+            Des idées pour concevoir des activités d'évaluation
+            adaptées aux objectifs d'apprentissage.
+          </p>
+
+          <div class="resource-type">Évaluation</div>
+
+          <a href="#" class="resource-button"
+             onclick="return false;">
+            Ressource bientôt disponible
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="empty-message" id="emptyMessage">
+      <h3>Aucune ressource trouvée</h3>
+      <p>Essayez de modifier vos critères de recherche.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      <strong>ABFLEX</strong> — Votre partenaire en français.
+    </p>
+
+    <p>Des ressources au service de l'enseignement du FLE.</p>
+
+    <p>© 2026 ABFLEX — Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    const niveau = document.getElementById("niveau");
+    const competence = document.getElementById("competence");
+    const type = document.getElementById("type");
+    const recherche = document.getElementById("recherche");
+
+    const cartes = document.querySelectorAll(".resource-card");
+    const compteur = document.getElementById("compteur");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    function filtrerRessources() {
+      const niveauChoisi = niveau.value;
+      const competenceChoisie = competence.value;
+      const typeChoisi = type.value;
+      const motCle = recherche.value.toLowerCase().trim();
+
+      let nombreVisible = 0;
+
+      cartes.forEach(carte => {
+        const niveauCarte = carte.dataset.niveau;
+        const competenceCarte = carte.dataset.competence;
+        const typeCarte = carte.dataset.type;
+
+        const contenuCarte = carte.textContent.toLowerCase();
+
+        const correspondNiveau =
+          !niveauChoisi || niveauCarte === niveauChoisi;
+
+        const correspondCompetence =
+          !competenceChoisie ||
+          competenceCarte === competenceChoisie;
+
+        const correspondType =
+          !typeChoisi || typeCarte === typeChoisi;
+
+        const correspondRecherche =
+          !motCle || contenuCarte.includes(motCle);
+
+        const afficher =
+          correspondNiveau &&
+          correspondCompetence &&
+          correspondType &&
+          correspondRecherche;
+
+        carte.style.display = afficher ? "" : "none";
+
+        if (afficher) {
+          nombreVisible++;
+        }
+      });
+
+      compteur.textContent =
+        nombreVisible + " ressource(s) affichée(s).";
+
+      emptyMessage.style.display =
+        nombreVisible === 0 ? "block" : "none";
+    }
+
+    niveau.addEventListener("change", filtrerRessources);
+    competence.addEventListener("change", filtrerRessources);
+    type.addEventListener("change", filtrerRessources);
+    recherche.addEventListener("input", filtrerRessources);
+
+    // Ouvrir la page avec un niveau déjà sélectionné.
+    const parametres = new URLSearchParams(window.location.search);
+    const niveauURL = parametres.get("niveau");
+
+    if (["1AS", "2AS", "3AS"].includes(niveauURL)) {
+      niveau.value = niveauURL;
+    }
+
+    filtrerRessources();
+  </script>
+
+</body>
+</html>
