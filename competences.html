@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compétences | ABFLEX</title>
+
+<style>
+:root {
+  --pink: #e85d96;
+  --yellow: #ffe477;
+  --orange: #ffad70;
+  --red: #f16b70;
+  --cream: #fffaf5;
+  --text: #42313a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header {
+  background: white;
+  padding: 16px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-shadow: 0 3px 15px #0000000a;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--pink);
+  letter-spacing: -2px;
+}
+
+.logo span {
+  color: var(--orange);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+nav a {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--pink);
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 6%;
+  background: linear-gradient(120deg, #ffe8f1, #fff2bd, #ffe0c7);
+}
+
+.badge {
+  display: inline-block;
+  background: white;
+  padding: 7px 16px;
+  border-radius: 30px;
+  color: var(--pink);
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+h1 span {
+  color: var(--pink);
+}
+
+.hero p {
+  max-width: 680px;
+  margin: auto;
+  color: #685560;
+}
+
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 45px 6%;
+}
+
+.section-title {
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #796b73;
+  margin-bottom: 25px;
+}
+
+.filter-box {
+  background: white;
+  padding: 18px;
+  border-radius: 15px;
+  border: 1px solid #f2e3e9;
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #e8dce2;
+  border-radius: 10px;
+  background: white;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.competence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #f2e3e9;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px #00000006;
+  transition: transform .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-top {
+  padding: 22px;
+  font-size: 36px;
+}
+
+.pink-bg { background: #ffe4ef; }
+.yellow-bg { background: #fff3bf; }
+.orange-bg { background: #ffe4d1; }
+.red-bg { background: #ffe0df; }
+
+.card-content {
+  padding: 22px;
+}
+
+.card h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: #796b73;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 16px;
+}
+
+.level-button {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 9px;
+  background: #fff0f6;
+  color: #c9477b;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.level-button:hover {
+  background: var(--pink);
+  color: white;
+}
+
+.resource-link {
+  display: inline-block;
+  padding: 10px 16px;
+  background: var(--pink);
+  color: white;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.resource-link:hover {
+  background: #cf477e;
+}
+
+.empty-message {
+  display: none;
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 6%;
+  background: white;
+  color: #796b73;
+  margin-top: 40px;
+  font-size: 13px;
+}
+
+footer strong {
+  color: var(--pink);
+}
+
+@media (max-width: 650px) {
+  header {
+    justify-content: center;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .competence-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">AB<span>FLEX</span></a>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="niveaux.html">Les niveaux</a>
+    <a href="competences.html" class="active">Compétences</a>
+    <a href="ressources.html">Ressources</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="badge">ABFLEX · Enseignement du FLE</span>
+
+  <h1>Les <span>compétences</span> en français</h1>
+
+  <p>
+    Découvrez les différentes compétences travaillées en classe
+    de français au secondaire. Sélectionnez un niveau pour
+    accéder aux ressources pédagogiques correspondantes.
+  </p>
+</section>
+
+<main>
+
+  <h2 class="section-title">Choisissez votre niveau</h2>
+
+  <p class="description">
+    Les compétences sont organisées pour les trois niveaux
+    du secondaire : 1AS, 2AS et 3AS.
+  </p>
+
+  <div class="filter-box">
+    <label for="niveau">Filtrer par niveau scolaire</label>
+
+    <select id="niveau">
+      <option value="tous">Tous les niveaux</option>
+      <option value="1AS">1AS — Première année secondaire</option>
+      <option value="2AS">2AS — Deuxième année secondaire</option>
+      <option value="3AS">3AS — Troisième année secondaire</option>
+    </select>
+  </div>
+
+  <div class="competence-grid" id="competenceGrid">
+
+    <article class="card" data-competence="ecrit">
+      <div class="card-top pink-bg">📖</div>
+
+      <div class="card-content">
+        <h2>Compréhension de l’écrit</h2>
+
+        <p>
+          Exploitation de textes, lecture analytique,
+          repérage des informations et construction du sens.
+        </p>
+
+        <div class="levels">
+          <a class="level-button" href="ressources.html?niveau=1AS&competence=ecrit">1AS</a>
+          <a class="level-button" href="ressources.html?niveau=2AS&competence=ecrit">2AS</a>
+          <a class="level-button" href="ressources.html?niveau=3AS&competence=ecrit">3AS</a>
+        </div>
+
+        <a class="resource-link" href="ressources.html?competence=ecrit">
+          Voir les ressources
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-competence="oral">
+      <div class="card-top yellow-bg">🎧</div>
+
+      <div class="card-content">
+        <h2>Compréhension de l’oral</h2>
+
+        <p>
+          Écoute de documents sonores, repérage des informations
+          et développement des stratégies de compréhension.
+        </p>
+
+        <div class="levels">
+          <a class="level-button" href="ressources.html?niveau=1AS&competence=oral">1AS</a>
+          <a class="level-button" href="ressources.html?niveau=2AS&competence=oral">2AS</a>
+          <a class="level-button" href="ressources.html?niveau=3AS&competence=oral">3AS</a>
+        </div>
+
+        <a class="resource-link" href="ressources.html?competence=oral">
+          Voir les ressources
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-competence="production-ecrite">
+      <div class="card-top orange-bg">✍️</div>
+
+      <div class="card-content">
+        <h2>Production écrite</h2>
+
+        <p>
+          Préparation à la rédaction, organisation des idées,
+          cohérence textuelle et réécriture.
+        </p>
+
+        <div class="levels">
+          <a class="level-button" href="ressources.html?niveau=1AS&competence=production-ecrite">1AS</a>
+          <a class="level-button" href="ressources.html?niveau=2AS&competence=production-ecrite">2AS</a>
+          <a class="level-button" href="ressources.html?niveau=3AS&competence=production-ecrite">3AS</a>
+        </div>
+
+        <a class="resource-link" href="ressources.html?competence=production-ecrite">
+          Voir les ressources
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-competence="production-orale">
+      <div class="card-top red-bg">🗣️</div>
+
+      <div class="card-content">
+        <h2>Production orale</h2>
+
+        <p>
+          Prise de parole, expression des opinions,
+          interaction et argumentation en classe.
+        </p>
+
+        <div class="levels">
+          <a class="level-button" href="ressources.html?niveau=1AS&competence=production-orale">1AS</a>
+          <a class="level-button" href="ressources.html?niveau=2AS&competence=production-orale">2AS</a>
+          <a class="level-button" href="ressources.html?niveau=3AS&competence=production-orale">3AS</a>
+        </div>
+
+        <a class="resource-link" href="ressources.html?competence=production-orale">
+          Voir les ressources
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-competence="langue">
+      <div class="card-top yellow-bg">📝</div>
+
+      <div class="card-content">
+        <h2>Points de langue</h2>
+
+        <p>
+          Grammaire, conjugaison, vocabulaire, orthographe
+          et étude des faits de langue en contexte.
+        </p>
+
+        <div class="levels">
+          <a class="level-button" href="ressources.html?niveau=1AS&competence=langue">1AS</a>
+          <a class="level-button" href="ressources.html?niveau=2AS&competence=langue">2AS</a>
+          <a class="level-button" href="ressources.html?niveau=3AS&competence=langue">3AS</a>
+        </div>
+
+        <a class="resource-link" href="ressources.html?competence=langue">
+          Voir les ressources
+        </a>
+      </div>
+    </article>
+
+    <article class="card" data-competence="autres">
+      <div class="card-top pink-bg">📚</div>
+
+      <div class="card-content">
+        <h2>Autres activités pédagogiques</h2>
+
+        <p>
+          Projets, activités de remédiation, exercices
+          complémentaires et activités de révision.
+        </p>
+
+        <div class="levels">
+          <a class="level-button" href="ressources.html?niveau=1AS&competence=autres">1AS</a>
+          <a class="level-button" href="ressources.html?niveau=2AS&competence=autres">2AS</a>
+          <a class="level-button" href="ressources.html?niveau=3AS&competence=autres">3AS</a>
+        </div>
+
+        <a class="resource-link" href="ressources.html?competence=autres">
+          Voir les ressources
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="empty-message" id="emptyMessage">
+    Aucune compétence trouvée pour ce niveau.
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>ABFLEX</strong> — Votre partenaire en français.</p>
+  <p>Des ressources au service de l’enseignement du FLE.</p>
+  <p>© 2026 ABFLEX — Tous droits réservés.</p>
+</footer>
+
+<script>
+const niveauSelect = document.getElementById("niveau");
+const cartes = document.querySelectorAll(".card");
+const emptyMessage = document.getElementById("emptyMessage");
+
+function filtrerCompetences() {
+  const niveau = niveauSelect.value;
+  let visibles = 0;
+
+  cartes.forEach(carte => {
+    const afficher = ["1AS", "2AS", "3AS"].includes(niveau)
+      ? true
+      : niveau === "tous";
+
+    carte.style.display = afficher ? "" : "none";
+
+    if (afficher) visibles++;
+  });
+
+  emptyMessage.style.display = visibles === 0 ? "block" : "none";
+}
+
+niveauSelect.addEventListener("change", filtrerCompetences);
+
+const params = new URLSearchParams(window.location.search);
+const niveauURL = params.get("niveau");
+
+if (["1AS", "2AS", "3AS"].includes(niveauURL)) {
+  niveauSelect.value = niveauURL;
+}
+
+filtrerCompetences();
+</script>
+
+</body>
+</html>
