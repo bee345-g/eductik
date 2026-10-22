@@ -1,1241 +1,1012 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ABFLEX | Votre partenaire en français</title>
-
-<meta name="description" content="ABFLEX, votre partenaire en français : ressources didactiques, fiches pédagogiques et activités pour l'enseignement du FLE.">
-
-<style>
-:root {
-  --pink: #f7a8bd;
-  --pink-light: #fff0f4;
-  --orange: #ff9859;
-  --yellow: #ffdf78;
-  --red: #ed5b63;
-  --dark: #352936;
-  --muted: #756a78;
-  --white: #ffffff;
-  --background: #fffaf8;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--background);
-  color: var(--dark);
-  line-height: 1.6;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-.container {
-  width: min(1120px, 90%);
-  margin: auto;
-}
-
-/* NAVIGATION */
-
-header {
-  background: rgba(255, 250, 248, 0.96);
-  border-bottom: 1px solid #f4e6e7;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.navbar {
-  min-height: 82px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-}
-
-.logo-mark {
-  width: 49px;
-  height: 49px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--pink), var(--orange));
-  border-radius: 15px;
-  color: white;
-  font-size: 23px;
-  font-weight: 900;
-  box-shadow: 0 6px 16px #f5a0b544;
-}
-
-.logo-name {
-  font-size: 23px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-.logo-name span {
-  color: var(--red);
-}
-
-.logo small {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: -3px;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.nav-links a:hover {
-  color: var(--red);
-}
-
-.nav-button {
-  background: var(--dark);
-  color: white !important;
-  padding: 12px 19px;
-  border-radius: 12px;
-}
-
-/* HERO */
-
-.hero {
-  padding: 76px 0 68px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 85% 20%, #ffdf7866, transparent 27%),
-    radial-gradient(circle at 10% 85%, #f7a8bd44, transparent 30%),
-    var(--background);
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 55px;
-  align-items: center;
-}
-
-.badge {
-  display: inline-block;
-  background: #fff0d6;
-  color: #a65a24;
-  padding: 8px 14px;
-  border-radius: 30px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 22px;
-}
-
-.hero h1 {
-  font-size: clamp(38px, 5vw, 61px);
-  line-height: 1.12;
-  letter-spacing: -2px;
-  margin-bottom: 22px;
-}
-
-.hero h1 span {
-  color: var(--red);
-}
-
-.hero-description {
-  max-width: 540px;
-  color: var(--muted);
-  font-size: 16px;
-  margin-bottom: 30px;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
-}
-
-.button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  border-radius: 13px;
-  padding: 14px 21px;
-  font-weight: 700;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-}
-
-.button-primary {
-  background: var(--red);
-  color: white;
-  box-shadow: 0 8px 20px #ed5b6333;
-}
-
-.button-secondary {
-  background: white;
-  border: 1px solid #eadde0;
-}
-
-.hero-visual {
-  min-height: 365px;
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-.visual-card {
-  width: min(100%, 365px);
-  padding: 30px;
-  background: white;
-  border-radius: 28px;
-  box-shadow: 0 25px 65px #6e344015;
-  transform: rotate(-2deg);
-}
-
-.visual-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
-}
-
-.visual-top strong {
-  font-size: 17px;
-}
-
-.visual-icon {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  background: var(--pink-light);
-  font-size: 24px;
-}
-
-.mini-resource {
-  display: flex;
-  gap: 13px;
-  align-items: center;
-  padding: 13px;
-  border: 1px solid #f0e9e9;
-  border-radius: 15px;
-  margin-top: 12px;
-}
-
-.mini-icon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.mini-icon.pink { background: #ffe5ed; }
-.mini-icon.yellow { background: #fff2c9; }
-.mini-icon.orange { background: #ffe8d9; }
-
-.mini-resource strong {
-  display: block;
-  font-size: 13px;
-}
-
-.mini-resource small {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.floating-star {
-  position: absolute;
-  top: 20px;
-  right: 5px;
-  font-size: 48px;
-  color: var(--orange);
-}
-
-.floating-heart {
-  position: absolute;
-  bottom: 15px;
-  left: 0;
-  font-size: 42px;
-  color: var(--red);
-}
-
-/* GENERAL SECTIONS */
-
-section {
-  scroll-margin-top: 100px;
-}
-
-.section {
-  padding: 76px 0;
-}
-
-.section-heading {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 40px;
-}
-
-.section-label {
-  display: inline-block;
-  color: #d64f65;
-  background: #ffe8ed;
-  padding: 7px 13px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 800;
-  margin-bottom: 13px;
-}
-
-.section-heading h2 {
-  font-size: clamp(28px, 4vw, 39px);
-  line-height: 1.2;
-  margin-bottom: 14px;
-}
-
-.section-heading p {
-  color: var(--muted);
-  font-size: 15px;
-}
-
-/* LEVELS */
-
-.levels {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.level-card {
-  background: white;
-  padding: 28px;
-  border: 1px solid #f0e5e7;
-  border-radius: 22px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.level-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px #6e344010;
-}
-
-.level-number {
-  width: 56px;
-  height: 56px;
-  display: grid;
-  place-items: center;
-  border-radius: 17px;
-  font-weight: 900;
-  font-size: 19px;
-  margin-bottom: 22px;
-}
-
-.level-card:nth-child(1) .level-number {
-  background: #ffe4ed;
-  color: #d64f65;
-}
-
-.level-card:nth-child(2) .level-number {
-  background: #fff0c5;
-  color: #9b6b00;
-}
-
-.level-card:nth-child(3) .level-number {
-  background: #ffe4d4;
-  color: #c75b25;
-}
-
-.level-card h3 {
-  font-size: 21px;
-  margin-bottom: 9px;
-}
-
-.level-card p {
-  color: var(--muted);
-  font-size: 14px;
-  min-height: 45px;
-  margin-bottom: 20px;
-}
-
-.text-link {
-  color: #d64f65;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-/* RESOURCES */
-
-.resources-section {
-  background: #fff2f3;
-}
-
-.resource-filters {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 25px;
-}
-
-.filter-button {
-  background: white;
-  border: 1px solid #f0dfe2;
-  border-radius: 30px;
-  padding: 10px 16px;
-  color: var(--dark);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.filter-button.active,
-.filter-button:hover {
-  background: var(--dark);
-  border-color: var(--dark);
-  color: white;
-}
-
-.search-box {
-  max-width: 540px;
-  margin: 0 auto 30px;
-}
-
-.search-box input {
-  width: 100%;
-  border: 1px solid #eadde0;
-  background: white;
-  padding: 15px 18px;
-  border-radius: 13px;
-  outline: none;
-  font: inherit;
-}
-
-.search-box input:focus {
-  border-color: var(--red);
-}
-
-.resource-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.resource-card {
-  background: white;
-  padding: 24px;
-  border: 1px solid #f0e4e6;
-  border-radius: 20px;
-}
-
-.resource-symbol {
-  width: 49px;
-  height: 49px;
-  display: grid;
-  place-items: center;
-  border-radius: 15px;
-  background: var(--pink-light);
-  font-size: 23px;
-  margin-bottom: 19px;
-}
-
-.resource-card h3 {
-  font-size: 17px;
-  margin-bottom: 9px;
-}
-
-.resource-card p {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 18px;
-}
-
-.resource-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.resource-tag {
-  background: #fff1cf;
-  color: #8b651a;
-  padding: 5px 9px;
-  border-radius: 7px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 35px;
-  color: var(--muted);
-  background: white;
-  border-radius: 18px;
-}
-
-/* SKILLS */
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.skill-card {
-  padding: 23px;
-  border-radius: 18px;
-  background: white;
-  border: 1px solid #f0e5e7;
-}
-
-.skill-card span {
-  font-size: 25px;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.skill-card h3 {
-  font-size: 16px;
-  margin-bottom: 7px;
-}
-
-.skill-card p {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* ABOUT */
-
-.about-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 35px;
-  align-items: center;
-  background: white;
-  padding: 42px;
-  border: 1px solid #f0e5e7;
-  border-radius: 27px;
-}
-
-.about-box h2 {
-  font-size: 32px;
-  line-height: 1.2;
-  margin-bottom: 18px;
-}
-
-.about-box p {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-
-.about-points {
-  display: grid;
-  gap: 14px;
-}
-
-.about-point {
-  background: var(--background);
-  padding: 17px;
-  border-radius: 15px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.about-point span {
-  margin-right: 8px;
-}
-
-/* FOOTER */
-
-footer {
-  margin-top: 70px;
-  padding: 32px 0;
-  border-top: 1px solid #f0e5e7;
-  background: white;
-}
-
-.footer-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-content p {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.footer-links {
-  display: flex;
-  gap: 18px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 850px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .hero {
-    padding-top: 55px;
-  }
-
-  .hero-visual {
-    min-height: 330px;
-  }
-
-  .levels,
-  .resource-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .about-box {
-    grid-template-columns: 1fr;
-    padding: 28px;
-  }
-
-  .nav-links {
-    gap: 15px;
-  }
-}
-
-@media (max-width: 560px) {
-  .navbar {
-    min-height: 72px;
-    flex-wrap: wrap;
-    padding: 12px 0;
-    gap: 12px;
-  }
-
-  .logo-mark {
-    width: 42px;
-    height: 42px;
-  }
-
-  .logo-name {
-    font-size: 20px;
-  }
-
-  .nav-links {
-    width: 100%;
-    justify-content: space-between;
-    gap: 9px;
-    font-size: 12px;
-    padding-bottom: 6px;
-  }
-
-  .nav-button {
-    padding: 8px 10px;
-  }
-
-  .hero {
-    padding: 43px 0;
-  }
-
-  .hero h1 {
-    letter-spacing: -1px;
-  }
-
-  .hero-description {
-    font-size: 14px;
-  }
-
-  .hero-visual {
-    min-height: 300px;
-  }
-
-  .visual-card {
-    padding: 22px;
-  }
-
-  .section {
-    padding: 55px 0;
-  }
-
-  .levels,
-  .resource-grid,
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .level-card p {
-    min-height: auto;
-  }
-
-  .about-box {
-    padding: 23px;
-  }
-
-  .about-box h2 {
-    font-size: 27px;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="ABFLEX, votre partenaire en français. Découvrez un espace dédié aux enseignants et aux ressources pédagogiques en FLE.">
+
+  <title>ABFLEX — Votre partenaire en français</title>
+
+  <style>
+    :root {
+      --pink: #f7b4c8;
+      --pink-light: #fff0f5;
+      --yellow: #ffdf70;
+      --orange: #ff9d55;
+      --red: #e94b62;
+      --dark: #382b36;
+      --text: #665561;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(80, 40, 60, 0.09);
+      --radius: 22px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: #fffafc;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    /* HEADER */
+
+    header {
+      background: rgba(255, 255, 255, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 18px rgba(80, 40, 60, 0.06);
+    }
+
+    .navbar {
+      min-height: 82px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 53px;
+      height: 53px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 17px;
+      color: white;
+      font-size: 21px;
+      font-weight: 900;
+      background: linear-gradient(
+        135deg,
+        var(--red),
+        var(--orange),
+        var(--yellow)
+      );
+      box-shadow: 0 5px 15px rgba(233, 75, 98, 0.22);
+    }
+
+    .logo-name {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--red);
+      line-height: 1.2;
+    }
+
+    .logo-tagline {
+      display: block;
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 23px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-links .nav-button {
+      background: var(--red);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 30px;
+    }
+
+    .nav-links .nav-button:hover {
+      background: #d93651;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 85px 0 90px;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(255, 223, 112, 0.38),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 5% 90%,
+          rgba(247, 180, 200, 0.38),
+          transparent 28%
+        ),
+        linear-gradient(135deg, #fff8fb, #fffaf0);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 15px;
+      margin-bottom: 20px;
+      border-radius: 30px;
+      color: #c83d58;
+      background: #ffe5ed;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      max-width: 650px;
+      margin-bottom: 22px;
+      font-size: clamp(37px, 5vw, 59px);
+      line-height: 1.13;
+      letter-spacing: -1.8px;
+    }
+
+    .hero h1 span {
+      color: var(--red);
+    }
+
+    .hero-description {
+      max-width: 550px;
+      margin-bottom: 30px;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      box-shadow: 0 7px 18px rgba(233, 75, 98, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: #d93651;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      color: var(--dark);
+      background: white;
+      border: 1px solid #f1dce4;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+    }
+
+    /* HERO VISUAL */
+
+    .hero-visual {
+      position: relative;
+      min-height: 390px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .visual-card {
+      width: min(100%, 390px);
+      padding: 32px;
+      position: relative;
+      z-index: 2;
+      border-radius: 30px;
+      background: white;
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+    }
+
+    .visual-card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 23px;
+      border-bottom: 1px solid #f5e7ec;
+    }
+
+    .visual-logo {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      background: linear-gradient(
+        135deg,
+        var(--pink),
+        var(--orange),
+        var(--yellow)
+      );
+      color: white;
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .visual-card-top h3 {
+      font-size: 22px;
+      color: var(--red);
+    }
+
+    .visual-card-top p {
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .visual-card h2 {
+      margin: 24px 0 17px;
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    .visual-item {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 13px;
+      margin-top: 11px;
+      border-radius: 15px;
+      background: #fff7fa;
+    }
+
+    .visual-item:nth-of-type(2) {
+      background: #fff9e8;
+    }
+
+    .visual-item:nth-of-type(3) {
+      background: #fff0e7;
+    }
+
+    .visual-item .emoji {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 13px;
+      background: white;
+      font-size: 21px;
+    }
+
+    .visual-item strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .visual-item small {
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .shape-one {
+      width: 115px;
+      height: 115px;
+      top: 0;
+      right: 0;
+      background: var(--yellow);
+      opacity: 0.75;
+    }
+
+    .shape-two {
+      width: 80px;
+      height: 80px;
+      bottom: 12px;
+      left: 0;
+      background: var(--pink);
+      opacity: 0.8;
+    }
+
+    .shape-three {
+      width: 42px;
+      height: 42px;
+      top: 48%;
+      left: 1%;
+      background: var(--orange);
+      opacity: 0.8;
+    }
+
+    /* ABOUT */
+
+    .section {
+      padding: 85px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 45px;
+      text-align: center;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 16px;
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.25;
+    }
+
+    .section-heading p {
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .about-section {
+      background: white;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .about-visual {
+      min-height: 320px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 35px;
+      border-radius: 30px;
+      background: linear-gradient(
+        135deg,
+        #ffe9f0,
+        #fff2d6
+      );
+    }
+
+    .about-illustration {
+      width: 100%;
+      max-width: 360px;
+      padding: 32px;
+      text-align: center;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow);
+    }
+
+    .about-illustration .big-icon {
+      margin-bottom: 12px;
+      font-size: 60px;
+    }
+
+    .about-illustration h3 {
+      margin-bottom: 8px;
+      color: var(--red);
+      font-size: 25px;
+    }
+
+    .about-illustration p {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .about-content h2 {
+      margin-bottom: 20px;
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.3;
+    }
+
+    .about-content h2 span {
+      color: var(--red);
+    }
+
+    .about-content > p {
+      margin-bottom: 18px;
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    .about-points {
+      display: grid;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .about-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .check-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      color: #b33c54;
+      background: #ffe5ed;
+      font-weight: 900;
+    }
+
+    .about-point strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 15px;
+    }
+
+    .about-point p {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    /* CALL TO ACTION */
+
+    .cta-section {
+      padding: 70px 0;
+      background: linear-gradient(
+        120deg,
+        #f9bdce,
+        #ffd97d,
+        #ffb16d
+      );
+    }
+
+    .cta-box {
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      margin-bottom: 14px;
+      font-size: clamp(29px, 4vw, 40px);
+      line-height: 1.3;
+    }
+
+    .cta-box p {
+      max-width: 620px;
+      margin: 0 auto 25px;
+      color: #59434c;
+    }
+
+    .cta-box .btn {
+      background: white;
+      color: var(--red);
+      box-shadow: 0 5px 15px rgba(80, 40, 60, 0.08);
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 40px 0 20px;
+      color: white;
+      background: #382b36;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      padding-bottom: 25px;
+    }
+
+    .footer-logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .footer-logo span {
+      color: var(--yellow);
+    }
+
+    .footer-description {
+      max-width: 360px;
+      margin-top: 5px;
+      color: #e9dce4;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: #f6eaf0;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--yellow);
+    }
+
+    .footer-bottom {
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      color: #d9cbd5;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 850px) {
+      .navbar {
+        padding: 15px 0;
+        flex-direction: column;
+        gap: 17px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+      }
+
+      .hero {
+        padding: 55px 0 65px;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .hero-text {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 350px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .about-content {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: 92%;
+      }
+
+      .logo-name {
+        font-size: 22px;
+      }
+
+      .nav-links {
+        gap: 10px 13px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .nav-links .nav-button {
+        padding: 9px 13px;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+        letter-spacing: -1px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .visual-card {
+        padding: 23px;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .about-visual {
+        min-height: 260px;
+        padding: 20px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container navbar">
-
-    <a href="#accueil" class="logo">
-      <div class="logo-mark">AB</div>
-      <div>
-        <div class="logo-name">AB<span>FLEX</span></div>
-        <small>Votre partenaire en français</small>
-      </div>
-    </a>
-
-    <nav class="nav-links">
-      <a href="#accueil">Accueil</a>
-      <a href="#niveaux">Les niveaux</a>
-      <a href="#ressources">Ressources</a>
-      <a href="#apropos" class="nav-button">Découvrir ABFLEX</a>
-    </nav>
-
-  </div>
-</header>
-
-<main>
-
-  <!-- ACCUEIL -->
-
-  <section class="hero" id="accueil">
-    <div class="container hero-grid">
-
-      <div>
-        <div class="badge">✦ L'univers des ressources en FLE</div>
-
-        <h1>
-          Votre partenaire<br>
-          en <span>français.</span>
-        </h1>
-
-        <p class="hero-description">
-          Découvrez un espace dédié aux ressources didactiques,
-          aux activités pédagogiques et aux supports multimédias
-          pour accompagner l'enseignement et l'apprentissage du français.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#niveaux" class="button button-primary">
-            Explorer les niveaux →
-          </a>
-
-          <a href="#ressources" class="button button-secondary">
-            Découvrir les ressources
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-
-        <div class="floating-star">✦</div>
-        <div class="floating-heart">♥</div>
-
-        <div class="visual-card">
-
-          <div class="visual-top">
-            <strong>Votre espace pédagogique</strong>
-            <div class="visual-icon">📚</div>
-          </div>
-
-          <div class="mini-resource">
-            <div class="mini-icon pink">📝</div>
-            <div>
-              <strong>Fiches pédagogiques</strong>
-              <small>Des supports pour vos séances</small>
-            </div>
-          </div>
-
-          <div class="mini-resource">
-            <div class="mini-icon yellow">🎧</div>
-            <div>
-              <strong>Supports multimédias</strong>
-              <small>Audio, vidéo et documents</small>
-            </div>
-          </div>
-
-          <div class="mini-resource">
-            <div class="mini-icon orange">✏️</div>
-            <div>
-              <strong>Activités et évaluations</strong>
-              <small>Pour travailler les compétences</small>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- NIVEAUX -->
-
-  <section class="section" id="niveaux">
-
-    <div class="container">
-
-      <div class="section-heading">
-        <div class="section-label">Les niveaux scolaires</div>
-        <h2>Choisissez votre niveau</h2>
-        <p>
-          Retrouvez les ressources pédagogiques correspondant
-          aux trois niveaux du cycle secondaire.
-        </p>
-      </div>
-
-      <div class="levels">
-
-        <article class="level-card">
-          <div class="level-number">1AS</div>
-          <h3>Première année</h3>
-          <p>
-            Des ressources pour préparer les activités
-            et accompagner les apprentissages.
-          </p>
-          <a class="text-link" href="#ressources"
-             onclick="chooseLevel('1AS')">
-            Explorer les ressources →
-          </a>
-        </article>
-
-        <article class="level-card">
-          <div class="level-number">2AS</div>
-          <h3>Deuxième année</h3>
-          <p>
-            Des supports et des activités adaptés
-            aux objectifs du programme.
-          </p>
-          <a class="text-link" href="#ressources"
-             onclick="chooseLevel('2AS')">
-            Explorer les ressources →
-          </a>
-        </article>
-
-        <article class="level-card">
-          <div class="level-number">3AS</div>
-          <h3>Troisième année</h3>
-          <p>
-            Des ressources pour travailler les compétences
-            et préparer les apprentissages.
-          </p>
-          <a class="text-link" href="#ressources"
-             onclick="chooseLevel('3AS')">
-            Explorer les ressources →
-          </a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- RESSOURCES -->
-
-  <section class="section resources-section" id="ressources">
-
-    <div class="container">
-
-      <div class="section-heading">
-        <div class="section-label">Bibliothèque pédagogique</div>
-        <h2>Explorez les ressources</h2>
-        <p>
-          Recherchez les supports selon le niveau,
-          la compétence travaillée ou le type de ressource.
-        </p>
-      </div>
-
-      <div class="resource-filters">
-
-        <button class="filter-button active"
-                data-level="Tous"
-                onclick="chooseLevel('Tous')">
-          Tous les niveaux
-        </button>
-
-        <button class="filter-button"
-                data-level="1AS"
-                onclick="chooseLevel('1AS')">
-          1AS
-        </button>
-
-        <button class="filter-button"
-                data-level="2AS"
-                onclick="chooseLevel('2AS')">
-          2AS
-        </button>
-
-        <button class="filter-button"
-                data-level="3AS"
-                onclick="chooseLevel('3AS')">
-          3AS
-        </button>
-
-      </div>
-
-      <div class="search-box">
-        <input
-          type="search"
-          id="resourceSearch"
-          placeholder="Rechercher une ressource..."
-          aria-label="Rechercher une ressource"
-        >
-      </div>
-
-      <div class="resource-grid" id="resourceGrid">
-
-        <article class="resource-card"
-          data-level="1AS"
-          data-search="fiche pédagogique compréhension écrit lecture">
-          <div class="resource-symbol">📝</div>
-          <h3>Fiche pédagogique</h3>
-          <p>
-            Des fiches pour organiser les séances
-            et préparer les activités de classe.
-          </p>
-          <div class="resource-tags">
-            <span class="resource-tag">1AS</span>
-            <span class="resource-tag">Compréhension de l'écrit</span>
-          </div>
-        </article>
-
-        <article class="resource-card"
-          data-level="1AS"
-          data-search="support textuel document texte lecture">
-          <div class="resource-symbol">📄</div>
-          <h3>Supports textuels</h3>
-          <p>
-            Des documents pour développer la lecture
-            et la compréhension des textes.
-          </p>
-          <div class="resource-tags">
-            <span class="resource-tag">1AS</span>
-            <span class="resource-tag">Support textuel</span>
-          </div>
-        </article>
-
-        <article class="resource-card"
-          data-level="2AS"
-          data-search="activité exercice langue grammaire vocabulaire">
-          <div class="resource-symbol">✏️</div>
-          <h3>Activités et exercices</h3>
-          <p>
-            Des activités pour travailler la langue,
-            le vocabulaire et les compétences.
-          </p>
-          <div class="resource-tags">
-            <span class="resource-tag">2AS</span>
-            <span class="resource-tag">Points de langue</span>
-          </div>
-        </article>
-
-        <article class="resource-card"
-          data-level="2AS"
-          data-search="audio compréhension oral écoute">
-          <div class="resource-symbol">🎧</div>
-          <h3>Supports audio</h3>
-          <p>
-            Des supports sonores pour travailler
-            la compréhension de l'oral.
-          </p>
-          <div class="resource-tags">
-            <span class="resource-tag">2AS</span>
-            <span class="resource-tag">Compréhension de l'oral</span>
-          </div>
-        </article>
-
-        <article class="resource-card"
-          data-level="3AS"
-          data-search="évaluation acquis production écrite">
-          <div class="resource-symbol">📋</div>
-          <h3>Évaluations</h3>
-          <p>
-            Des exemples de supports d'évaluation
-            pour différentes compétences.
-          </p>
-          <div class="resource-tags">
-            <span class="resource-tag">3AS</span>
-            <span class="resource-tag">Évaluation</span>
-          </div>
-        </article>
-
-        <article class="resource-card"
-          data-level="3AS"
-          data-search="vidéo multimédia compréhension oral">
-          <div class="resource-symbol">🎬</div>
-          <h3>Supports vidéo</h3>
-          <p>
-            Des ressources audiovisuelles pour enrichir
-            les situations d'apprentissage.
-          </p>
-          <div class="resource-tags">
-            <span class="resource-tag">3AS</span>
-            <span class="resource-tag">Vidéo</span>
-          </div>
-        </article>
-
-      </div>
-
-      <p style="text-align:center;margin-top:25px;font-size:12px;color:#756a78">
-        Les éléments affichés ici sont des exemples de présentation.
-        La bibliothèque réelle sera alimentée par les ressources publiées.
-      </p>
-
-    </div>
-  </section>
-
-  <!-- COMPÉTENCES -->
-
-  <section class="section" id="competences">
-
-    <div class="container">
-
-      <div class="section-heading">
-        <div class="section-label">Les compétences</div>
-        <h2>Des ressources organisées par compétence</h2>
-        <p>
-          Une organisation pensée pour faciliter la recherche
-          de supports adaptés aux objectifs pédagogiques.
-        </p>
-      </div>
-
-      <div class="skills-grid">
-
-        <article class="skill-card">
-          <span>📖</span>
-          <h3>Compréhension de l'écrit</h3>
-          <p>Textes, activités de lecture et supports de compréhension.</p>
-        </article>
-
-        <article class="skill-card">
-          <span>🎧</span>
-          <h3>Compréhension de l'oral</h3>
-          <p>Documents sonores et activités d'écoute.</p>
-        </article>
-
-        <article class="skill-card">
-          <span>✍️</span>
-          <h3>Production écrite</h3>
-          <p>Activités de rédaction, consignes et aides à l'écriture.</p>
-        </article>
-
-        <article class="skill-card">
-          <span>💬</span>
-          <h3>Production orale</h3>
-          <p>Activités d'expression et de prise de parole.</p>
-        </article>
-
-        <article class="skill-card">
-          <span>🔤</span>
-          <h3>Points de langue</h3>
-          <p>Grammaire, conjugaison, vocabulaire et syntaxe.</p>
-        </article>
-
-        <article class="skill-card">
-          <span>✨</span>
-          <h3>Autre</h3>
-          <p>D'autres supports selon les besoins pédagogiques.</p>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- À PROPOS -->
-
-  <section class="section" id="apropos">
-
-    <div class="container">
-
-      <div class="about-box">
+  <!-- HEADER -->
+  <header>
+    <div class="container navbar">
+
+      <a href="index.html" class="logo">
+        <div class="logo-icon">AB</div>
 
         <div>
-          <div class="section-label">À propos d'ABFLEX</div>
+          <div class="logo-name">ABFLEX</div>
+          <span class="logo-tagline">Votre partenaire en français</span>
+        </div>
+      </a>
 
-          <h2>La réussite pédagogique commence ici.</h2>
+      <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="niveaux.html">Les niveaux</a>
+        <a href="competences.html">Compétences</a>
+        <a href="ressources.html">Ressources</a>
+        <a href="index.html#apropos" class="nav-button">
+          Découvrir ABFLEX
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- ACCUEIL -->
+    <section class="hero" id="accueil">
+
+      <div class="container hero-content">
+
+        <div class="hero-text">
+
+          <span class="eyebrow">
+            Un espace dédié à l’enseignement du français
+          </span>
+
+          <h1>
+            Votre partenaire pour
+            <span>un enseignement du français</span>
+            plus inspirant.
+          </h1>
+
+          <p class="hero-description">
+            ABFLEX vous accompagne dans votre parcours pédagogique
+            en mettant à votre disposition un espace dédié aux
+            ressources didactiques et aux pratiques d’enseignement
+            du français langue étrangère.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="ressources.html" class="btn btn-primary">
+              Explorer les ressources →
+            </a>
+
+            <a href="index.html#apropos" class="btn btn-secondary">
+              Découvrir ABFLEX
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+          <div class="floating-shape shape-one"></div>
+          <div class="floating-shape shape-two"></div>
+          <div class="floating-shape shape-three"></div>
+
+          <div class="visual-card">
+
+            <div class="visual-card-top">
+
+              <div class="visual-logo">AB</div>
+
+              <div>
+                <h3>ABFLEX</h3>
+                <p>Votre partenaire en français</p>
+              </div>
+
+            </div>
+
+            <h2>
+              Enseigner le français,
+              autrement.
+            </h2>
+
+            <div class="visual-item">
+              <div class="emoji">📚</div>
+              <div>
+                <strong>Ressources pédagogiques</strong>
+                <small>Des supports pour vos cours</small>
+              </div>
+            </div>
+
+            <div class="visual-item">
+              <div class="emoji">🎯</div>
+              <div>
+                <strong>Compétences linguistiques</strong>
+                <small>Des apprentissages organisés</small>
+              </div>
+            </div>
+
+            <div class="visual-item">
+              <div class="emoji">✨</div>
+              <div>
+                <strong>Accompagnement pédagogique</strong>
+                <small>Des idées pour enrichir vos pratiques</small>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- À PROPOS -->
+    <section class="section about-section" id="apropos">
+
+      <div class="container about-grid">
+
+        <div class="about-visual">
+
+          <div class="about-illustration">
+
+            <div class="big-icon">📖</div>
+
+            <h3>Bienvenue chez ABFLEX</h3>
+
+            <p>
+              Un espace pensé pour accompagner les enseignants
+              de français dans leurs pratiques pédagogiques.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="about-content">
+
+          <span class="section-label">
+            À propos de nous
+          </span>
+
+          <h2>
+            ABFLEX, <span>votre partenaire</span> en français.
+          </h2>
 
           <p>
-            ABFLEX est un projet dédié à l'enseignement
-            du français langue étrangère. Il vise à faciliter
-            l'accès à des ressources didactiques organisées
-            et adaptées aux besoins pédagogiques.
+            ABFLEX est un espace éducatif consacré à l’enseignement
+            du français langue étrangère. Il a pour vocation de
+            faciliter l’accès aux ressources didactiques et de
+            proposer des pistes susceptibles d’enrichir les pratiques
+            pédagogiques des enseignants.
           </p>
 
           <p>
-            L'objectif est de proposer un espace clair
-            où les enseignants peuvent rechercher des fiches,
-            des supports multimédias et des activités selon
-            le niveau et la compétence.
+            À travers une organisation claire des contenus selon
+            les niveaux scolaires, les compétences et les types
+            de ressources, ABFLEX souhaite rendre la recherche
+            pédagogique plus simple et plus accessible.
           </p>
 
-          <a href="#niveaux" class="button button-primary">
-            Découvrir les niveaux →
+          <div class="about-points">
+
+            <div class="about-point">
+
+              <div class="check-icon">✓</div>
+
+              <div>
+                <strong>Des ressources organisées</strong>
+                <p>
+                  Des contenus classés pour faciliter la recherche
+                  et la préparation des cours.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="about-point">
+
+              <div class="check-icon">✓</div>
+
+              <div>
+                <strong>Une approche centrée sur l’enseignant</strong>
+                <p>
+                  Un espace conçu pour répondre aux besoins
+                  pédagogiques du terrain.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="about-point">
+
+              <div class="check-icon">✓</div>
+
+              <div>
+                <strong>Une ouverture sur le numérique</strong>
+                <p>
+                  Une place accordée aux supports textuels,
+                  audio et vidéo dans l’enseignement du FLE.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+
+      <div class="container cta-box">
+
+        <h2>
+          Prête à découvrir votre espace pédagogique ?
+        </h2>
+
+        <p>
+          Explorez les niveaux, les compétences et les ressources
+          disponibles sur ABFLEX pour enrichir votre enseignement
+          du français.
+        </p>
+
+        <a href="niveaux.html" class="btn">
+          Découvrir les niveaux →
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-content">
+
+        <div>
+
+          <a href="index.html" class="footer-logo">
+            AB<span>FLEX</span>
           </a>
-        </div>
 
-        <div class="about-points">
-
-          <div class="about-point">
-            <span>🌷</span>
-            Des ressources organisées et accessibles
-          </div>
-
-          <div class="about-point">
-            <span>📚</span>
-            Une organisation par niveau et compétence
-          </div>
-
-          <div class="about-point">
-            <span>🎯</span>
-            Des supports au service des pratiques pédagogiques
-          </div>
-
-          <div class="about-point">
-            <span>💡</span>
-            Une approche simple et pratique
-          </div>
+          <p class="footer-description">
+            Votre partenaire en français : un espace dédié
+            aux ressources didactiques et à l’enseignement du FLE.
+          </p>
 
         </div>
 
+
+        <nav class="footer-links">
+
+          <a href="index.html">Accueil</a>
+          <a href="niveaux.html">Les niveaux</a>
+          <a href="competences.html">Compétences</a>
+          <a href="ressources.html">Ressources</a>
+          <a href="index.html#apropos">À propos</a>
+
+        </nav>
+
       </div>
-    </div>
-  </section>
 
-</main>
 
-<footer>
-  <div class="container footer-content">
+      <div class="footer-bottom">
 
-    <a href="#accueil" class="logo">
-      <div class="logo-mark">AB</div>
-      <div>
-        <div class="logo-name">AB<span>FLEX</span></div>
-        <small>Votre partenaire en français</small>
+        © <span id="year"></span> ABFLEX — Tous droits réservés.
+
       </div>
-    </a>
 
-    <p>© <span id="year"></span> ABFLEX. Tous droits réservés.</p>
-
-    <div class="footer-links">
-      <a href="#accueil">Accueil</a>
-      <a href="#niveaux">Niveaux</a>
-      <a href="#apropos">À propos</a>
     </div>
 
-  </div>
-</footer>
+  </footer>
 
-<script>
-let selectedLevel = "Tous";
 
-function chooseLevel(level) {
-  selectedLevel = level;
-
-  document.querySelectorAll(".filter-button").forEach(button => {
-    button.classList.toggle(
-      "active",
-      button.dataset.level === level
-    );
-  });
-
-  filterResources();
-
-  if (document.getElementById("ressources")) {
-    // Le filtre est appliqué sans quitter la page.
-  }
-}
-
-function filterResources() {
-  const searchInput = document.getElementById("resourceSearch");
-  const search = searchInput.value.toLowerCase().trim();
-  const cards = document.querySelectorAll(".resource-card");
-
-  let visibleCount = 0;
-
-  cards.forEach(card => {
-    const level = card.dataset.level;
-    const text = (
-      card.innerText + " " + (card.dataset.search || "")
-    ).toLowerCase();
-
-    const matchesLevel =
-      selectedLevel === "Tous" || level === selectedLevel;
-
-    const matchesSearch = text.includes(search);
-    const visible = matchesLevel && matchesSearch;
-
-    card.style.display = visible ? "" : "none";
-
-    if (visible) visibleCount++;
-  });
-
-  let emptyMessage = document.getElementById("emptyMessage");
-
-  if (!emptyMessage) {
-    emptyMessage = document.createElement("div");
-    emptyMessage.id = "emptyMessage";
-    emptyMessage.className = "empty-state";
-    emptyMessage.textContent = "Aucune ressource trouvée.";
-    document.getElementById("resourceGrid").appendChild(emptyMessage);
-  }
-
-  emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
-}
-
-document.getElementById("resourceSearch").addEventListener(
-  "input",
-  filterResources
-);
-
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 
 </body>
 </html>
