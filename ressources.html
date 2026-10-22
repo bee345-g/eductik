@@ -1,445 +1,232 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Retrouvez des ressources pédagogiques pour l'enseignement du FLE en 1AS, 2AS et 3AS.">
-  <title>Ressources pédagogiques | ABFLEX</title>
-
-  <style>
-    :root {
-      --pink: #f7b4c8;
-      --pink-light: #fff0f5;
-      --yellow: #ffdf70;
-      --orange: #ff9d55;
-      --red: #e94b62;
-      --dark: #382b36;
-      --text: #665561;
-      --white: #ffffff;
-      --shadow: 0 10px 30px rgba(80,40,60,.09);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--dark);
-      background: #fffafc;
-      line-height: 1.7;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      width: min(1120px, 92%);
-      margin: auto;
-    }
-
-    header {
-      background: white;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 3px 18px rgba(80,40,60,.06);
-    }
-
-    .navbar {
-      min-height: 80px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      color: white;
-      font-size: 21px;
-      font-weight: 900;
-      background: linear-gradient(135deg,var(--red),var(--orange),var(--yellow));
-    }
-
-    .logo-name {
-      color: var(--red);
-      font-size: 24px;
-      font-weight: 900;
-    }
-
-    .logo-tagline {
-      display: block;
-      color: var(--text);
-      font-size: 11px;
-      line-height: 1.3;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .nav-links a:hover {
-      color: var(--red);
-    }
-
-    .nav-button {
-      padding: 10px 16px;
-      color: white !important;
-      background: var(--red);
-      border-radius: 25px;
-    }
-
-    .page-hero {
-      padding: 65px 0;
-      text-align: center;
-      background: linear-gradient(135deg,#fff0f5,#fff7df);
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 6px 14px;
-      margin-bottom: 14px;
-      color: #c83d58;
-      background: #ffe1eb;
-      border-radius: 25px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    h1 {
-      margin-bottom: 15px;
-      font-size: clamp(32px,5vw,48px);
-      line-height: 1.2;
-    }
-
-    h1 span {
-      color: var(--red);
-    }
-
-    .page-hero p {
-      max-width: 700px;
-      margin: auto;
-      color: var(--text);
-    }
-
-    .filters-section {
-      padding: 35px 0 20px;
-    }
-
-    .filters {
-      display: grid;
-      grid-template-columns: repeat(4,minmax(0,1fr));
-      gap: 14px;
-      padding: 22px;
-      background: white;
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .filter-group label {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    select,
-    input {
-      width: 100%;
-      min-height: 45px;
-      padding: 10px 12px;
-      border: 1px solid #eadde3;
-      border-radius: 11px;
-      outline: none;
-      color: var(--dark);
-      background: white;
-      font-size: 13px;
-    }
-
-    select:focus,
-    input:focus {
-      border-color: var(--red);
-    }
-
-    .competencies-section {
-      padding: 25px 0 20px;
-    }
-
-    .section-heading {
-      margin-bottom: 25px;
-      text-align: center;
-    }
-
-    .section-heading h2 {
-      margin-bottom: 8px;
-      font-size: clamp(25px,4vw,34px);
-    }
-
-    .section-heading p {
-      color: var(--text);
-    }
-
-    .competencies-grid {
-      display: grid;
-      grid-template-columns: repeat(3,minmax(0,1fr));
-      gap: 18px;
-    }
-
-    .competency-card {
-      padding: 22px;
-      border: 1px solid #f3e5eb;
-      border-radius: 18px;
-      background: white;
-      box-shadow: 0 5px 18px rgba(80,40,60,.04);
-      transition: .2s;
-    }
-
-    .competency-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
-    }
-
-    .competency-icon {
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
-      border-radius: 14px;
-      background: var(--pink-light);
-      font-size: 22px;
-    }
-
-    .competency-card h3 {
-      margin-bottom: 7px;
-      font-size: 17px;
-    }
-
-    .competency-card p {
-      color: var(--text);
-      font-size: 13px;
-    }
-
-    .competency-card button {
-      margin-top: 13px;
-      padding: 8px 12px;
-      border: 0;
-      border-radius: 20px;
-      color: #bd354f;
-      background: #ffe7ed;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .resources-section {
-      padding: 35px 0 80px;
-    }
-
-    .resources-grid {
-      display: grid;
-      grid-template-columns: repeat(3,minmax(0,1fr));
-      gap: 20px;
-    }
-
-    .resource-card {
-      overflow: hidden;
-      border: 1px solid #f0e1e7;
-      border-radius: 19px;
-      background: white;
-      box-shadow: 0 5px 18px rgba(80,40,60,.04);
-      transition: .2s;
-    }
-
-    .resource-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-
-    .resource-top {
-      min-height: 110px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg,#ffe5ed,#fff1cf);
-      font-size: 40px;
-    }
-
-    .resource-content {
-      padding: 20px;
-    }
-
-    .resource-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 12px;
-    }
-
-    .tag {
-      padding: 4px 9px;
-      border-radius: 15px;
-      color: #bd354f;
-      background: #ffe7ed;
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .tag.level {
-      color: #8b5c00;
-      background: #fff1c7;
-    }
-
-    .resource-card h3 {
-      margin-bottom: 8px;
-      font-size: 18px;
-      line-height: 1.4;
-    }
-
-    .resource-card p {
-      color: var(--text);
-      font-size: 13px;
-    }
-
-    .resource-status {
-      display: inline-block;
-      margin-top: 15px;
-      color: #a64a60;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .no-results {
-      display: none;
-      padding: 30px;
-      text-align: center;
-      color: var(--text);
-      background: white;
-      border-radius: 18px;
-    }
-
-    footer {
-      padding: 35px 0 20px;
-      color: white;
-      background: #382b36;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding-bottom: 20px;
-    }
-
-    .footer-logo {
-      font-size: 24px;
-      font-weight: 900;
-    }
-
-    .footer-logo span {
-      color: var(--yellow);
-    }
-
-    .footer-description {
-      max-width: 370px;
-      margin-top: 5px;
-      color: #e9dce4;
-      font-size: 13px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .footer-links a {
-      color: #f6eaf0;
-      font-size: 13px;
-    }
-
-    .footer-bottom {
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,.15);
-      color: #d9cbd5;
-      text-align: center;
-      font-size: 12px;
-    }
-
-    @media(max-width:850px) {
-      .navbar {
-        padding: 14px 0;
-        flex-direction: column;
-      }
-
-      .nav-links {
-        justify-content: center;
-        gap: 12px 16px;
-      }
-
-      .filters {
-        grid-template-columns: repeat(2,minmax(0,1fr));
-      }
-
-      .competencies-grid,
-      .resources-grid {
-        grid-template-columns: repeat(2,minmax(0,1fr));
-      }
-    }
-
-    @media(max-width:520px) {
-      .nav-links {
-        gap: 10px;
-      }
-
-      .nav-links a {
-        font-size: 12px;
-      }
-
-      .filters,
-      .competencies-grid,
-      .resources-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .page-hero {
-        padding: 45px 0;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explorez les ressources pédagogiques ABFLEX pour l'enseignement du français langue étrangère.">
+<title>Ressources — ABFLEX</title>
+
+<style>
+:root {
+  --pink:#f7b4c8;
+  --pink-light:#fff0f5;
+  --yellow:#ffdf70;
+  --orange:#ff9d55;
+  --red:#e94b62;
+  --dark:#382b36;
+  --text:#665561;
+  --white:#ffffff;
+  --shadow:0 10px 30px rgba(80,40,60,.09);
+  --radius:22px;
+}
+* {margin:0;padding:0;box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--dark);
+  background:#fffafc;
+  line-height:1.7;
+}
+a {color:inherit;text-decoration:none}
+.container {width:min(1120px,90%);margin:auto}
+
+header {
+  background:rgba(255,255,255,.96);
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 18px rgba(80,40,60,.06);
+}
+.navbar {
+  min-height:82px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+}
+.logo {display:flex;align-items:center;gap:12px;flex-shrink:0}
+.logo-icon {
+  width:53px;height:53px;
+  display:flex;justify-content:center;align-items:center;
+  border-radius:17px;color:white;font-size:21px;font-weight:900;
+  background:linear-gradient(135deg,var(--red),var(--orange),var(--yellow));
+  box-shadow:0 5px 15px rgba(233,75,98,.22);
+}
+.logo-name {
+  font-size:25px;font-weight:900;letter-spacing:1px;
+  color:var(--red);line-height:1.2;
+}
+.logo-tagline {display:block;color:var(--text);font-size:11px}
+.nav-links {
+  display:flex;align-items:center;justify-content:flex-end;gap:23px;
+}
+.nav-links a {font-size:14px;font-weight:700;transition:.2s}
+.nav-links a:hover {color:var(--red)}
+.nav-links .nav-button {
+  background:var(--red);color:white;padding:11px 18px;border-radius:30px;
+}
+.nav-links .nav-button:hover {background:#d93651;color:white}
+
+.hero {
+  padding:70px 0;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(255,223,112,.38),transparent 25%),
+    radial-gradient(circle at 5% 90%,rgba(247,180,200,.38),transparent 28%),
+    linear-gradient(135deg,#fff8fb,#fffaf0);
+}
+.hero-content {max-width:850px;margin:auto;text-align:center}
+.eyebrow {
+  display:inline-block;padding:7px 15px;margin-bottom:20px;
+  border-radius:30px;color:#c83d58;background:#ffe5ed;
+  font-size:13px;font-weight:800;
+}
+h1 {margin-bottom:18px;font-size:clamp(36px,5vw,55px);line-height:1.2}
+h1 span,.section-heading h2 span {color:var(--red)}
+.hero p {max-width:720px;margin:auto;color:var(--text);font-size:17px}
+
+.section {padding:70px 0}
+.section-heading {max-width:720px;margin:0 auto 35px;text-align:center}
+.section-label {
+  display:inline-block;margin-bottom:12px;color:var(--red);
+  font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;
+}
+.section-heading h2 {margin-bottom:12px;font-size:clamp(29px,4vw,40px);line-height:1.25}
+.section-heading p {color:var(--text)}
+
+.filters {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:25px;
+  padding:22px;
+  background:white;
+  border:1px solid #f8e6ed;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.filters input,.filters select {
+  width:100%;
+  min-width:0;
+  padding:13px 12px;
+  border:1px solid #ecdde4;
+  border-radius:12px;
+  background:#fffafc;
+  color:var(--dark);
+  font:inherit;
+  font-size:14px;
+  outline:none;
+}
+.filters input:focus,.filters select:focus {border-color:var(--red)}
+
+.competence-title {margin:30px 0 15px;font-size:20px}
+.competence-buttons {
+  display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;
+}
+.competence-btn {
+  padding:10px 16px;
+  border:1px solid #f0dce4;
+  border-radius:25px;
+  background:white;
+  color:var(--dark);
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  transition:.2s;
+}
+.competence-btn:hover,.competence-btn.active {
+  background:var(--red);border-color:var(--red);color:white;
+}
+
+.results-line {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:15px;margin-bottom:20px;color:var(--text);font-size:14px;
+}
+.resources-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.resource-card {
+  display:flex;
+  flex-direction:column;
+  padding:25px;
+  background:white;
+  border:1px solid #f8e6ed;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:transform .2s;
+}
+.resource-card:hover {transform:translateY(-4px)}
+.resource-icon {
+  width:54px;height:54px;display:flex;align-items:center;
+  justify-content:center;margin-bottom:16px;border-radius:17px;
+  background:#ffe5ed;font-size:26px;
+}
+.resource-card:nth-child(3n+2) .resource-icon {background:#fff4cf}
+.resource-card:nth-child(3n) .resource-icon {background:#ffeadc}
+.badges {display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.badge {
+  padding:4px 9px;border-radius:20px;background:#fff0f5;
+  color:#b33c54;font-size:11px;font-weight:800;
+}
+.resource-card h3 {margin-bottom:10px;font-size:19px;line-height:1.4}
+.resource-card p {margin-bottom:18px;color:var(--text);font-size:14px}
+.resource-card .resource-type {margin-top:auto;color:#a45b6d;font-size:12px;font-weight:700}
+.empty-state {
+  grid-column:1/-1;
+  padding:35px;
+  text-align:center;
+  background:white;
+  border-radius:var(--radius);
+  color:var(--text);
+}
+.reset-button {
+  padding:11px 17px;
+  border:0;border-radius:25px;background:#fff0f5;
+  color:#b33c54;font-weight:800;cursor:pointer;
+}
+.reset-button:hover {background:#ffe0e9}
+
+footer {padding:40px 0 20px;color:white;background:#382b36}
+.footer-content {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:25px;flex-wrap:wrap;padding-bottom:25px;
+}
+.footer-logo {font-size:25px;font-weight:900;letter-spacing:1px}
+.footer-logo span {color:var(--yellow)}
+.footer-description {max-width:360px;margin-top:5px;color:#e9dce4;font-size:13px}
+.footer-links {display:flex;flex-wrap:wrap;gap:20px}
+.footer-links a {color:#f6eaf0;font-size:13px}
+.footer-links a:hover {color:var(--yellow)}
+.footer-bottom {
+  padding-top:18px;border-top:1px solid rgba(255,255,255,.15);
+  color:#d9cbd5;font-size:12px;text-align:center;
+}
+
+@media(max-width:850px) {
+  .navbar {padding:15px 0;flex-direction:column;gap:17px}
+  .nav-links {justify-content:center;flex-wrap:wrap;gap:12px 18px}
+  .filters {grid-template-columns:repeat(2,1fr)}
+  .resources-grid {grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:540px) {
+  .container {width:92%}
+  .logo-name {font-size:22px}
+  .nav-links {gap:10px 13px}
+  .nav-links a {font-size:12px}
+  .nav-links .nav-button {padding:9px 13px}
+  .hero {padding:55px 0}
+  .section {padding:50px 0}
+  .filters,.resources-grid {grid-template-columns:1fr}
+  .results-line {align-items:flex-start;flex-direction:column}
+  .footer-content {flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
 
 <body>
-
 <header>
   <div class="container navbar">
-
     <a href="index.html" class="logo">
       <div class="logo-icon">AB</div>
       <div>
@@ -447,613 +234,279 @@
         <span class="logo-tagline">Votre partenaire en français</span>
       </div>
     </a>
-
     <nav class="nav-links">
       <a href="index.html">Accueil</a>
       <a href="niveaux.html">Les niveaux</a>
       <a href="ressources.html">Ressources</a>
       <a href="index.html#apropos" class="nav-button">Découvrir ABFLEX</a>
     </nav>
-
   </div>
 </header>
 
-
 <main>
-
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Bibliothèque pédagogique</span>
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="eyebrow">Votre espace pédagogique</span>
       <h1>Explorez nos <span>ressources</span></h1>
       <p>
-        Retrouvez les compétences linguistiques et les types de ressources
-        pédagogiques selon le niveau scolaire, de la 1AS à la 3AS.
+        Retrouvez des ressources didactiques pour l’enseignement du FLE,
+        classées par niveau, compétence et type de support afin de faciliter
+        votre recherche et la préparation de vos cours.
       </p>
     </div>
   </section>
 
-
-  <!-- FILTRES -->
-  <section class="filters-section">
+  <section class="section">
     <div class="container">
+      <div class="section-heading">
+        <span class="section-label">Bibliothèque pédagogique</span>
+        <h2>Trouvez le support <span>adapté à vos besoins</span></h2>
+        <p>Utilisez les filtres pour affiner votre recherche.</p>
+      </div>
 
       <div class="filters">
+        <input type="search" id="searchInput" placeholder="Rechercher une ressource...">
 
-        <div class="filter-group">
-          <label for="niveau">Niveau scolaire</label>
-          <select id="niveau">
-            <option value="tous">Tous les niveaux</option>
-            <option value="1AS">1AS</option>
-            <option value="2AS">2AS</option>
-            <option value="3AS">3AS</option>
-          </select>
-        </div>
+        <select id="levelFilter" aria-label="Filtrer par niveau">
+          <option value="">Tous les niveaux</option>
+          <option value="1AS">1AS</option>
+          <option value="2AS">2AS</option>
+          <option value="3AS">3AS</option>
+        </select>
 
-        <div class="filter-group">
-          <label for="competence">Compétence</label>
-          <select id="competence">
-            <option value="tous">Toutes les compétences</option>
-            <option value="ecrit">Compréhension de l’écrit</option>
-            <option value="oral">Compréhension de l’oral</option>
-            <option value="production-ecrite">Production écrite</option>
-            <option value="production-orale">Production orale</option>
-            <option value="langue">Points de langue</option>
-            <option value="autre">Autres compétences</option>
-          </select>
-        </div>
+        <select id="competenceFilter" aria-label="Filtrer par compétence">
+          <option value="">Toutes les compétences</option>
+          <option value="Compréhension de l’écrit">Compréhension de l’écrit</option>
+          <option value="Compréhension de l’oral">Compréhension de l’oral</option>
+          <option value="Production écrite">Production écrite</option>
+          <option value="Production orale">Production orale</option>
+          <option value="Points de langue">Points de langue</option>
+          <option value="Autres">Autres</option>
+        </select>
 
-        <div class="filter-group">
-          <label for="type">Type de ressource</label>
-          <select id="type">
-            <option value="tous">Tous les types</option>
-            <option value="fiche">Fiche pédagogique</option>
-            <option value="texte">Support textuel</option>
-            <option value="activite">Activité / Exercice</option>
-            <option value="evaluation">Évaluation</option>
-            <option value="audio">Audio</option>
-            <option value="video">Vidéo</option>
-            <option value="autre">Autre</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="recherche">Rechercher</label>
-          <input
-            type="search"
-            id="recherche"
-            placeholder="Mot-clé..."
-          >
-        </div>
-
+        <select id="typeFilter" aria-label="Filtrer par type de ressource">
+          <option value="">Tous les types</option>
+          <option value="Fiche pédagogique">Fiche pédagogique</option>
+          <option value="Support textuel">Support textuel</option>
+          <option value="Activité / exercice">Activité / exercice</option>
+          <option value="Évaluation">Évaluation</option>
+          <option value="Audio">Audio</option>
+          <option value="Vidéo">Vidéo</option>
+          <option value="Autre">Autre</option>
+        </select>
       </div>
 
-    </div>
-  </section>
-
-
-  <!-- COMPÉTENCES -->
-  <section class="competencies-section">
-    <div class="container">
-
-      <div class="section-heading">
-        <h2>Les compétences</h2>
-        <p>
-          Choisissez une compétence pour filtrer les ressources correspondantes.
-        </p>
+      <h3 class="competence-title">Explorer par compétence</h3>
+      <div class="competence-buttons">
+        <button class="competence-btn active" data-competence="">Toutes</button>
+        <button class="competence-btn" data-competence="Compréhension de l’écrit">Compréhension de l’écrit</button>
+        <button class="competence-btn" data-competence="Compréhension de l’oral">Compréhension de l’oral</button>
+        <button class="competence-btn" data-competence="Production écrite">Production écrite</button>
+        <button class="competence-btn" data-competence="Production orale">Production orale</button>
+        <button class="competence-btn" data-competence="Points de langue">Points de langue</button>
+        <button class="competence-btn" data-competence="Autres">Autres</button>
       </div>
 
-      <div class="competencies-grid">
-
-        <article class="competency-card">
-          <div class="competency-icon">📖</div>
-          <h3>Compréhension de l’écrit</h3>
-          <p>
-            Supports textuels, textes à analyser, activités de lecture
-            et fiches de compréhension.
-          </p>
-          <button type="button" data-competence="ecrit">
-            Voir les ressources →
-          </button>
-        </article>
-
-        <article class="competency-card">
-          <div class="competency-icon">🎧</div>
-          <h3>Compréhension de l’oral</h3>
-          <p>
-            Documents audio, vidéos, activités d’écoute et questions
-            de compréhension.
-          </p>
-          <button type="button" data-competence="oral">
-            Voir les ressources →
-          </button>
-        </article>
-
-        <article class="competency-card">
-          <div class="competency-icon">✍️</div>
-          <h3>Production écrite</h3>
-          <p>
-            Sujets de rédaction, consignes, activités de réécriture
-            et grilles d’évaluation.
-          </p>
-          <button type="button" data-competence="production-ecrite">
-            Voir les ressources →
-          </button>
-        </article>
-
-        <article class="competency-card">
-          <div class="competency-icon">🗣️</div>
-          <h3>Production orale</h3>
-          <p>
-            Situations de communication, débats, exposés et activités
-            d’expression orale.
-          </p>
-          <button type="button" data-competence="production-orale">
-            Voir les ressources →
-          </button>
-        </article>
-
-        <article class="competency-card">
-          <div class="competency-icon">📝</div>
-          <h3>Points de langue</h3>
-          <p>
-            Grammaire, vocabulaire, conjugaison, orthographe et
-            activités de langue.
-          </p>
-          <button type="button" data-competence="langue">
-            Voir les ressources →
-          </button>
-        </article>
-
-        <article class="competency-card">
-          <div class="competency-icon">🌟</div>
-          <h3>Autres ressources</h3>
-          <p>
-            Supports complémentaires et contenus utiles à la
-            préparation des cours de FLE.
-          </p>
-          <button type="button" data-competence="autre">
-            Voir les ressources →
-          </button>
-        </article>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- RESSOURCES -->
-  <section class="resources-section" id="liste-ressources">
-    <div class="container">
-
-      <div class="section-heading">
-        <h2>La bibliothèque de ressources</h2>
-        <p>
-          Filtrez les contenus par niveau, compétence et type de ressource.
-        </p>
+      <div class="results-line">
+        <span id="resultsCount" aria-live="polite">Ressources disponibles : 9</span>
+        <button class="reset-button" id="resetFilters" type="button">Réinitialiser les filtres</button>
       </div>
 
       <div class="resources-grid" id="resourcesGrid">
 
-        <!-- 1AS : Compréhension de l'écrit -->
-        <article class="resource-card"
-          data-niveau="1AS"
-          data-competence="ecrit"
-          data-type="fiche"
-          data-search="1AS compréhension écrit fiche pédagogique lecture">
-
-          <div class="resource-top">📖</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">1AS</span>
-              <span class="tag">Compréhension de l’écrit</span>
-            </div>
-            <h3>Fiches de compréhension de l’écrit</h3>
-            <p>Fiches pédagogiques et activités de lecture adaptées au niveau 1AS.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="1AS" data-competence="Compréhension de l’écrit" data-type="Fiche pédagogique">
+          <div class="resource-icon">📘</div>
+          <div class="badges"><span class="badge">1AS</span><span class="badge">Compréhension de l’écrit</span></div>
+          <h3>Fiche pédagogique — Compréhension de l’écrit</h3>
+          <p>Un espace prévu pour présenter une fiche pédagogique adaptée au programme de première année secondaire.</p>
+          <span class="resource-type">Fiche pédagogique</span>
         </article>
 
-        <!-- 1AS : Compréhension de l'oral -->
-        <article class="resource-card"
-          data-niveau="1AS"
-          data-competence="oral"
-          data-type="audio"
-          data-search="1AS compréhension oral audio écoute">
-
-          <div class="resource-top">🎧</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">1AS</span>
-              <span class="tag">Compréhension de l’oral</span>
-            </div>
-            <h3>Supports audio et activités d’écoute</h3>
-            <p>Supports d’écoute et activités pour développer la compréhension orale.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="1AS" data-competence="Production écrite" data-type="Activité / exercice">
+          <div class="resource-icon">✍️</div>
+          <div class="badges"><span class="badge">1AS</span><span class="badge">Production écrite</span></div>
+          <h3>Activité de production écrite</h3>
+          <p>Un espace pour ajouter des consignes, des exercices et des activités de rédaction.</p>
+          <span class="resource-type">Activité / exercice</span>
         </article>
 
-        <!-- 1AS : Production écrite -->
-        <article class="resource-card"
-          data-niveau="1AS"
-          data-competence="production-ecrite"
-          data-type="activite"
-          data-search="1AS production écrite rédaction activité">
-
-          <div class="resource-top">✍️</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">1AS</span>
-              <span class="tag">Production écrite</span>
-            </div>
-            <h3>Activités de production écrite</h3>
-            <p>Sujets, consignes et activités pour accompagner la rédaction.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="1AS" data-competence="Compréhension de l’oral" data-type="Audio">
+          <div class="resource-icon">🎧</div>
+          <div class="badges"><span class="badge">1AS</span><span class="badge">Compréhension de l’oral</span></div>
+          <h3>Support audio</h3>
+          <p>Un espace pour intégrer un document sonore et des activités de compréhension orale.</p>
+          <span class="resource-type">Audio</span>
         </article>
 
-        <!-- 1AS : Production orale -->
-        <article class="resource-card"
-          data-niveau="1AS"
-          data-competence="production-orale"
-          data-type="activite"
-          data-search="1AS production orale expression communication">
-
-          <div class="resource-top">🗣️</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">1AS</span>
-              <span class="tag">Production orale</span>
-            </div>
-            <h3>Activités d’expression orale</h3>
-            <p>Situations de communication et activités pour prendre la parole.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="2AS" data-competence="Points de langue" data-type="Fiche pédagogique">
+          <div class="resource-icon">📝</div>
+          <div class="badges"><span class="badge">2AS</span><span class="badge">Points de langue</span></div>
+          <h3>Fiche de langue</h3>
+          <p>Un espace pour ajouter des explications et des activités portant sur les points de langue.</p>
+          <span class="resource-type">Fiche pédagogique</span>
         </article>
 
-        <!-- 1AS : Points de langue -->
-        <article class="resource-card"
-          data-niveau="1AS"
-          data-competence="langue"
-          data-type="activite"
-          data-search="1AS points langue grammaire vocabulaire conjugaison">
-
-          <div class="resource-top">📝</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">1AS</span>
-              <span class="tag">Points de langue</span>
-            </div>
-            <h3>Grammaire, vocabulaire et conjugaison</h3>
-            <p>Exercices et activités pour travailler les points de langue.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="2AS" data-competence="Production orale" data-type="Activité / exercice">
+          <div class="resource-icon">💬</div>
+          <div class="badges"><span class="badge">2AS</span><span class="badge">Production orale</span></div>
+          <h3>Activité de production orale</h3>
+          <p>Un espace pour présenter des activités d’expression orale, de dialogue et de prise de parole.</p>
+          <span class="resource-type">Activité / exercice</span>
         </article>
 
-        <!-- 2AS : Compréhension de l'écrit -->
-        <article class="resource-card"
-          data-niveau="2AS"
-          data-competence="ecrit"
-          data-type="fiche"
-          data-search="2AS compréhension écrit fiche lecture">
-
-          <div class="resource-top">📚</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">2AS</span>
-              <span class="tag">Compréhension de l’écrit</span>
-            </div>
-            <h3>Fiches de compréhension de l’écrit</h3>
-            <p>Fiches et supports de lecture destinés au niveau 2AS.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="2AS" data-competence="Compréhension de l’écrit" data-type="Support textuel">
+          <div class="resource-icon">📄</div>
+          <div class="badges"><span class="badge">2AS</span><span class="badge">Compréhension de l’écrit</span></div>
+          <h3>Support textuel</h3>
+          <p>Un espace pour intégrer un texte accompagné de questions et de pistes d’exploitation.</p>
+          <span class="resource-type">Support textuel</span>
         </article>
 
-        <!-- 2AS : Compréhension de l'oral -->
-        <article class="resource-card"
-          data-niveau="2AS"
-          data-competence="oral"
-          data-type="audio"
-          data-search="2AS compréhension oral audio vidéo">
-
-          <div class="resource-top">🎙️</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">2AS</span>
-              <span class="tag">Compréhension de l’oral</span>
-            </div>
-            <h3>Supports audio et vidéo</h3>
-            <p>Documents et activités d’écoute pour le niveau 2AS.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="3AS" data-competence="Production écrite" data-type="Évaluation">
+          <div class="resource-icon">🎯</div>
+          <div class="badges"><span class="badge">3AS</span><span class="badge">Production écrite</span></div>
+          <h3>Évaluation de la production écrite</h3>
+          <p>Un espace pour ajouter un sujet d’écriture, des critères d’évaluation et une grille de correction.</p>
+          <span class="resource-type">Évaluation</span>
         </article>
 
-        <!-- 2AS : Production écrite -->
-        <article class="resource-card"
-          data-niveau="2AS"
-          data-competence="production-ecrite"
-          data-type="activite"
-          data-search="2AS production écrite rédaction">
-
-          <div class="resource-top">✏️</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">2AS</span>
-              <span class="tag">Production écrite</span>
-            </div>
-            <h3>Activités de production écrite</h3>
-            <p>Activités de rédaction, consignes et outils d’accompagnement.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="3AS" data-competence="Compréhension de l’oral" data-type="Vidéo">
+          <div class="resource-icon">🎬</div>
+          <div class="badges"><span class="badge">3AS</span><span class="badge">Compréhension de l’oral</span></div>
+          <h3>Support vidéo</h3>
+          <p>Un espace pour intégrer une vidéo pédagogique et des activités d’écoute et de compréhension.</p>
+          <span class="resource-type">Vidéo</span>
         </article>
 
-        <!-- 2AS : Production orale -->
-        <article class="resource-card"
-          data-niveau="2AS"
-          data-competence="production-orale"
-          data-type="activite"
-          data-search="2AS production orale débat exposé">
-
-          <div class="resource-top">💬</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">2AS</span>
-              <span class="tag">Production orale</span>
-            </div>
-            <h3>Expression orale et communication</h3>
-            <p>Activités de prise de parole et situations de communication.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
-        </article>
-
-        <!-- 2AS : Points de langue -->
-        <article class="resource-card"
-          data-niveau="2AS"
-          data-competence="langue"
-          data-type="activite"
-          data-search="2AS grammaire vocabulaire conjugaison">
-
-          <div class="resource-top">📘</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">2AS</span>
-              <span class="tag">Points de langue</span>
-            </div>
-            <h3>Activités de langue</h3>
-            <p>Exercices de grammaire, vocabulaire et conjugaison pour 2AS.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
-        </article>
-
-        <!-- 3AS : Compréhension de l'écrit -->
-        <article class="resource-card"
-          data-niveau="3AS"
-          data-competence="ecrit"
-          data-type="fiche"
-          data-search="3AS compréhension écrit texte analyse">
-
-          <div class="resource-top">📑</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">3AS</span>
-              <span class="tag">Compréhension de l’écrit</span>
-            </div>
-            <h3>Fiches de compréhension de l’écrit</h3>
-            <p>Supports et activités de lecture analytique pour le niveau 3AS.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
-        </article>
-
-        <!-- 3AS : Compréhension de l'oral -->
-        <article class="resource-card"
-          data-niveau="3AS"
-          data-competence="oral"
-          data-type="audio"
-          data-search="3AS compréhension oral écoute document">
-
-          <div class="resource-top">🎧</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">3AS</span>
-              <span class="tag">Compréhension de l’oral</span>
-            </div>
-            <h3>Documents de compréhension orale</h3>
-            <p>Supports audio et activités d’écoute pour le niveau 3AS.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
-        </article>
-
-        <!-- 3AS : Production écrite -->
-        <article class="resource-card"
-          data-niveau="3AS"
-          data-competence="production-ecrite"
-          data-type="evaluation"
-          data-search="3AS production écrite argumentation évaluation">
-
-          <div class="resource-top">🖊️</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">3AS</span>
-              <span class="tag">Production écrite</span>
-            </div>
-            <h3>Production écrite et évaluation</h3>
-            <p>Sujets, consignes et grilles pour accompagner les productions écrites.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
-        </article>
-
-        <!-- 3AS : Production orale -->
-        <article class="resource-card"
-          data-niveau="3AS"
-          data-competence="production-orale"
-          data-type="activite"
-          data-search="3AS production orale débat argumentation">
-
-          <div class="resource-top">🗣️</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">3AS</span>
-              <span class="tag">Production orale</span>
-            </div>
-            <h3>Débat et expression orale</h3>
-            <p>Activités d’argumentation, de débat et de prise de parole.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
-        </article>
-
-        <!-- 3AS : Points de langue -->
-        <article class="resource-card"
-          data-niveau="3AS"
-          data-competence="langue"
-          data-type="activite"
-          data-search="3AS points langue grammaire vocabulaire">
-
-          <div class="resource-top">📒</div>
-          <div class="resource-content">
-            <div class="resource-tags">
-              <span class="tag level">3AS</span>
-              <span class="tag">Points de langue</span>
-            </div>
-            <h3>Révision des points de langue</h3>
-            <p>Exercices et activités de révision linguistique pour 3AS.</p>
-            <span class="resource-status">Contenu à ajouter</span>
-          </div>
+        <article class="resource-card" data-level="3AS" data-competence="Autres" data-type="Autre">
+          <div class="resource-icon">✨</div>
+          <div class="badges"><span class="badge">3AS</span><span class="badge">Autres</span></div>
+          <h3>Autres ressources pédagogiques</h3>
+          <p>Un espace pour ajouter tout autre support utile à la préparation des cours de français.</p>
+          <span class="resource-type">Autre</span>
         </article>
 
       </div>
-
-      <div class="no-results" id="noResults">
-        Aucune ressource ne correspond à votre recherche.
-        Essayez de modifier les filtres.
-      </div>
-
     </div>
   </section>
-
 </main>
-
 
 <footer>
   <div class="container">
-
     <div class="footer-content">
-
       <div>
         <a href="index.html" class="footer-logo">AB<span>FLEX</span></a>
         <p class="footer-description">
-          Votre partenaire en français et en ressources pédagogiques.
+          Votre partenaire en français : un espace dédié aux ressources didactiques et à l’enseignement du FLE.
         </p>
       </div>
-
       <nav class="footer-links">
         <a href="index.html">Accueil</a>
         <a href="niveaux.html">Les niveaux</a>
         <a href="ressources.html">Ressources</a>
         <a href="index.html#apropos">À propos</a>
       </nav>
-
     </div>
-
-    <div class="footer-bottom">
-      © <span id="year"></span> ABFLEX — Tous droits réservés.
-    </div>
-
+    <div class="footer-bottom">© <span id="year"></span> ABFLEX — Tous droits réservés.</div>
   </div>
 </footer>
 
-
 <script>
-  const niveau = document.getElementById("niveau");
-  const competence = document.getElementById("competence");
-  const type = document.getElementById("type");
-  const recherche = document.getElementById("recherche");
-  const cards = document.querySelectorAll(".resource-card");
-  const noResults = document.getElementById("noResults");
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  function filtrerRessources() {
-    const niveauChoisi = niveau.value;
-    const competenceChoisie = competence.value;
-    const typeChoisi = type.value;
-    const motCle = recherche.value.toLowerCase().trim();
+const searchInput = document.getElementById("searchInput");
+const levelFilter = document.getElementById("levelFilter");
+const competenceFilter = document.getElementById("competenceFilter");
+const typeFilter = document.getElementById("typeFilter");
+const cards = [...document.querySelectorAll(".resource-card")];
+const count = document.getElementById("resultsCount");
+const competenceButtons = [...document.querySelectorAll(".competence-btn")];
 
-    let nombreVisible = 0;
+function normalizeText(text) {
+  return text.toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
-    cards.forEach(function(card) {
-      const cardNiveau = card.dataset.niveau;
-      const cardCompetence = card.dataset.competence;
-      const cardType = card.dataset.type;
-      const texte = card.dataset.search.toLowerCase()
-        + " " + card.innerText.toLowerCase();
+function filterResources() {
+  const query = normalizeText(searchInput.value.trim());
+  const level = levelFilter.value;
+  const competence = competenceFilter.value;
+  const type = typeFilter.value;
+  let visible = 0;
 
-      const niveauOK =
-        niveauChoisi === "tous" || cardNiveau === niveauChoisi;
+  cards.forEach(card => {
+    const text = normalizeText(card.innerText);
+    const matches =
+      text.includes(query) &&
+      (!level || card.dataset.level === level) &&
+      (!competence || card.dataset.competence === competence) &&
+      (!type || card.dataset.type === type);
 
-      const competenceOK =
-        competenceChoisie === "tous"
-        || cardCompetence === competenceChoisie;
-
-      const typeOK =
-        typeChoisi === "tous"
-        || cardType === typeChoisi;
-
-      const rechercheOK =
-        texte.includes(motCle);
-
-      const afficher =
-        niveauOK && competenceOK && typeOK && rechercheOK;
-
-      card.style.display = afficher ? "" : "none";
-
-      if (afficher) {
-        nombreVisible++;
-      }
-    });
-
-    noResults.style.display =
-      nombreVisible === 0 ? "block" : "none";
-  }
-
-  niveau.addEventListener("change", filtrerRessources);
-  competence.addEventListener("change", filtrerRessources);
-  type.addEventListener("change", filtrerRessources);
-  recherche.addEventListener("input", filtrerRessources);
-
-  document.querySelectorAll("[data-competence]").forEach(function(button) {
-    button.addEventListener("click", function() {
-      competence.value = button.dataset.competence;
-
-      document.getElementById("liste-ressources")
-        .scrollIntoView({ behavior: "smooth" });
-
-      filtrerRessources();
-    });
+    card.style.display = matches ? "flex" : "none";
+    if (matches) visible++;
   });
 
-  // Lire les filtres éventuels dans l'adresse de la page
-  const params = new URLSearchParams(window.location.search);
-  const niveauParam = params.get("niveau");
-  const competenceParam = params.get("competence");
-
-  if (["1AS", "2AS", "3AS"].includes(niveauParam)) {
-    niveau.value = niveauParam;
+  let empty = document.getElementById("emptyState");
+  if (visible === 0) {
+    if (!empty) {
+      empty = document.createElement("div");
+      empty.id = "emptyState";
+      empty.className = "empty-state";
+      empty.textContent = "Aucune ressource ne correspond à votre recherche.";
+      document.getElementById("resourcesGrid").appendChild(empty);
+    }
+  } else if (empty) {
+    empty.remove();
   }
 
-  if ([
-    "ecrit",
-    "oral",
-    "production-ecrite",
-    "production-orale",
-    "langue",
-    "autre"
-  ].includes(competenceParam)) {
-    competence.value = competenceParam;
-  }
+  count.textContent = visible + (visible > 1 ? " ressources affichées" : " ressource affichée");
+}
 
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
+function updateCompetenceButtons(value) {
+  competenceButtons.forEach(button => {
+    button.classList.toggle("active", button.dataset.competence === value);
+  });
+}
 
-  filtrerRessources();
+searchInput.addEventListener("input", filterResources);
+levelFilter.addEventListener("change", filterResources);
+competenceFilter.addEventListener("change", () => {
+  updateCompetenceButtons(competenceFilter.value);
+  filterResources();
+});
+typeFilter.addEventListener("change", filterResources);
+
+competenceButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    competenceFilter.value = button.dataset.competence;
+    updateCompetenceButtons(button.dataset.competence);
+    filterResources();
+  });
+});
+
+document.getElementById("resetFilters").addEventListener("click", () => {
+  searchInput.value = "";
+  levelFilter.value = "";
+  competenceFilter.value = "";
+  typeFilter.value = "";
+  updateCompetenceButtons("");
+  filterResources();
+});
+
+const params = new URLSearchParams(window.location.search);
+const niveau = params.get("niveau");
+const competence = params.get("competence");
+
+if (["1AS", "2AS", "3AS"].includes(niveau)) {
+  levelFilter.value = niveau;
+}
+if (competence) {
+  const matchingOption = [...competenceFilter.options].find(
+    option => normalizeText(option.value) === normalizeText(competence)
+  );
+  if (matchingOption) competenceFilter.value = matchingOption.value;
+}
+updateCompetenceButtons(competenceFilter.value);
+filterResources();
 </script>
-
 </body>
 </html>
