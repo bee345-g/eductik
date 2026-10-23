@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bee345-g.github.io/Abflexdz/sitemap.xml
+Sitemap: https://bee345-g.github.io/Abflexdz/sitemap1.xml
