@@ -1,0 +1,8 @@
+{
+  "name": "abflexdz",
+  "compatibility_date": "2026-10-24",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page"
+  }
+}
