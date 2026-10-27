@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,7 +6,8 @@
 <meta name="robots" content="noindex, follow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Explorez les ressources pédagogiques Eductik pour l’enseignement du français langue étrangère.">
-<link rel="icon" href="logo.png.png">
+<link rel="icon" type="image/png" href="logo.png.png">
+<meta name="theme-color" content="#102f4a">
 <title>Ressources — Eductik</title>
 
 <style>
@@ -30,7 +32,9 @@
   box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -56,15 +60,16 @@ button, input, select {
 /* NAVIGATION */
 
 header {
-  background: rgba(255,255,255,.97);
+  background: rgba(255,250,245,.97);
   position: sticky;
   top: 0;
   z-index: 100;
   box-shadow: 0 3px 18px rgba(16,47,74,.07);
+  backdrop-filter: blur(10px);
 }
 
 .navbar {
-  min-height: 82px;
+  min-height: 92px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,31 +77,40 @@ header {
 }
 
 .logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
 }
 
 .brand-mark {
-  width: 53px;
-  height: 53px;
   display: block;
+  width: 54px;
+  height: 54px;
   flex-shrink: 0;
 }
 
+.logo-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
 .logo-name {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: .5px;
   color: var(--navy);
-  line-height: 1.2;
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: -1px;
 }
 
 .logo-tagline {
   display: block;
-  color: var(--muted);
-  font-size: 11px;
+  margin-top: 5px;
+  color: var(--navy);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .nav-links {
@@ -439,9 +453,9 @@ footer {
 }
 
 .footer-logo {
-  font-size: 25px;
+  font-size: 29px;
   font-weight: 900;
-  letter-spacing: .5px;
+  letter-spacing: -1px;
   color: var(--white);
 }
 
@@ -504,21 +518,44 @@ footer {
   }
 }
 
-@media(max-width:540px) {
-  .container { width: 92%; }
+@media(max-width:480px) {
+  .container {
+    width: 92%;
+  }
 
-  .logo-name { font-size: 22px; }
-  .brand-mark { width: 47px; height: 47px; }
+  .brand-mark {
+    width: 46px;
+    height: 46px;
+  }
 
-  .nav-links { gap: 10px 13px; }
-  .nav-links a { font-size: 12px; }
+  .logo-name {
+    font-size: 23px;
+  }
+
+  .logo-tagline {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .nav-links {
+    gap: 10px 13px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
 
   .nav-links .nav-button {
     padding: 9px 13px;
   }
 
-  .hero { padding: 55px 0; }
-  .section { padding: 50px 0; }
+  .hero {
+    padding: 55px 0;
+  }
+
+  .section {
+    padding: 50px 0;
+  }
 
   .filters,
   .resources-grid {
@@ -542,60 +579,23 @@ footer {
 
 <header>
   <div class="container navbar">
-    
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
 
-.brand-mark {
-  display: block;
-  width: 54px;
-  height: 54px;
-  flex-shrink: 0;
-}
+    <a href="index.html" class="logo" aria-label="Eductik, accueil">
+      <svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Eductik">
+        <rect x="4" y="4" width="42" height="42" rx="10" fill="#102f4a"/>
+        <circle cx="72" cy="25" r="21" fill="#ffd6a3"/>
+        <rect x="4" y="54" width="42" height="42" rx="10" fill="#ffd6a3"/>
+        <g transform="rotate(-9 72 75)">
+          <rect x="51" y="54" width="42" height="42" rx="10" fill="#ff7417"/>
+          <path d="M61 75l8 8 16-19" fill="none" stroke="#fffaf5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
 
-.logo-copy {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-
-.logo-name {
-  color: var(--navy);
-  font-size: 27px;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
-
-.logo-tagline {
-  display: block;
-  margin-top: 5px;
-  color: var(--navy);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-@media (max-width: 480px) {
-  .brand-mark {
-    width: 46px;
-    height: 46px;
-  }
-
-  .logo-name {
-    font-size: 23px;
-  }
-
-  .logo-tagline {
-    font-size: 7px;
-    letter-spacing: 1px;
-  }
-}
-
+      <span class="logo-copy">
+        <span class="logo-name">eductik</span>
+        <span class="logo-tagline">Toutes vos ressources, un seul lieu</span>
+      </span>
+    </a>
 
     <nav class="nav-links" aria-label="Navigation principale">
       <a href="index.html">Accueil</a>
@@ -603,6 +603,7 @@ footer {
       <a href="ressources.html">Ressources</a>
       <a href="index.html#apropos" class="nav-button">À propos</a>
     </nav>
+
   </div>
 </header>
 
