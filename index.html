@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="yLtt3JdcmcbVptQZrqP_KsDDtGfygiNq1tD38f1x38Y">
-  <meta name="google-site-verification" content="ajENK2aNa_ymNayu4mWEJHnasQOKn16gNVbbIZd4Sf8" />
+  <meta name="google-site-verification" content="ajENK2aNa_ymNayu4mWEJHnasQOKn16gNVbbIZd4Sf8">
   <link rel="icon" type="image/png" href="logo.png.png">
-  <title>ABFLEXDZ</title>
+  <title>Eductik</title>
 
   <style>
     :root {
-      --pink: #f7b4c8;
-      --pink-light: #fff0f5;
-      --yellow: #ffdf70;
-      --orange: #ff9d55;
-      --red: #e94b62;
-      --dark: #382b36;
-      --text: #665561;
+      --pink: #e8f1f2;
+      --pink-light: #f1f7f7;
+      --yellow: #f5a04a;
+      --orange: #f28c28;
+      --red: #0f5962;
+      --dark: #18363a;
+      --text: #52696c;
       --white: #ffffff;
-      --shadow: 0 10px 30px rgba(80, 40, 60, 0.09);
+      --shadow: 0 10px 30px rgba(24, 54, 58, 0.09);
       --radius: 22px;
     }
 
@@ -35,7 +35,7 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       color: var(--dark);
-      background: #fffafc;
+      background: #f7fafa;
       line-height: 1.7;
     }
 
@@ -56,7 +56,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 3px 18px rgba(80, 40, 60, 0.06);
+      box-shadow: 0 3px 18px rgba(24, 54, 58, 0.06);
     }
 
     .navbar {
@@ -82,10 +82,23 @@
       align-items: center;
       border-radius: 17px;
       color: white;
-      font-size: 21px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--red), var(--orange), var(--yellow));
-      box-shadow: 0 5px 15px rgba(233, 75, 98, 0.22);
+      background: var(--red);
+      box-shadow: 0 5px 15px rgba(15, 89, 98, 0.22);
+    }
+
+    .logo-icon svg {
+      width: 34px;
+      height: 34px;
+      fill: none;
+      stroke: white;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .logo-icon svg path {
+      stroke: var(--orange);
+      stroke-width: 4;
     }
 
     .logo-name {
@@ -129,7 +142,7 @@
     }
 
     .nav-links .nav-button:hover {
-      background: #d93651;
+      background: #0b4650;
       color: white;
       transform: translateY(-2px);
     }
@@ -140,9 +153,9 @@
       padding: 85px 0 90px;
       overflow: hidden;
       background:
-        radial-gradient(circle at 90% 15%, rgba(255, 223, 112, 0.38), transparent 25%),
-        radial-gradient(circle at 5% 90%, rgba(247, 180, 200, 0.38), transparent 28%),
-        linear-gradient(135deg, #fff8fb, #fffaf0);
+        radial-gradient(circle at 90% 15%, rgba(242, 140, 40, 0.16), transparent 25%),
+        radial-gradient(circle at 5% 90%, rgba(15, 89, 98, 0.10), transparent 28%),
+        linear-gradient(135deg, #f7fafa, #fffaf4);
     }
 
     .hero-content {
@@ -157,8 +170,8 @@
       padding: 7px 15px;
       margin-bottom: 20px;
       border-radius: 30px;
-      color: #c83d58;
-      background: #ffe5ed;
+      color: #0f5962;
+      background: #e4f0f1;
       font-size: 13px;
       font-weight: 800;
     }
@@ -202,18 +215,18 @@
     .btn-primary {
       background: var(--red);
       color: white;
-      box-shadow: 0 7px 18px rgba(233, 75, 98, 0.2);
+      box-shadow: 0 7px 18px rgba(15, 89, 98, 0.2);
     }
 
     .btn-primary:hover {
-      background: #d93651;
+      background: #0b4650;
       transform: translateY(-3px);
     }
 
     .btn-secondary {
       color: var(--dark);
       background: white;
-      border: 1px solid #f1dce4;
+      border: 1px solid #dce8e9;
     }
 
     .btn-secondary:hover {
@@ -247,7 +260,7 @@
       align-items: center;
       gap: 14px;
       padding-bottom: 23px;
-      border-bottom: 1px solid #f5e7ec;
+      border-bottom: 1px solid #e5eeee;
     }
 
     .visual-logo {
@@ -257,7 +270,7 @@
       justify-content: center;
       align-items: center;
       border-radius: 20px;
-      background: linear-gradient(135deg, var(--pink), var(--orange), var(--yellow));
+      background: var(--red);
       color: white;
       font-size: 23px;
       font-weight: 900;
@@ -286,15 +299,15 @@
       padding: 13px;
       margin-top: 11px;
       border-radius: 15px;
-      background: #fff7fa;
+      background: #edf5f5;
     }
 
     .visual-item:nth-of-type(2) {
-      background: #fff9e8;
+      background: #fff5e8;
     }
 
     .visual-item:nth-of-type(3) {
-      background: #fff0e7;
+      background: #eef3f7;
     }
 
     .visual-item .emoji {
@@ -329,7 +342,7 @@
       top: 0;
       right: 0;
       background: var(--yellow);
-      opacity: 0.75;
+      opacity: 0.55;
     }
 
     .shape-two {
@@ -401,7 +414,7 @@
       align-items: center;
       padding: 35px;
       border-radius: 30px;
-      background: linear-gradient(135deg, #ffe9f0, #fff2d6);
+      background: linear-gradient(135deg, #e4f0f1, #fff0dc);
     }
 
     .about-illustration {
@@ -466,8 +479,8 @@
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      color: #b33c54;
-      background: #ffe5ed;
+      color: white;
+      background: var(--red);
       font-weight: 900;
     }
 
@@ -486,7 +499,7 @@
 
     .cta-section {
       padding: 70px 0;
-      background: linear-gradient(120deg, #f9bdce, #ffd97d, #ffb16d);
+      background: linear-gradient(120deg, #dcebed, #f8e5cf, #f5c28e);
     }
 
     .cta-box {
@@ -502,13 +515,13 @@
     .cta-box p {
       max-width: 620px;
       margin: 0 auto 25px;
-      color: #59434c;
+      color: #40595c;
     }
 
     .cta-box .btn {
       background: white;
       color: var(--red);
-      box-shadow: 0 5px 15px rgba(80, 40, 60, 0.08);
+      box-shadow: 0 5px 15px rgba(24, 54, 58, 0.08);
     }
 
     /* FOOTER */
@@ -516,7 +529,7 @@
     footer {
       padding: 45px 0 20px;
       color: white;
-      background: #382b36;
+      background: #18363a;
     }
 
     .footer-brand {
@@ -531,13 +544,13 @@
     }
 
     .footer-logo span {
-      color: var(--yellow);
+      color: var(--orange);
     }
 
     .footer-description {
       max-width: 360px;
       margin: 8px auto 0;
-      color: #e9dce4;
+      color: #dce8e9;
       font-size: 13px;
     }
 
@@ -549,14 +562,14 @@
       padding: 32px 22px;
       text-align: center;
       background: #ffffff;
-      border: 2px solid #ffe1eb;
+      border: 2px solid #e4f0f1;
       border-radius: 26px;
-      box-shadow: 0 10px 30px rgba(247, 180, 200, 0.18);
+      box-shadow: 0 10px 30px rgba(15, 89, 98, 0.12);
       transition: 0.25s;
     }
 
     .contact-card:hover {
-      box-shadow: 0 14px 35px rgba(247, 180, 200, 0.25);
+      box-shadow: 0 14px 35px rgba(15, 89, 98, 0.18);
     }
 
     .contact-card h2 {
@@ -580,9 +593,9 @@
       max-width: 100%;
       padding: 13px 22px;
       border-radius: 30px;
-      background: #fff0f5;
-      border: 1px solid #ffd5e2;
-      color: #d93651;
+      background: #edf5f5;
+      border: 1px solid #d5e6e7;
+      color: var(--red);
       font-size: 16px;
       font-weight: 800;
       overflow-wrap: anywhere;
@@ -590,8 +603,8 @@
     }
 
     .contact-button:hover {
-      background: #ffe1eb;
-      box-shadow: 0 6px 15px rgba(233, 75, 98, 0.12);
+      background: #dcebed;
+      box-shadow: 0 6px 15px rgba(15, 89, 98, 0.12);
       transform: translateY(-2px);
     }
 
@@ -604,7 +617,7 @@
     .footer-bottom {
       padding-top: 18px;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
-      color: #d9cbd5;
+      color: #d9e5e6;
       font-size: 12px;
       text-align: center;
     }
@@ -726,10 +739,18 @@
     <div class="container navbar">
 
       <a href="index.html" class="logo">
-        <div class="logo-icon">AB</div>
+        <div class="logo-icon" aria-label="Logo Eductik">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="5" y="5" width="15" height="15" rx="4"/>
+            <rect x="28" y="5" width="15" height="15" rx="4"/>
+            <rect x="5" y="28" width="15" height="15" rx="4"/>
+            <rect x="28" y="28" width="15" height="15" rx="4"/>
+            <path d="m15 24 6 6 13-14"/>
+          </svg>
+        </div>
 
         <div>
-          <div class="logo-name">ABFLEX</div>
+          <div class="logo-name">Eductik</div>
           <span class="logo-tagline">Votre partenaire en français</span>
         </div>
       </a>
@@ -739,7 +760,7 @@
         <a href="niveaux.html">Les niveaux</a>
         <a href="ressources.html">Ressources</a>
         <a href="index.html#apropos" class="nav-button">
-          Découvrir ABFLEX
+          Découvrir Eductik
         </a>
       </nav>
 
@@ -750,11 +771,9 @@
 
     <!-- ACCUEIL -->
     <section class="hero" id="accueil">
-
       <div class="container hero-content">
 
         <div class="hero-text">
-
           <span class="eyebrow">
             Un espace dédié à l’enseignement du français
           </span>
@@ -766,43 +785,46 @@
           </h1>
 
           <p class="hero-description">
-            ABFLEX vous accompagne dans votre parcours pédagogique
+            Eductik vous accompagne dans votre parcours pédagogique
             en mettant à votre disposition un espace dédié aux
             ressources didactiques et aux pratiques d’enseignement
             du français langue étrangère.
           </p>
 
           <div class="hero-buttons">
-
             <a href="ressources.html" class="btn btn-primary">
               Explorer les ressources →
             </a>
 
             <a href="index.html#apropos" class="btn btn-secondary">
-              Découvrir ABFLEX
+              Découvrir Eductik
             </a>
-
           </div>
-
         </div>
 
         <div class="hero-visual">
-
           <div class="floating-shape shape-one"></div>
           <div class="floating-shape shape-two"></div>
           <div class="floating-shape shape-three"></div>
 
           <div class="visual-card">
-
             <div class="visual-card-top">
-
-              <div class="visual-logo">AB</div>
-
-              <div>
-                <h3>ABFLEX</h3>
-                <p>Votre partenaire en français</p>
+              <div class="visual-logo" aria-hidden="true">
+                <svg viewBox="0 0 48 48" width="38" height="38">
+                  <g fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="5" width="15" height="15" rx="4"/>
+                    <rect x="28" y="5" width="15" height="15" rx="4"/>
+                    <rect x="5" y="28" width="15" height="15" rx="4"/>
+                    <rect x="28" y="28" width="15" height="15" rx="4"/>
+                    <path d="m15 24 6 6 13-14" stroke="#f28c28" stroke-width="4"/>
+                  </g>
+                </svg>
               </div>
 
+              <div>
+                <h3>Eductik</h3>
+                <p>Votre partenaire en français</p>
+              </div>
             </div>
 
             <h2>
@@ -833,49 +855,40 @@
                 <small>Des idées pour enrichir vos pratiques</small>
               </div>
             </div>
-
           </div>
-
         </div>
 
       </div>
-
     </section>
 
     <!-- À PROPOS -->
     <section class="section about-section" id="apropos">
-
       <div class="container about-grid">
 
         <div class="about-visual">
-
           <div class="about-illustration">
-
             <div class="big-icon">📖</div>
 
-            <h3>Bienvenue chez ABFLEX</h3>
+            <h3>Bienvenue chez Eductik</h3>
 
             <p>
               Un espace pensé pour accompagner les enseignants
               de français dans leurs pratiques pédagogiques.
             </p>
-
           </div>
-
         </div>
 
         <div class="about-content">
-
           <span class="section-label">
             À propos de nous
           </span>
 
           <h2>
-            ABFLEX, <span>votre partenaire</span> en français.
+            Eductik, <span>votre partenaire</span> en français.
           </h2>
 
           <p>
-            ABFLEX est un espace éducatif consacré à l’enseignement
+            Eductik est un espace éducatif consacré à l’enseignement
             du français langue étrangère. Il a pour vocation de
             faciliter l’accès aux ressources didactiques et de
             proposer des pistes susceptibles d’enrichir les pratiques
@@ -885,15 +898,13 @@
           <p>
             À travers une organisation claire des contenus selon
             les niveaux scolaires, les compétences et les types
-            de ressources, ABFLEX souhaite rendre la recherche
+            de ressources, Eductik souhaite rendre la recherche
             pédagogique plus simple et plus accessible.
           </p>
 
           <div class="about-points">
-
             <div class="about-point">
               <div class="check-icon">✓</div>
-
               <div>
                 <strong>Des ressources organisées</strong>
                 <p>
@@ -905,7 +916,6 @@
 
             <div class="about-point">
               <div class="check-icon">✓</div>
-
               <div>
                 <strong>Une approche centrée sur l’enseignant</strong>
                 <p>
@@ -917,7 +927,6 @@
 
             <div class="about-point">
               <div class="check-icon">✓</div>
-
               <div>
                 <strong>Une ouverture sur le numérique</strong>
                 <p>
@@ -926,18 +935,14 @@
                 </p>
               </div>
             </div>
-
           </div>
-
         </div>
 
       </div>
-
     </section>
 
     <!-- CALL TO ACTION -->
     <section class="cta-section">
-
       <div class="container cta-box">
 
         <h2>
@@ -946,7 +951,7 @@
 
         <p>
           Explorez les niveaux, les compétences et les ressources
-          disponibles sur ABFLEX pour enrichir votre enseignement
+          disponibles sur Eductik pour enrichir votre enseignement
           du français.
         </p>
 
@@ -955,32 +960,27 @@
         </a>
 
       </div>
-
     </section>
 
   </main>
 
   <!-- FOOTER -->
   <footer>
-
     <div class="container">
 
       <div class="footer-brand">
-
         <a href="index.html" class="footer-logo">
-          AB<span>FLEX</span>
+          Eductik
         </a>
 
         <p class="footer-description">
           Votre partenaire en français : un espace dédié
           aux ressources didactiques et à l’enseignement du FLE.
         </p>
-
       </div>
 
       <!-- CONTACT CARD -->
       <div class="contact-card">
-
         <h2>Une question ou une suggestion ?</h2>
 
         <p class="contact-intro">
@@ -988,24 +988,22 @@
         </p>
 
         <a
-          href="mailto:abflexdz213@gmail.com"
+          href="mailto:eductik213@gmail.com"
           class="contact-button"
         >
-          ✉️ abflexdz213@gmail.com
+          ✉️ eductik213@gmail.com
         </a>
 
         <p class="contact-note">
           Nous serons ravis de recevoir vos messages et suggestions.
         </p>
-
       </div>
 
       <div class="footer-bottom">
-        © <span id="year"></span> ABFLEX — Tous droits réservés.
+        © <span id="year"></span> Eductik — Tous droits réservés.
       </div>
 
     </div>
-
   </footer>
 
   <script>
