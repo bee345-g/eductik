@@ -1,237 +1,912 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Administration privée des ressources ABFLEX.">
-<title>Administration — ABFLEX</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-:root{--pink:#f7b4c8;--pink-light:#fff0f5;--yellow:#ffdf70;--orange:#ff9d55;--red:#e94b62;--dark:#382b36;--text:#665561;--shadow:0 10px 30px rgba(80,40,60,.09);--radius:22px}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fffafc;line-height:1.7}
-a{color:inherit;text-decoration:none}
-.container{width:min(900px,92%);margin:auto}
-header{background:rgba(255,255,255,.96);box-shadow:0 3px 18px rgba(80,40,60,.06)}
-.navbar{min-height:82px;display:flex;justify-content:space-between;align-items:center;gap:20px}
-.logo{display:flex;align-items:center;gap:12px}
-.logo-icon{width:53px;height:53px;display:flex;justify-content:center;align-items:center;border-radius:17px;color:white;font-size:21px;font-weight:900;background:linear-gradient(135deg,var(--red),var(--orange),var(--yellow));box-shadow:0 5px 15px rgba(233,75,98,.22)}
-.logo-name{font-size:25px;font-weight:900;letter-spacing:1px;color:var(--red);line-height:1.2}
-.logo-tagline{display:block;color:var(--text);font-size:11px}
-.navlink{font-size:14px;font-weight:700;color:var(--red)}
-.hero{padding:45px 0 20px;text-align:center}
-.eyebrow{display:inline-block;padding:7px 15px;margin-bottom:15px;border-radius:30px;color:#c83d58;background:#ffe5ed;font-size:13px;font-weight:800}
-h1{font-size:clamp(30px,5vw,44px);line-height:1.2;margin-bottom:12px}
-h1 span{color:var(--red)}
-.hero p{color:var(--text)}
-main{padding-bottom:65px}
-.panel{background:#fff;border:1px solid #f8e6ed;border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin:22px auto}
-.panel h2{font-size:22px;margin-bottom:8px}
-.muted{color:var(--text);font-size:14px;margin-bottom:18px}
-form{display:grid;gap:14px}
-label{font-weight:700;font-size:14px;display:grid;gap:6px}
-input,textarea,select{width:100%;padding:12px;border:1px solid #ecdde4;border-radius:12px;background:#fffafc;color:var(--dark);font:inherit;font-size:14px}
-textarea{min-height:100px;resize:vertical}
-button{border:0;border-radius:25px;padding:12px 18px;font-weight:800;font-size:14px;cursor:pointer}
-.primary{background:var(--red);color:white}
-.primary:hover{background:#d93651}
-.secondary{background:#fff0f5;color:#b33c54}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.status{padding:12px 15px;border-radius:12px;background:#fff0f5;color:#8f3047;font-size:14px;display:none;overflow-wrap:anywhere}
-.status.show{display:block}
-.status.success{background:#eaf8ef;color:#236b3c}
-.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.small{font-size:12px;color:var(--text)}
-.hidden{display:none!important}
-footer{text-align:center;padding:25px;color:var(--text);font-size:12px}
-@media(max-width:600px){.navbar{padding:12px 0;flex-wrap:wrap}.row{grid-template-columns:1fr}.panel{padding:20px}.logo-name{font-size:22px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="robots" content="noindex, nofollow">
+  <title>Administration | Eductik</title>
+  <meta name="theme-color" content="#102f4a">
+
+  <link rel="icon" href="logo.png.png" type="image/png">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root {
+      --navy: #102f4a;
+      --navy-deep: #0b263d;
+      --orange: #ff7417;
+      --peach: #ffd6a3;
+      --cream: #fffaf5;
+      --text: #243b4b;
+      --muted: #61717d;
+      --white: #ffffff;
+      --pale-blue: #edf4f7;
+      --border: #dce6eb;
+      --success: #247a50;
+      --danger: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 5%;
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 45px;
+      height: 45px;
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      color: var(--navy);
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
+
+    .brand-name span {
+      color: var(--orange);
+    }
+
+    .brand-caption {
+      display: block;
+      margin-top: -4px;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: 0.2s ease;
+    }
+
+    .back-link:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    main {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 44px 22px 60px;
+      flex: 1;
+    }
+
+    .page-intro {
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 5px 11px;
+      border-radius: 30px;
+      background: var(--peach);
+      color: var(--navy);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: var(--navy);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .page-intro p {
+      max-width: 650px;
+      color: var(--muted);
+    }
+
+    .panel {
+      margin-bottom: 25px;
+      padding: 28px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(16, 47, 74, 0.05);
+    }
+
+    .panel h2 {
+      margin-bottom: 7px;
+      color: var(--navy);
+      font-size: 1.3rem;
+    }
+
+    .panel-description {
+      margin-bottom: 23px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--navy);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccd9e0;
+      border-radius: 10px;
+      outline: none;
+      background: var(--white);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255, 116, 23, 0.12);
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      background: var(--pale-blue);
+    }
+
+    input[type="file"]::file-selector-button {
+      margin-right: 12px;
+      padding: 8px 12px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--navy);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 45px;
+      padding: 11px 19px;
+      border: 0;
+      border-radius: 10px;
+      font-weight: 800;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: #e9650e;
+    }
+
+    .btn-secondary {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
+      background: var(--navy-deep);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--orange);
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+      transform: none;
+    }
+
+    .form-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .message {
+      display: none;
+      margin-top: 17px;
+      padding: 12px 14px;
+      border-radius: 9px;
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+    }
+
+    .message.success {
+      display: block;
+      background: #eaf7ef;
+      color: var(--success);
+      border: 1px solid #c7ead4;
+    }
+
+    .message.error {
+      display: block;
+      background: #fff0ee;
+      color: var(--danger);
+      border: 1px solid #f4d0cb;
+    }
+
+    .message.info {
+      display: block;
+      background: var(--pale-blue);
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    .hint {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .admin-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 22px;
+      padding: 15px 18px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--pale-blue);
+    }
+
+    .admin-status strong {
+      color: var(--navy);
+    }
+
+    .admin-status p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .security-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--orange);
+      border-radius: 0 9px 9px 0;
+      background: var(--cream);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer {
+      padding: 23px 20px;
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    footer strong {
+      color: var(--peach);
+    }
+
+    @media (max-width: 650px) {
+      .site-header {
+        padding: 13px 16px;
+      }
+
+      .brand-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .brand-name {
+        font-size: 1.3rem;
+      }
+
+      .brand-caption {
+        font-size: 0.65rem;
+      }
+
+      .back-link {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+      }
+
+      main {
+        padding: 32px 15px 45px;
+      }
+
+      .panel {
+        padding: 21px 17px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .form-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div class="container navbar">
-    <a href="index.html" class="logo">
-      <div class="logo-icon">AB</div>
-      <div><div class="logo-name">ABFLEX</div><span class="logo-tagline">Votre partenaire en français</span></div>
-    </a>
-    <a class="navlink" href="ressources.html">Voir les ressources ↗</a>
-  </div>
-</header>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Eductik - Accueil">
+        <svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Eductik">
+          <rect x="4" y="4" width="42" height="42" rx="10" fill="#102f4a"/>
+          <circle cx="72" cy="25" r="21" fill="#ffd6a3"/>
+          <rect x="4" y="54" width="42" height="42" rx="10" fill="#ffd6a3"/>
+          <g transform="rotate(-9 72 75)">
+            <rect x="51" y="54" width="42" height="42" rx="10" fill="#ff7417"/>
+            <path d="M61 75l8 8 16-19" fill="none" stroke="#fffaf5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
 
-<section class="hero container">
-  <span class="eyebrow">Espace privé</span>
-  <h1>Administration <span>ABFLEX</span></h1>
-  <p>Connectez-vous pour ajouter et publier des ressources pédagogiques.</p>
-</section>
+        <span>
+          <span class="brand-name">eductik<span>.</span></span>
+          <span class="brand-caption">Toutes vos ressources, un seul lieu</span>
+        </span>
+      </a>
 
-<main class="container">
-  <section class="panel" id="loginPanel">
-    <h2>Connexion administrateur</h2>
-    <p class="muted">Utilisez l’adresse e-mail et le mot de passe du compte créé dans Supabase.</p>
-    <form id="loginForm">
-      <label>Adresse e-mail
-        <input id="email" type="email" autocomplete="username" required placeholder="votre adresse e-mail">
-      </label>
-      <label>Mot de passe
-        <input id="password" type="password" autocomplete="current-password" required placeholder="Votre mot de passe">
-      </label>
-      <button class="primary" type="submit">Se connecter</button>
-      <div class="status" id="loginStatus" role="status"></div>
-    </form>
-  </section>
-
-  <section class="panel hidden" id="adminPanel">
-    <div class="toolbar">
-      <div>
-        <h2>Ajouter une ressource</h2>
-        <p class="muted">Complétez les informations puis choisissez le fichier à publier.</p>
-      </div>
-      <button class="secondary" type="button" id="logoutBtn">Déconnexion</button>
+      <a class="back-link" href="ressources.html">
+        Voir les ressources ↗
+      </a>
     </div>
-    <form id="resourceForm">
-      <label>Titre de la ressource
-        <input id="titre" maxlength="180" required placeholder="Ex. Fiche de compréhension de l’écrit">
-      </label>
-      <label>Description
-        <textarea id="description" maxlength="1500" placeholder="Présentez brièvement le contenu de la ressource"></textarea>
-      </label>
-      <div class="row">
-        <label>Niveau
-          <select id="niveau" required>
-            <option value="">Choisir un niveau</option>
-            <option value="1AS">1AS</option><option value="2AS">2AS</option><option value="3AS">3AS</option>
-          </select>
-        </label>
-        <label>Compétence
-          <select id="competence" required>
-            <option value="">Choisir une compétence</option>
-            <option>Compréhension de l’écrit</option>
-            <option>Compréhension de l’oral</option>
-            <option>Production écrite</option>
-            <option>Production orale</option>
-            <option>Points de langue</option>
-            <option>Autres</option>
-          </select>
-        </label>
+  </header>
+
+  <main>
+    <div class="page-intro">
+      <span class="eyebrow">Espace privé</span>
+      <h1>Administration Eductik</h1>
+      <p>
+        Gérez vos ressources pédagogiques et publiez vos fiches
+        pour les enseignants directement depuis cet espace.
+      </p>
+    </div>
+
+    <!-- CONNEXION -->
+    <section id="login-section" class="panel">
+      <h2>Connexion administrateur</h2>
+      <p class="panel-description">
+        Connectez-vous pour accéder à l'espace de gestion des ressources.
+      </p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Adresse e-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Votre adresse e-mail"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Votre mot de passe"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button type="submit" id="login-btn" class="btn btn-primary">
+          Se connecter
+        </button>
+
+        <div id="login-message" class="message" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="security-note">
+        Cet espace est réservé aux personnes autorisées.
+        Utilisez votre compte administrateur Supabase.
       </div>
-      <div class="row">
-        <label>Type de ressource
-          <select id="typeRessource" required>
-            <option value="">Choisir un type</option>
-            <option>Fiche pédagogique</option>
-            <option>Support textuel</option>
-            <option>Activité / exercice</option>
-            <option>Évaluation</option>
-            <option>Audio</option>
-            <option>Vidéo</option>
-            <option>Autre</option>
-          </select>
-        </label>
-        <label>Fichier (PDF, image, audio, vidéo…)
-          <input id="fichier" type="file" required accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.webp,.mp3,.wav,.ogg,.mp4,.webm">
-        </label>
+    </section>
+
+    <!-- ADMINISTRATION -->
+    <section id="admin-section" class="hidden">
+      <div class="admin-status">
+        <div>
+          <strong>Vous êtes connectée</strong>
+          <p>Vous pouvez maintenant ajouter une ressource pédagogique.</p>
+        </div>
+
+        <button type="button" id="logout-btn" class="btn btn-outline">
+          Se déconnecter
+        </button>
       </div>
-      <p class="small">Limite actuelle : 50 Mo par fichier. Le bucket est public : les personnes qui disposent du lien peuvent ouvrir le fichier.</p>
-      <button class="primary" id="publishBtn" type="submit">Téléverser et publier</button>
-      <div class="status" id="formStatus" role="status"></div>
-    </form>
-  </section>
-</main>
 
-<footer>© <span id="year"></span> ABFLEX — Administration privée</footer>
+      <section class="panel">
+        <h2>Ajouter une ressource</h2>
+        <p class="panel-description">
+          Complétez les informations ci-dessous, puis sélectionnez
+          le fichier à publier sur Eductik.
+        </p>
 
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
+        <form id="resource-form">
+          <div class="form-group">
+            <label for="titre">Titre de la ressource</label>
+            <input
+              type="text"
+              id="titre"
+              name="titre"
+              placeholder="Ex. : Compréhension de l'écrit — 1AS"
+              maxlength="200"
+              required
+            >
+          </div>
 
-/* Configuration publique Supabase : ne jamais mettre une clé secret ici. */
-const SUPABASE_URL = "https://gxztteylmztlxikhrhwo.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_sDtCL2dhLqT8iZzAkhjegg_K2p7Kz_d";
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              maxlength="2000"
+              placeholder="Présentez brièvement le contenu et les objectifs de la ressource..."
+            ></textarea>
+          </div>
 
-const loginPanel = document.getElementById("loginPanel");
-const adminPanel = document.getElementById("adminPanel");
-const loginStatus = document.getElementById("loginStatus");
-const formStatus = document.getElementById("formStatus");
-const publishBtn = document.getElementById("publishBtn");
+          <div class="form-row">
+            <div class="form-group">
+              <label for="niveau">Niveau</label>
+              <select id="niveau" name="niveau" required>
+                <option value="">Choisir un niveau</option>
+                <option value="1AS">1AS</option>
+                <option value="2AS">2AS</option>
+                <option value="3AS">3AS</option>
+              </select>
+            </div>
 
-function showStatus(element, message, success=false) {
-  element.textContent = message;
-  element.className = "status show" + (success ? " success" : "");
-}
-function setLoggedIn(isLoggedIn) {
-  loginPanel.classList.toggle("hidden", isLoggedIn);
-  adminPanel.classList.toggle("hidden", !isLoggedIn);
-}
-async function refreshSession() {
-  const { data } = await supabaseClient.auth.getSession();
-  setLoggedIn(!!data.session);
-}
-document.getElementById("loginForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  loginStatus.className = "status";
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-  if (error) {
-    showStatus(loginStatus, "Connexion impossible : " + error.message);
-    return;
-  }
-  showStatus(loginStatus, "Connexion réussie.", true);
-  setLoggedIn(true);
-});
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-  await supabaseClient.auth.signOut();
-  setLoggedIn(false);
-  document.getElementById("password").value = "";
-});
+            <div class="form-group">
+              <label for="competence">Compétence</label>
+              <select id="competence" name="competence" required>
+                <option value="">Choisir une compétence</option>
+                <option value="Compréhension de l'écrit">Compréhension de l'écrit</option>
+                <option value="Compréhension de l'oral">Compréhension de l'oral</option>
+                <option value="Production écrite">Production écrite</option>
+                <option value="Production orale">Production orale</option>
+                <option value="Points de langue">Points de langue</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+          </div>
 
-document.getElementById("resourceForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  formStatus.className = "status";
-  const file = document.getElementById("fichier").files[0];
-  if (!file) {
-    showStatus(formStatus, "Choisissez un fichier à téléverser.");
-    return;
-  }
-  if (file.size > 50 * 1024 * 1024) {
-    showStatus(formStatus, "Le fichier dépasse la limite de 50 Mo.");
-    return;
-  }
-  publishBtn.disabled = true;
-  publishBtn.textContent = "Téléversement en cours…";
-  try {
-    const safeName = file.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9._-]/g, "_");
-    const filePath = Date.now() + "-" + crypto.randomUUID() + "-" + safeName;
-    const { error: uploadError } = await supabaseClient.storage.from("ressources").upload(filePath, file, {
-      cacheControl: "3600",
-      upsert: false,
-      contentType: file.type || "application/octet-stream"
+          <div class="form-group">
+            <label for="type_ressource">Type de ressource</label>
+            <select id="type_ressource" name="type_ressource" required>
+              <option value="">Choisir un type</option>
+              <option value="Fiche pédagogique">Fiche pédagogique</option>
+              <option value="Support">Support de cours</option>
+              <option value="Exercice">Exercice</option>
+              <option value="Évaluation">Évaluation</option>
+              <option value="Audio">Audio</option>
+              <option value="Vidéo">Vidéo</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fichier">Fichier à publier</label>
+            <input
+              type="file"
+              id="fichier"
+              name="fichier"
+              accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.webp,.mp3,.wav,.ogg,.mp4,.webm"
+              required
+            >
+            <span class="hint">
+              Formats acceptés : PDF, Word, PowerPoint, images, audio et vidéo.
+              Taille maximale de l'interface : 50 Mo.
+            </span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="publish-btn" class="btn btn-primary">
+              Publier la ressource
+            </button>
+
+            <button type="reset" id="reset-btn" class="btn btn-outline">
+              Réinitialiser
+            </button>
+          </div>
+
+          <div id="upload-message" class="message" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 <strong>Eductik</strong> — Ressources et outils pour l'enseignement des langues.</p>
+  </footer>
+
+  <script>
+    // Configuration Supabase
+    const SUPABASE_URL = "https://gxztteylmztlxikhrhwo.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_sDtCL2dhLqT8iZzAkhjegg_K2p7Kz_d";
+    const BUCKET_NAME = "ressources";
+    const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const loginSection = document.getElementById("login-section");
+    const adminSection = document.getElementById("admin-section");
+    const loginForm = document.getElementById("login-form");
+    const resourceForm = document.getElementById("resource-form");
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const publishBtn = document.getElementById("publish-btn");
+    const loginMessage = document.getElementById("login-message");
+    const uploadMessage = document.getElementById("upload-message");
+
+    function showMessage(element, message, type) {
+      element.textContent = message;
+      element.className = "message " + type;
+    }
+
+    function clearMessage(element) {
+      element.textContent = "";
+      element.className = "message";
+    }
+
+    function showLogin() {
+      loginSection.classList.remove("hidden");
+      adminSection.classList.add("hidden");
+    }
+
+    function showAdmin() {
+      loginSection.classList.add("hidden");
+      adminSection.classList.remove("hidden");
+    }
+
+    async function refreshSession() {
+      const { data, error } = await supabaseClient.auth.getSession();
+
+      if (error) {
+        showLogin();
+        showMessage(
+          loginMessage,
+          "Impossible de vérifier la session. Veuillez vous reconnecter.",
+          "error"
+        );
+        return;
+      }
+
+      if (data.session) {
+        showAdmin();
+      } else {
+        showLogin();
+      }
+    }
+
+    // Vérifier la session au chargement
+    refreshSession();
+
+    // Suivre les changements de session
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        showAdmin();
+      } else {
+        showLogin();
+      }
     });
-    if (uploadError) throw uploadError;
 
-    const { data: publicData } = supabaseClient.storage.from("ressources").getPublicUrl(filePath);
-    const { error: insertError } = await supabaseClient.from("ressources").insert({
-      titre: document.getElementById("titre").value.trim(),
-      description: document.getElementById("description").value.trim() || null,
-      niveau: document.getElementById("niveau").value,
-      competence: document.getElementById("competence").value,
-      type_ressource: document.getElementById("typeRessource").value,
-      fichier_url: publicData.publicUrl,
-      publie: true
+    // Connexion
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage(loginMessage);
+
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Connexion en cours...";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const { error } = await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) {
+          showMessage(
+            loginMessage,
+            "Connexion impossible. Vérifiez vos identifiants et réessayez.",
+            "error"
+          );
+          return;
+        }
+
+        loginForm.reset();
+        showAdmin();
+      } catch (error) {
+        console.error("Erreur de connexion :", error);
+        showMessage(
+          loginMessage,
+          "Une erreur est survenue pendant la connexion.",
+          "error"
+        );
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Se connecter";
+      }
     });
-    if (insertError) throw insertError;
 
-    showStatus(formStatus, "Ressource publiée avec succès ! Elle apparaîtra dans la bibliothèque après la mise à jour de la page Ressources.", true);
-    document.getElementById("resourceForm").reset();
-  } catch (error) {
-    showStatus(formStatus, "Une erreur est survenue : " + (error.message || "veuillez réessayer."));
-  } finally {
-    publishBtn.disabled = false;
-    publishBtn.textContent = "Téléverser et publier";
-  }
-});
+    // Déconnexion
+    logoutBtn.addEventListener("click", async () => {
+      logoutBtn.disabled = true;
 
-refreshSession();
-</script>
+      try {
+        const { error } = await supabaseClient.auth.signOut();
+
+        if (error) {
+          alert("La déconnexion a échoué. Veuillez réessayer.");
+          console.error(error);
+        } else {
+          showLogin();
+        }
+      } catch (error) {
+        console.error("Erreur de déconnexion :", error);
+        alert("Une erreur est survenue pendant la déconnexion.");
+      } finally {
+        logoutBtn.disabled = false;
+      }
+    });
+
+    // Publication d'une ressource
+    resourceForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage(uploadMessage);
+
+      const {
+        data: sessionData,
+        error: sessionError
+      } = await supabaseClient.auth.getSession();
+
+      if (sessionError || !sessionData.session) {
+        showLogin();
+        showMessage(
+          uploadMessage,
+          "Votre session a expiré. Veuillez vous reconnecter.",
+          "error"
+        );
+        return;
+      }
+
+      const titre = document.getElementById("titre").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const niveau = document.getElementById("niveau").value;
+      const competence = document.getElementById("competence").value;
+      const typeRessource = document.getElementById("type_ressource").value;
+      const fileInput = document.getElementById("fichier");
+      const file = fileInput.files[0];
+
+      if (!titre || !niveau || !competence || !typeRessource || !file) {
+        showMessage(
+          uploadMessage,
+          "Veuillez remplir tous les champs obligatoires et sélectionner un fichier.",
+          "error"
+        );
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        showMessage(
+          uploadMessage,
+          "Le fichier dépasse la limite de 50 Mo.",
+          "error"
+        );
+        return;
+      }
+
+      const allowedExtensions = [
+        "pdf", "doc", "docx", "ppt", "pptx",
+        "jpg", "jpeg", "png", "webp",
+        "mp3", "wav", "ogg", "mp4", "webm"
+      ];
+
+      const extension = file.name.split(".").pop().toLowerCase();
+
+      if (!allowedExtensions.includes(extension)) {
+        showMessage(
+          uploadMessage,
+          "Ce format de fichier n'est pas autorisé.",
+          "error"
+        );
+        return;
+      }
+
+      publishBtn.disabled = true;
+      publishBtn.textContent = "Publication en cours...";
+
+      let uploadedPath = null;
+
+      try {
+        // Créer un nom de fichier unique
+        const safeName = file.name
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-zA-Z0-9._-]/g, "-");
+
+        const uniqueName =
+          Date.now() + "-" + Math.random().toString(36).slice(2, 8) +
+          "-" + safeName;
+
+        // Envoyer le fichier dans le bucket Supabase
+        const { data: fileData, error: fileError } =
+          await supabaseClient.storage
+            .from(BUCKET_NAME)
+            .upload(uniqueName, file, {
+              cacheControl: "3600",
+              upsert: false
+            });
+
+        if (fileError) {
+          throw new Error(
+            "Échec de l'envoi du fichier : " + fileError.message
+          );
+        }
+
+        uploadedPath = fileData.path;
+
+        // Récupérer l'URL publique du fichier
+        const { data: publicData } = supabaseClient.storage
+          .from(BUCKET_NAME)
+          .getPublicUrl(uploadedPath);
+
+        const fichierUrl = publicData.publicUrl;
+
+        // Enregistrer les informations de la ressource
+        const { error: insertError } = await supabaseClient
+          .from("ressources")
+          .insert([{
+            titre: titre,
+            description: description,
+            niveau: niveau,
+            competence: competence,
+            type_ressource: typeRessource,
+            fichier_url: fichierUrl,
+            publie: true
+          }]);
+
+        if (insertError) {
+          throw new Error(
+            "Le fichier a été envoyé, mais l'enregistrement a échoué : " +
+            insertError.message
+          );
+        }
+
+        showMessage(
+          uploadMessage,
+          "Ressource publiée avec succès ! Elle est maintenant enregistrée dans Eductik.",
+          "success"
+        );
+
+        resourceForm.reset();
+      } catch (error) {
+        console.error("Erreur de publication :", error);
+
+        showMessage(
+          uploadMessage,
+          error.message || "Une erreur est survenue pendant la publication.",
+          "error"
+        );
+      } finally {
+        publishBtn.disabled = false;
+        publishBtn.textContent = "Publier la ressource";
+      }
+    });
+
+    // Effacer les anciens messages lors de la réinitialisation
+    resourceForm.addEventListener("reset", () => {
+      clearMessage(uploadMessage);
+    });
+  </script>
 </body>
 </html>
