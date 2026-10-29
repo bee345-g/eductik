@@ -35,10 +35,10 @@
 
     body {
       margin: 0;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background: var(--cream);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     body.modal-open {
@@ -62,70 +62,60 @@
     }
 
     .container {
-      width: min(1160px, 92%);
+      width: min(1120px, 90%);
       margin-inline: auto;
     }
 
-    /* =========================
-       NAVIGATION EDUCTIK
-    ========================= */
-
-    .navbar {
+    header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(255, 250, 245, 0.96);
-      border-bottom: 1px solid rgba(16, 47, 74, 0.09);
-      backdrop-filter: blur(14px);
+      z-index: 100;
+      background: rgba(255, 250, 245, 0.97);
+      box-shadow: 0 3px 18px rgba(16, 47, 74, 0.08);
+      backdrop-filter: blur(10px);
     }
 
-    .nav-inner {
+    .navbar {
       min-height: 92px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 28px;
     }
 
-    .brand {
+    .logo {
       display: inline-flex;
       align-items: center;
       gap: 12px;
       flex-shrink: 0;
     }
 
-    /* Logo original Eductik : quatre formes et coche */
     .brand-mark {
       display: block;
       width: 54px;
       height: 54px;
-      padding: 0;
       flex-shrink: 0;
-      background: transparent;
-      border-radius: 0;
-      transform: none;
     }
 
-    .brand-name {
-      display: block;
-      color: var(--navy);
-      font-size: 24px;
+    .logo-copy {
+      display: flex;
+      flex-direction: column;
       line-height: 1.1;
-      font-weight: 850;
-      letter-spacing: -0.8px;
     }
 
-    .brand-name span {
-      color: var(--orange);
+    .logo-name {
+      color: var(--navy);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: -1px;
     }
 
-    .brand-tagline {
-      display: block;
+    .logo-tagline {
       margin-top: 5px;
       color: var(--navy);
       font-size: 9px;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
     }
 
@@ -134,40 +124,32 @@
       align-items: center;
       justify-content: flex-end;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 23px;
     }
 
     .nav-links > a:not(.external-icon) {
-      position: relative;
-      padding: 8px 0;
       color: var(--navy);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      white-space: nowrap;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links > a:not(.external-icon)::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 2px;
-      background: var(--orange);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.2s ease;
+      transition: color 0.2s, transform 0.2s;
     }
 
     .nav-links > a:not(.external-icon):hover,
-    .nav-links > a.active {
+    .nav-links > a.active:not(.nav-button) {
       color: var(--orange);
     }
 
-    .nav-links > a:not(.external-icon):hover::after,
-    .nav-links > a.active::after {
-      transform: scaleX(1);
+    .nav-links .nav-button {
+      padding: 11px 18px;
+      border-radius: 30px;
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .nav-links .nav-button:hover {
+      background: var(--orange);
+      color: var(--white);
+      transform: translateY(-2px);
     }
 
     /* =========================
@@ -793,7 +775,7 @@
     ========================= */
 
     @media (max-width: 980px) {
-      .nav-inner {
+      .navbar {
         gap: 15px;
       }
 
@@ -812,15 +794,16 @@
     }
 
     @media (max-width: 800px) {
-      .nav-inner {
-        padding: 14px 0;
-        align-items: flex-start;
+      .navbar {
+        padding: 15px 0;
         flex-direction: column;
+        gap: 17px;
       }
 
       .nav-links {
         width: 100%;
-        justify-content: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
         gap: 12px 18px;
       }
 
@@ -848,11 +831,7 @@
 
     @media (max-width: 520px) {
       .container {
-        width: 91%;
-      }
-
-      .nav-inner {
-        min-height: auto;
+        width: 92%;
       }
 
       .brand-mark {
@@ -860,12 +839,17 @@
         height: 46px;
       }
 
-      .brand-name {
-        font-size: 22px;
+      .logo-name {
+        font-size: 23px;
+      }
+
+      .logo-tagline {
+        font-size: 7px;
+        letter-spacing: 1px;
       }
 
       .nav-links {
-        gap: 8px 15px;
+        gap: 10px 13px;
       }
 
       .nav-links > a:not(.external-icon) {
@@ -954,39 +938,23 @@
        NAVIGATION
   ========================= -->
 
-  <header class="navbar">
-    <div class="container nav-inner">
+  <header>
+    <div class="container navbar">
 
-      <a class="brand" href="index.html" aria-label="Eductik — Accueil">
-
-        <!-- Logo original Eductik -->
-        <svg
-          class="brand-mark"
-          viewBox="0 0 100 100"
-          role="img"
-          aria-label="Logo Eductik"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+      <a href="index.html" class="logo" aria-label="Eductik, accueil">
+        <svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Eductik" xmlns="http://www.w3.org/2000/svg">
           <rect x="4" y="4" width="42" height="42" rx="10" fill="#102f4a"/>
           <circle cx="72" cy="25" r="21" fill="#ffd6a3"/>
           <rect x="4" y="54" width="42" height="42" rx="10" fill="#ffd6a3"/>
-
           <g transform="rotate(-9 72 75)">
             <rect x="51" y="54" width="42" height="42" rx="10" fill="#ff7417"/>
-            <path
-              d="M61 75l8 8 16-19"
-              fill="none"
-              stroke="#fffaf5"
-              stroke-width="6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+            <path d="M61 75l8 8 16-19" fill="none" stroke="#fffaf5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
           </g>
         </svg>
 
-        <span>
-          <span class="brand-name">Educ<span>tik</span></span>
-          <span class="brand-tagline">Toutes vos ressources, un seul lieu</span>
+        <span class="logo-copy">
+          <span class="logo-name">eductik</span>
+          <span class="logo-tagline">Toutes vos ressources, un seul lieu</span>
         </span>
       </a>
 
@@ -994,10 +962,8 @@
         <a href="index.html">Accueil</a>
         <a href="niveaux.html">Niveaux</a>
         <a href="ressources.html">Ressources</a>
-        <a class="active" href="communaute.html" aria-current="page">Communauté</a>
-        <a href="index.html#apropos">À propos</a>
-
-        <!-- external-links.js ajoutera ici les icônes externes -->
+        <a href="communaute.html" class="active" aria-current="page">Communaut&eacute;</a>
+        <a href="index.html#apropos" class="nav-button">&Agrave; propos</a>
       </nav>
 
     </div>
