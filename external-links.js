@@ -7,13 +7,31 @@
   if (!nav || nav.querySelector(".external-rotator")) return;
 
   const links = [
-    {
-      name: "ChatGPT",
-      url: "https://chatgpt.com/",
-      svg: `<svg viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" stroke="none" d="M12 2.5a5.2 5.2 0 0 0-4.5 2.6 5.2 5.2 0 0 0-4.1 7.3 5.2 5.2 0 0 0 2.2 6.5 5.2 5.2 0 0 0 7.1 2.1 5.2 5.2 0 0 0 7.1-2.1 5.2 5.2 0 0 0 2.2-6.5 5.2 5.2 0 0 0-4.1-7.3A5.2 5.2 0 0 0 12 2.5Zm0 2a3.2 3.2 0 0 1 3 2l-3 1.8-3-1.8a3.2 3.2 0 0 1 3-2ZM5.2 8.2l3 1.8v3.5l-3 1.8a3.2 3.2 0 0 1 0-7.1Zm13.6 0a3.2 3.2 0 0 1 0 7.1l-3-1.8V10l3-1.8ZM10.2 11l1.8-1.1 1.8 1.1v2.1L12 14.2l-1.8-1.1V11Zm-2 4.2 2.8 1.7v2.2a3.2 3.2 0 0 1-2.8-3.9Zm7.6 0a3.2 3.2 0 0 1-2.8 3.9v-2.2l2.8-1.7Z"/>
-      </svg>`
-    },
+
+{
+  name: "ChatGPT",
+  url: "https://chatgpt.com/",
+  svg: `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 3.2a4.4 4.4 0 0 0-4.2 3.1 4.4 4.4 0 0 0-3.3 6.6 4.4 4.4 0 0 0 3.8 6.3 4.4 4.4 0 0 0 7.1 0 4.4 4.4 0 0 0 3.8-6.3 4.4 4.4 0 0 0-3.3-6.6A4.4 4.4 0 0 0 12 3.2Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linejoin="round"
+      />
+      <path
+        d="m8 6.5 8 4.6v5.2M4.8 9.2l8 4.6v6M7.8 17.8l8-4.6 3.2 1.8M5 15.5l8-4.6V5.2"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  `
+},
+
     {
       name: "Ministère de l'Éducation nationale",
       url: "https://www.education.gov.dz/",
