@@ -152,6 +152,12 @@
       transform: translateY(-2px);
     }
 
+    .nav-links > a.nav-button,
+    .nav-links > a.nav-button:hover,
+    .nav-links > a.nav-button:focus-visible {
+      color: #ffffff;
+    }
+
     /* =========================
        BOUTONS
     ========================= */
@@ -928,15 +934,10 @@
     }
   </style>
 
-  <!-- Feuille de style des liens externes -->
   <link rel="stylesheet" href="external-links.css">
 </head>
 
 <body>
-
-  <!-- =========================
-       NAVIGATION
-  ========================= -->
 
   <header>
     <div class="container navbar">
@@ -969,10 +970,6 @@
     </div>
   </header>
 
-  <!-- =========================
-       HERO
-  ========================= -->
-
   <section class="hero">
     <div class="container hero-content">
 
@@ -1000,10 +997,6 @@
     </div>
   </section>
 
-  <!-- =========================
-       CONTENU PRINCIPAL
-  ========================= -->
-
   <main class="container">
 
     <section class="welcome">
@@ -1015,7 +1008,6 @@
 
     <div class="layout">
 
-      <!-- Questions et recherche -->
       <section aria-label="Questions de la communauté">
 
         <div class="toolbar">
@@ -1033,7 +1025,6 @@
           </button>
         </div>
 
-        <!-- Filtres par thématique -->
         <div class="filters" id="filters" aria-label="Filtrer par thématique">
 
           <button class="filter active" data-category="Toutes" type="button">
@@ -1077,7 +1068,6 @@
 
       </section>
 
-      <!-- Barre latérale -->
       <aside class="sidebar">
 
         <div class="side-card">
@@ -1145,10 +1135,6 @@
 
     </div>
   </main>
-
-  <!-- =========================
-       FENÊTRE POUR POSER UNE QUESTION
-  ========================= -->
 
   <div
     class="modal"
@@ -1239,20 +1225,12 @@
     </div>
   </div>
 
-  <!-- =========================
-       PIED DE PAGE
-  ========================= -->
-
   <footer>
     <div class="container">
       © <span id="year"></span>
       <strong>Eductik</strong> — Échanger pour mieux enseigner.
     </div>
   </footer>
-
-  <!-- =========================
-       LOGIQUE DE LA COMMUNAUTÉ
-  ========================= -->
 
   <script>
     "use strict";
@@ -1293,7 +1271,6 @@
     const questionForm = document.getElementById("questionForm");
     const authorInput = document.getElementById("authorInput");
 
-    /* Charger les questions enregistrées localement */
     function loadQuestions() {
       try {
         const saved = localStorage.getItem(storageKey);
@@ -1303,7 +1280,6 @@
       }
     }
 
-    /* Enregistrer les questions dans ce navigateur */
     function saveQuestions() {
       try {
         localStorage.setItem(storageKey, JSON.stringify(questions));
@@ -1314,7 +1290,6 @@
       }
     }
 
-    /* Sécuriser le texte affiché dans le HTML */
     function escapeHTML(value) {
       return String(value).replace(/[&<>"']/g, char => ({
         "&": "&amp;",
@@ -1325,7 +1300,6 @@
       })[char]);
     }
 
-    /* Créer les initiales de l'auteur */
     function initials(name) {
       return String(name)
         .trim()
@@ -1336,7 +1310,6 @@
         .toUpperCase() || "E";
     }
 
-    /* Afficher les questions selon la recherche et le filtre */
     function renderQuestions() {
       const query = searchInput.value.trim().toLowerCase();
 
@@ -1407,7 +1380,6 @@
       `).join("");
     }
 
-    /* Ouvrir la fenêtre */
     function openModal() {
       previouslyFocusedElement = document.activeElement;
 
@@ -1418,7 +1390,6 @@
       window.setTimeout(() => authorInput.focus(), 50);
     }
 
-    /* Fermer la fenêtre */
     function closeModal() {
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden", "true");
@@ -1432,7 +1403,6 @@
       }
     }
 
-    /* Boutons d'ouverture */
     document.getElementById("askButton")
       .addEventListener("click", openModal);
 
@@ -1442,25 +1412,21 @@
     document.getElementById("sideAskButton")
       .addEventListener("click", openModal);
 
-    /* Bouton de fermeture */
     document.getElementById("closeModal")
       .addEventListener("click", closeModal);
 
-    /* Fermer en cliquant sur l'arrière-plan */
     modal.addEventListener("click", event => {
       if (event.target === modal) {
         closeModal();
       }
     });
 
-    /* Fermer avec la touche Échap */
     document.addEventListener("keydown", event => {
       if (event.key === "Escape" && modal.classList.contains("open")) {
         closeModal();
       }
     });
 
-    /* Filtres principaux */
     document.getElementById("filters")
       .addEventListener("click", event => {
         const button = event.target.closest("[data-category]");
@@ -1476,7 +1442,6 @@
         renderQuestions();
       });
 
-    /* Filtres de la barre latérale */
     document.querySelectorAll("[data-side-category]")
       .forEach(button => {
         button.addEventListener("click", () => {
@@ -1498,10 +1463,8 @@
         });
       });
 
-    /* Recherche en temps réel */
     searchInput.addEventListener("input", renderQuestions);
 
-    /* Publication d'une question dans la démonstration */
     questionForm.addEventListener("submit", event => {
       event.preventDefault();
 
@@ -1515,7 +1478,6 @@
         return;
       }
 
-      /* Retirer les exemples lorsqu'une vraie question est ajoutée */
       const previousQuestions = questions;
       const userQuestions = questions.filter(question => !question.demo);
 
@@ -1558,16 +1520,12 @@
       );
     });
 
-    /* Année automatique dans le pied de page */
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
-    /* Premier affichage */
     renderQuestions();
   </script>
 
-  <!-- Icônes externes : ChatGPT, ministère, TV5MONDE,
-       Instagram, Facebook et centre de langues -->
   <script src="external-links.js" defer></script>
 
 </body>
