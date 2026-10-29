@@ -161,8 +161,15 @@ widget.appendChild(menu);
     icons[current].classList.add("active");
   }
 
-  function start() {
-    if (timer || reducedMotion.matches || menuIsOpen) return;
+function start() {
+  if (timer || reducedMotion.matches) return;
+  timer = window.setInterval(showNext, 2500);
+}
+
+rotator.addEventListener("mouseenter", stop);
+rotator.addEventListener("mouseleave", start);
+rotator.addEventListener("focusin", stop);
+rotator.addEventListener("focusout", start);
   }
 
   function stop() {
