@@ -145,50 +145,55 @@ header {
 /* HERO */
 
 .hero {
-  padding: 70px 0;
+  position: relative;
+  overflow: hidden;
+  padding: 86px 0 90px;
   background:
-    radial-gradient(circle at 90% 15%, rgba(255,214,163,.55), transparent 25%),
-    radial-gradient(circle at 5% 90%, rgba(237,244,247,.95), transparent 30%),
-    linear-gradient(135deg, #fffaf5, #ffffff);
+    radial-gradient(circle at 90% 15%, rgba(255, 116, 23, 0.13), transparent 25%),
+    radial-gradient(circle at 5% 90%, rgba(16, 47, 74, 0.08), transparent 28%),
+    linear-gradient(135deg, #fffaf5, #fff4e8);
 }
 
 .hero-content {
+  position: relative;
+  z-index: 1;
   max-width: 850px;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
 }
 
 .eyebrow {
   display: inline-block;
-  padding: 7px 15px;
   margin-bottom: 20px;
+  padding: 7px 15px;
   border-radius: 30px;
+  background: #ffead8;
   color: var(--navy);
-  background: var(--pale-blue);
   font-size: 13px;
   font-weight: 800;
 }
 
-h1 {
-  margin-bottom: 18px;
+.hero h1 {
+  margin-bottom: 22px;
   color: var(--navy);
-  font-size: clamp(36px,5vw,55px);
-  line-height: 1.2;
+  font-size: clamp(37px, 5vw, 59px);
+  line-height: 1.13;
+  letter-spacing: -1.8px;
 }
 
-h1 span,
+.hero h1 span,
 .section-heading h2 span {
   color: var(--orange);
 }
 
 .hero p {
-  max-width: 720px;
-  margin: auto;
+  max-width: 700px;
+  margin: 0 auto 30px;
   color: var(--muted);
   font-size: 17px;
+  line-height: 1.9;
 }
 
-/* SECTION */
 
 .section {
   padding: 70px 0;
