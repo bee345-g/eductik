@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#174B5A">
+  <title>Communauté | Eductik</title>
+  <meta name="description" content="Un espace d’échange et d’entraide entre enseignants de langues.">
+  <style>
+    :root {
+      --petrol: #174B5A;
+      --petrol-light: #EAF2F4;
+      --orange: #FF9D55;
+      --bg: #F8FAFB;
+      --text: #24343B;
+      --muted: #74838A;
+      --border: #E3E9EC;
+      --white: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      color: var(--petrol);
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -.8px;
+    }
+
+    .logo span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 600;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--orange); }
+
+    /* Hero */
+    .hero {
+      background: var(--petrol);
+      color: white;
+      padding: 58px 0 64px;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.5fr .7fr;
+      align-items: center;
+      gap: 35px;
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 49px);
+      line-height: 1.15;
+      margin: 13px 0;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      color: #E0EAED;
+      max-width: 600px;
+      margin: 0 0 25px;
+    }
+
+    .hero-art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 190px;
+      font-size: 100px;
+      position: relative;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      background: rgba(255,157,85,.13);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+    }
+
+    .hero-art span { position: relative; }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-orange { background: var(--orange); color: #24343B; }
+    .btn-white { background: white; color: var(--petrol); }
+    .btn-outline {
+      background: white;
+      color: var(--petrol);
+      border: 1px solid var(--border);
+    }
+
+    /* Main layout */
+    main { padding: 38px 0 65px; }
+
+    .welcome {
+      margin-bottom: 27px;
+    }
+
+    .welcome h2 {
+      color: var(--petrol);
+      margin: 0 0 5px;
+      font-size: 25px;
+    }
+
+    .welcome p { color: var(--muted); margin: 0; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 285px;
+      gap: 25px;
+      align-items: start;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .search {
+      width: 100%;
+      min-width: 0;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .search:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--petrol);
+      outline: 2px solid rgba(23,75,90,.08);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .filter {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 30px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .filter.active {
+      background: var(--petrol-light);
+      border-color: var(--petrol);
+      color: var(--petrol);
+      font-weight: 700;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 20px 0 13px;
+    }
+
+    .section-heading h3 {
+      margin: 0;
+      color: var(--petrol);
+      font-size: 19px;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .question-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .question-card:hover {
+      border-color: #B8CCD2;
+      transform: translateY(-1px);
+    }
+
+    .question-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .avatar {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--petrol-light);
+      color: var(--petrol);
+      font-weight: 800;
+    }
+
+    .question-main { min-width: 0; flex: 1; }
+
+    .question-title {
+      margin: 0 0 6px;
+      color: var(--petrol);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .question-text {
+      margin: 13px 0;
+      color: #53636A;
+      font-size: 14px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--petrol);
+      background: var(--petrol-light);
+    }
+
+    .question-footer {
+      border-top: 1px solid #EFF2F3;
+      padding-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .reply-count {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .text-btn {
+      border: 0;
+      padding: 4px 0;
+      color: var(--petrol);
+      background: transparent;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: grid;
+      gap: 16px;
+    }
+
+    .side-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .side-card h3 {
+      color: var(--petrol);
+      font-size: 17px;
+      margin: 0 0 10px;
+    }
+
+    .side-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 15px;
+    }
+
+    .side-card .btn { width: 100%; }
+
+    .category-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .category-link {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 0;
+      border-bottom: 1px solid #EFF2F3;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .category-link:last-child { border-bottom: 0; }
+    .category-link:hover { color: var(--petrol); }
+
+    .guideline {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 18px;
+      margin-bottom: 0;
+    }
+
+    .guideline li { margin: 8px 0; }
+
+    /* Question modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      background: rgba(15,35,42,.65);
+      padding: 20px;
+      overflow-y: auto;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-panel {
+      width: min(560px, 100%);
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.2);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .modal-header h2 {
+      color: var(--petrol);
+      font-size: 23px;
+      margin: 0;
+    }
+
+    .close-btn {
+      border: 0;
+      background: var(--bg);
+      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .form-group { margin-bottom: 15px; }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 11px 12px;
+      background: white;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 125px;
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 38px 20px;
+      background: white;
+      border: 1px dashed #CBD8DC;
+      border-radius: 14px;
+      color: var(--muted);
+    }
+
+    .empty-state strong {
+      display: block;
+      color: var(--petrol);
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      padding: 25px 0;
+      text-align: center;
+      background: white;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .hero-content { grid-template-columns: 1fr; }
+      .hero-art { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav-inner { padding: 14px 0; align-items: flex-start; }
+      .nav-links { gap: 12px; justify-content: flex-end; }
+    }
+
+    @media (max-width: 520px) {
+      .nav-inner { display: block; }
+      .logo { display: inline-block; margin-bottom: 12px; }
+      .nav-links { justify-content: flex-start; gap: 13px; }
+      .nav-links a { font-size: 12px; }
+      .toolbar { flex-direction: column; }
+      .toolbar .btn { width: 100%; }
+      .sidebar { grid-template-columns: 1fr; }
+      .hero { padding: 40px 0; }
+      .question-card { padding: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html">Educ<span>tik</span></a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="niveaux.html">Niveaux</a>
+        <a href="ressources.html">Ressources</a>
+        <a class="active" href="communaute.html">Communauté</a>
+        <a href="index.html#apropos">À propos</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <div>
+        <span class="eyebrow">Eductik · Communauté pédagogique</span>
+        <h1>Une question ?<br>Échangeons ensemble.</h1>
+        <p>
+          Un espace d’entraide dédié aux enseignants de langues pour
+          poser des questions, partager leurs expériences et trouver
+          des pistes pédagogiques.
+        </p>
+        <button class="btn btn-orange" id="heroAskButton" type="button">
+          + Poser une question
+        </button>
+      </div>
+      <div class="hero-art" aria-hidden="true"><span>💬</span></div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="welcome">
+      <h2>La parole aux enseignants</h2>
+      <p>Posez vos questions et échangez autour de vos pratiques de classe.</p>
+    </section>
+
+    <div class="layout">
+      <section>
+        <div class="toolbar">
+          <input
+            class="search"
+            type="search"
+            id="searchInput"
+            placeholder="Rechercher une question..."
+            aria-label="Rechercher une question"
+          >
+          <button class="btn btn-orange" id="askButton" type="button">
+            + Poser une question
+          </button>
+        </div>
+
+        <div class="filters" id="filters">
+          <button class="filter active" data-category="Toutes" type="button">Toutes</button>
+          <button class="filter" data-category="Compréhension écrite" type="button">Compréhension écrite</button>
+          <button class="filter" data-category="Compréhension orale" type="button">Compréhension orale</button>
+          <button class="filter" data-category="Production écrite" type="button">Production écrite</button>
+          <button class="filter" data-category="Production orale" type="button">Production orale</button>
+          <button class="filter" data-category="Grammaire et langue" type="button">Grammaire et langue</button>
+          <button class="filter" data-category="Autre" type="button">Autre</button>
+        </div>
+
+        <div class="section-heading">
+          <h3>Questions récentes</h3>
+          <span class="meta" id="questionCount">2 questions</span>
+        </div>
+
+        <div class="question-list" id="questionList" aria-live="polite"></div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="side-card">
+          <h3>Participez à la communauté</h3>
+          <p>Une question pédagogique ? Décrivez votre difficulté pour lancer l’échange.</p>
+          <button class="btn btn-orange" id="sideAskButton" type="button">
+            Poser une question
+          </button>
+          <p class="form-note">Version de démonstration : les questions sont enregistrées uniquement dans ce navigateur.</p>
+        </div>
+
+        <div class="side-card">
+          <h3>Thématiques</h3>
+          <div class="category-list">
+            <button class="category-link" data-side-category="Compréhension écrite" type="button">Compréhension écrite <span>→</span></button>
+            <button class="category-link" data-side-category="Compréhension orale" type="button">Compréhension orale <span>→</span></button>
+            <button class="category-link" data-side-category="Production écrite" type="button">Production écrite <span>→</span></button>
+            <button class="category-link" data-side-category="Production orale" type="button">Production orale <span>→</span></button>
+            <button class="category-link" data-side-category="Grammaire et langue" type="button">Grammaire et langue <span>→</span></button>
+            <button class="category-link" data-side-category="Autre" type="button">Autres questions <span>→</span></button>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Quelques règles</h3>
+          <ul class="guideline">
+            <li>Respecter les autres membres.</li>
+            <li>Poser des questions claires et précises.</li>
+            <li>Privilégier les échanges pédagogiques constructifs.</li>
+            <li>Ne pas publier de données personnelles sur les élèves.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="modal" id="questionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="modalTitle">Poser une question</h2>
+        <button class="close-btn" id="closeModal" type="button" aria-label="Fermer">×</button>
+      </div>
+
+      <form id="questionForm">
+        <div class="form-group">
+          <label for="authorInput">Votre prénom ou nom d’enseignant</label>
+          <input id="authorInput" name="author" maxlength="60" required placeholder="Ex. : Enseignant de français">
+        </div>
+
+        <div class="form-group">
+          <label for="titleInput">Titre de la question</label>
+          <input id="titleInput" name="title" maxlength="140" required placeholder="Ex. : Comment travailler la compréhension de l’écrit en 1AS ?">
+        </div>
+
+        <div class="form-group">
+          <label for="categoryInput">Thématique</label>
+          <select id="categoryInput" name="category" required>
+            <option value="Compréhension écrite">Compréhension écrite</option>
+            <option value="Compréhension orale">Compréhension orale</option>
+            <option value="Production écrite">Production écrite</option>
+            <option value="Production orale">Production orale</option>
+            <option value="Grammaire et langue">Grammaire et langue</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bodyInput">Votre question</label>
+          <textarea id="bodyInput" name="body" maxlength="3000" required placeholder="Expliquez votre question ou la difficulté rencontrée..."></textarea>
+        </div>
+
+        <button class="btn btn-orange" type="submit">Publier la question</button>
+        <p class="form-note">Démo uniquement : les données restent dans le navigateur utilisé.</p>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Eductik — Échanger pour mieux enseigner.</div>
+  </footer>
+
+  <script>
+    const categories = [
+      "Toutes",
+      "Compréhension écrite",
+      "Compréhension orale",
+      "Production écrite",
+      "Production orale",
+      "Grammaire et langue",
+      "Autre"
+    ];
+
+    const demoQuestions = [
+      {
+        id: "demo-1",
+        author: "Enseignante de français",
+        title: "Comment enseigner la compréhension de l’écrit en 1AS ?",
+        category: "Compréhension écrite",
+        body: "Quelles démarches utilisez-vous pour aider les apprenants à comprendre un texte et à repérer les informations essentielles ?",
+        date: "Exemple de question",
+        replies: 0,
+        demo: true
+      },
+      {
+        id: "demo-2",
+        author: "Enseignant de langues",
+        title: "Comment motiver les élèves en production orale ?",
+        category: "Production orale",
+        body: "Je cherche des idées d’activités pour encourager la participation des apprenants et réduire leur peur de parler devant leurs camarades.",
+        date: "Exemple de question",
+        replies: 0,
+        demo: true
+      }
+    ];
+
+    const storageKey = "eductik_community_demo_questions";
+    let selectedCategory = "Toutes";
+    let questions = loadQuestions();
+
+    const questionList = document.getElementById("questionList");
+    const questionCount = document.getElementById("questionCount");
+    const searchInput = document.getElementById("searchInput");
+    const modal = document.getElementById("questionModal");
+    const questionForm = document.getElementById("questionForm");
+
+    function loadQuestions() {
+      try {
+        const saved = localStorage.getItem(storageKey);
+        return saved ? JSON.parse(saved) : demoQuestions;
+      } catch (error) {
+        return demoQuestions;
+      }
+    }
+
+    function saveQuestions() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(questions));
+      } catch (error) {
+        alert("Impossible d’enregistrer les données dans ce navigateur.");
+      }
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    function initials(name) {
+      return name.trim().split(/\s+/).slice(0, 2)
+        .map(part => part[0] || "").join("").toUpperCase() || "E";
+    }
+
+    function renderQuestions() {
+      const query = searchInput.value.trim().toLowerCase();
+
+      const filtered = questions.filter(question => {
+        const matchesCategory = selectedCategory === "Toutes" ||
+          question.category === selectedCategory;
+
+        const searchableText =
+          `${question.title} ${question.body} ${question.author} ${question.category}`.toLowerCase();
+
+        return matchesCategory && searchableText.includes(query);
+      });
+
+      questionCount.textContent = `${filtered.length} question${filtered.length !== 1 ? "s" : ""}`;
+
+      if (!filtered.length) {
+        questionList.innerHTML = `
+          <div class="empty-state">
+            <strong>Aucune question trouvée</strong>
+            Essayez un autre mot-clé ou choisissez une autre thématique.
+          </div>`;
+        return;
+      }
+
+      questionList.innerHTML = filtered.map(question => `
+        <article class="question-card">
+          <div class="question-top">
+            <div class="avatar">${escapeHTML(initials(question.author))}</div>
+            <div class="question-main">
+              <h4 class="question-title">${escapeHTML(question.title)}</h4>
+              <div class="meta">
+                ${escapeHTML(question.author)} · ${escapeHTML(question.date)}
+              </div>
+            </div>
+          </div>
+          <p class="question-text">${escapeHTML(question.body)}</p>
+          <span class="tag">${escapeHTML(question.category)}</span>
+          <div class="question-footer" style="margin-top:14px">
+            <span class="reply-count">💬 ${question.replies || 0} réponse(s)</span>
+            <span class="meta">${question.demo ? "Exemple illustratif" : "Démo locale"}</span>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openModal() {
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => document.getElementById("authorInput").focus(), 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("askButton").addEventListener("click", openModal);
+    document.getElementById("heroAskButton").addEventListener("click", openModal);
+    document.getElementById("sideAskButton").addEventListener("click", openModal);
+    document.getElementById("closeModal").addEventListener("click", closeModal);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeModal();
+    });
+
+    document.getElementById("filters").addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+
+      selectedCategory = button.dataset.category;
+
+      document.querySelectorAll(".filter").forEach(item => {
+        item.classList.toggle("active", item === button);
+      });
+
+      renderQuestions();
+    });
+
+    document.querySelectorAll("[data-side-category]").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedCategory = button.dataset.sideCategory;
+
+        document.querySelectorAll(".filter").forEach(item => {
+          item.classList.toggle("active", item.dataset.category === selectedCategory);
+        });
+
+        renderQuestions();
+        document.querySelector(".section-heading").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+
+    searchInput.addEventListener("input", renderQuestions);
+
+    questionForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const author = document.getElementById("authorInput").value.trim();
+      const title = document.getElementById("titleInput").value.trim();
+      const category = document.getElementById("categoryInput").value;
+      const body = document.getElementById("bodyInput").value.trim();
+
+      if (!author || !title || !body) return;
+
+      questions = questions.filter(question => !question.demo);
+
+      questions.unshift({
+        id: `local-${Date.now()}`,
+        author,
+        title,
+        category,
+        body,
+        date: new Date().toLocaleDateString("fr-FR"),
+        replies: 0,
+        demo: false
+      });
+
+      saveQuestions();
+      questionForm.reset();
+      closeModal();
+
+      selectedCategory = "Toutes";
+      document.querySelectorAll(".filter").forEach(item => {
+        item.classList.toggle("active", item.dataset.category === "Toutes");
+      });
+
+      searchInput.value = "";
+      renderQuestions();
+
+      alert("Question ajoutée dans cette démonstration. Elle n’est pas encore visible par les autres utilisateurs.");
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderQuestions();
+  </script>
+</body>
+</html>
