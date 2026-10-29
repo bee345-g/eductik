@@ -1,0 +1,78 @@
+/* Eductik — Liens externes animés */
+
+.external-rotator {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.external-rotator a.external-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 9px;
+  border: 1px solid #e4eaf0;
+  border-radius: 13px;
+  background: #fff;
+  color: #102f4a;
+  opacity: 0;
+  transform: translateY(7px) scale(.92);
+  pointer-events: none;
+  transition:
+    opacity .45s ease,
+    transform .45s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.external-rotator a.external-icon.active {
+  z-index: 2;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.external-rotator a.external-icon:hover {
+  color: #ff7417;
+  border-color: #ff7417;
+}
+
+.external-rotator a.external-icon:focus-visible {
+  outline: 3px solid #ff7417;
+  outline-offset: 3px;
+}
+
+.external-rotator svg {
+  display: block;
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+}
+
+.external-rotator .icon-stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 850px) {
+  .external-rotator {
+    margin-left: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .external-rotator a.external-icon {
+    transition: none;
+  }
+}
