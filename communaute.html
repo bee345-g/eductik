@@ -94,27 +94,16 @@
       flex-shrink: 0;
     }
 
+    /* Logo original Eductik : quatre formes et coche */
     .brand-mark {
-      width: 43px;
-      height: 43px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4px;
-      padding: 5px;
-      border-radius: 13px;
-      background: var(--navy);
-      transform: rotate(-3deg);
-    }
-
-    .brand-mark span {
       display: block;
-      border-radius: 4px;
-      background: var(--white);
-    }
-
-    .brand-mark span:last-child {
-      position: relative;
-      background: var(--orange);
+      width: 54px;
+      height: 54px;
+      padding: 0;
+      flex-shrink: 0;
+      background: transparent;
+      border-radius: 0;
+      transform: none;
     }
 
     .brand-name {
@@ -132,11 +121,12 @@
 
     .brand-tagline {
       display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.15px;
+      margin-top: 5px;
+      color: var(--navy);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .nav-links {
@@ -866,8 +856,8 @@
       }
 
       .brand-mark {
-        width: 39px;
-        height: 39px;
+        width: 46px;
+        height: 46px;
       }
 
       .brand-name {
@@ -968,12 +958,31 @@
     <div class="container nav-inner">
 
       <a class="brand" href="index.html" aria-label="Eductik — Accueil">
-        <span class="brand-mark" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
+
+        <!-- Logo original Eductik -->
+        <svg
+          class="brand-mark"
+          viewBox="0 0 100 100"
+          role="img"
+          aria-label="Logo Eductik"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="4" y="4" width="42" height="42" rx="10" fill="#102f4a"/>
+          <circle cx="72" cy="25" r="21" fill="#ffd6a3"/>
+          <rect x="4" y="54" width="42" height="42" rx="10" fill="#ffd6a3"/>
+
+          <g transform="rotate(-9 72 75)">
+            <rect x="51" y="54" width="42" height="42" rx="10" fill="#ff7417"/>
+            <path
+              d="M61 75l8 8 16-19"
+              fill="none"
+              stroke="#fffaf5"
+              stroke-width="6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </g>
+        </svg>
 
         <span>
           <span class="brand-name">Educ<span>tik</span></span>
