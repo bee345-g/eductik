@@ -99,12 +99,61 @@
   });
 
   nav.appendChild(rotator);
+  const widget = document.createElement("div");
+widget.className = "external-links-widget";
+widget.appendChild(rotator);
+nav.appendChild(widget);
+
+const toggle = document.createElement("button");
+toggle.className = "external-toggle";
+toggle.type = "button";
+toggle.setAttribute("aria-label", "Afficher tous les liens externes");
+toggle.setAttribute("aria-expanded", "false");
+toggle.setAttribute("aria-controls", "external-links-menu");
+toggle.innerHTML = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="m7 10 5 5 5-5" />
+  </svg>
+`;
+widget.appendChild(toggle);
+
+const menu = document.createElement("div");
+menu.className = "external-links-menu";
+menu.id = "external-links-menu";
+menu.setAttribute("aria-label", "Tous les liens externes");
+menu.hidden = true;
+
+const menuTitle = document.createElement("p");
+menuTitle.className = "external-menu-title";
+menuTitle.textContent = "Liens utiles";
+menu.appendChild(menuTitle);
+
+links.forEach(item => {
+  const link = document.createElement("a");
+  link.className = "external-menu-link";
+  link.href = item.url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+
+  const icon = document.createElement("span");
+  icon.className = "external-menu-icon";
+  icon.innerHTML = item.svg;
+
+  const label = document.createElement("span");
+  label.textContent = item.name;
+
+  link.append(icon, label);
+  menu.appendChild(link);
+});
+
+widget.appendChild(menu);
 
   const icons = Array.from(rotator.querySelectorAll(".external-icon"));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   let current = 0;
   let timer = null;
+  let menuIsOpen = false;
 
   function showNext() {
     icons[current].classList.remove("active");
@@ -113,8 +162,7 @@
   }
 
   function start() {
-    if (timer || reducedMotion.matches) return;
-    timer = window.setInterval(showNext, 2500);
+    if (timer || reducedMotion.matches || menuIsOpen) return;
   }
 
   function stop() {
@@ -123,10 +171,41 @@
     timer = null;
   }
 
-  rotator.addEventListener("mouseenter", stop);
-  rotator.addEventListener("mouseleave", start);
-  rotator.addEventListener("focusin", stop);
-  rotator.addEventListener("focusout", start);
+ function setMenuOpen(open) {
+  menuIsOpen = open;
+  menu.hidden = !open;
+  widget.classList.toggle("is-open", open);
+  toggle.setAttribute("aria-expanded", String(open));
+
+  if (open) stop();
+  else start();
+}
+
+toggle.addEventListener("click", () => {
+  setMenuOpen(!menuIsOpen);
+});
+
+document.addEventListener("click", event => {
+  if (menuIsOpen && !widget.contains(event.target)) {
+    setMenuOpen(false);
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && menuIsOpen) {
+    setMenuOpen(false);
+    toggle.focus();
+  }
+});
+
+widget.addEventListener("mouseenter", stop);
+widget.addEventListener("mouseleave", () => {
+  if (!menuIsOpen && !widget.contains(document.activeElement)) start();
+});
+widget.addEventListener("focusin", stop);
+widget.addEventListener("focusout", event => {
+  if (!menuIsOpen && !widget.contains(event.relatedTarget)) start();
+});
 
   if (typeof reducedMotion.addEventListener === "function") {
     reducedMotion.addEventListener("change", () => {
