@@ -1,78 +1,392 @@
-/* Eductik — Liens externes animés */
 
-.external-rotator {
-  position: relative;
-  display: inline-block;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
-  margin-left: 2px;
-  vertical-align: middle;
+/* ========================================
+   EDUCTIK — COLORFUL EXTERNAL LINKS
+   ======================================== */
+
+.external-links-panel {
+  --edutk-blue: #102f4a;
+  --edutk-orange: #ff7417;
+
+  width: min(1180px, calc(100% - 40px));
+  margin: 42px auto;
+  padding: 26px 20px 32px;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
-.external-rotator a.external-icon {
-  position: absolute;
-  inset: 0;
+.external-links-panel *,
+.external-links-panel *::before,
+.external-links-panel *::after {
+  box-sizing: border-box;
+}
+
+/* Heading */
+
+.external-links-heading {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 9px;
-  border: 1px solid #e4eaf0;
-  border-radius: 13px;
-  background: #fff;
-  color: #102f4a;
-  opacity: 0;
-  transform: translateY(7px) scale(.92);
-  pointer-events: none;
+  gap: 20px;
+  margin-bottom: 38px;
+}
+
+.external-links-heading h2 {
+  position: relative;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 12px 30px;
+  color: var(--edutk-blue);
+  background: linear-gradient(135deg, #fffaf5, #f2f1ff);
+  border: 1px solid #e1ddff;
+  border-radius: 50px;
+  box-shadow: 0 5px 18px rgba(16, 47, 74, 0.05);
+  font-size: clamp(18px, 2.4vw, 27px);
+  font-weight: 750;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.heading-sparkle {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--edutk-orange);
+  font-size: 0.85em;
+  animation: edutk-sparkle 3s ease-in-out infinite;
+}
+
+.heading-line {
+  width: 100%;
+  max-width: 180px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c9c4ff,
+    #a9caff
+  );
+}
+
+.heading-line:last-child {
+  transform: rotate(180deg);
+}
+
+/* Cards layout */
+
+.external-links-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+/* Individual card */
+
+.external-link-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0 4px 12px;
+  color: var(--edutk-blue);
+  text-align: center;
+  text-decoration: none;
+  border-radius: 22px;
+  outline: none;
+  animation: edutk-card-enter 0.55s both;
+  animation-delay: calc(var(--card-index, 0) * 70ms);
+}
+
+.external-link-icon {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 150px;
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--card-border, #e4e7ff);
+  border-radius: 30%;
+  background: var(--card-bg, #ffffff);
+  box-shadow:
+    0 9px 28px var(--card-shadow, rgba(95, 105, 180, 0.08)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   transition:
-    opacity .45s ease,
-    transform .45s ease,
-    border-color .2s ease,
-    color .2s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
-.external-rotator a.external-icon.active {
-  z-index: 2;
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
+.external-link-icon::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.5),
+    transparent 60%
+  );
+  pointer-events: none;
 }
 
-.external-rotator a.external-icon:hover {
-  color: #ff7417;
-  border-color: #ff7417;
-}
-
-.external-rotator a.external-icon:focus-visible {
-  outline: 3px solid #ff7417;
-  outline-offset: 3px;
-}
-
-.external-rotator svg {
+.external-link-icon svg {
+  position: relative;
+  z-index: 1;
   display: block;
-  width: 25px;
-  height: 25px;
-  fill: currentColor;
-}
-
-.external-rotator .icon-stroke {
+  width: 49%;
+  height: 49%;
   fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
+  stroke: var(--icon-color, var(--edutk-blue));
+  stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transition: transform 0.3s ease;
 }
 
-@media (max-width: 850px) {
-  .external-rotator {
-    margin-left: 4px;
+/* Brand-inspired colors */
+
+.external-link-card.chatgpt {
+  --card-bg: linear-gradient(145deg, #e0fff7, #f0fffb);
+  --card-border: #a5f1e3;
+  --card-shadow: rgba(0, 180, 150, 0.12);
+  --icon-color: #079e87;
+}
+
+.external-link-card.chatgpt .external-link-icon svg {
+  fill: #079e87;
+  stroke: none;
+}
+
+.external-link-card.ministry {
+  --card-bg: linear-gradient(145deg, #e9f7ff, #ffffff);
+  --card-border: #d4ebff;
+  --card-shadow: rgba(30, 150, 230, 0.1);
+  --icon-color: #159ee8;
+}
+
+.external-link-card.ministry .external-link-icon svg {
+  fill: #159ee8;
+  stroke: none;
+}
+
+.external-link-card.tv5 {
+  --card-bg: linear-gradient(145deg, #f1edff, #ffffff);
+  --card-border: #e2d6ff;
+  --card-shadow: rgba(120, 85, 220, 0.1);
+  --icon-color: #7655df;
+}
+
+.external-link-card.instagram {
+  --card-bg: linear-gradient(145deg, #fff0f7, #fff9f0);
+  --card-border: #ffd9ed;
+  --card-shadow: rgba(225, 55, 145, 0.1);
+  --icon-color: #d62976;
+}
+
+.external-link-card.instagram .external-link-icon svg {
+  stroke: url("#instagram-gradient");
+}
+
+/* Use a reliable Instagram gradient via CSS */
+
+.external-link-card.instagram .external-link-icon svg {
+  stroke: #d62976;
+}
+
+.external-link-card.instagram .external-link-icon svg rect,
+.external-link-card.instagram .external-link-icon svg circle {
+  stroke: #d62976;
+}
+
+.external-link-card.instagram .external-link-icon svg .insta-dot {
+  fill: #f7a928;
+  stroke: none;
+}
+
+.external-link-card.facebook {
+  --card-bg: linear-gradient(145deg, #edf4ff, #ffffff);
+  --card-border: #d9e7ff;
+  --card-shadow: rgba(24, 119, 242, 0.1);
+  --icon-color: #1877f2;
+}
+
+.external-link-card.facebook .external-link-icon svg {
+  fill: #1877f2;
+  stroke: none;
+}
+
+.external-link-card.university {
+  --card-bg: linear-gradient(145deg, #f3eaff, #fffaff);
+  --card-border: #e6d5ff;
+  --card-shadow: rgba(130, 75, 205, 0.1);
+  --icon-color: #8952d5;
+}
+
+.external-link-card.university .external-link-icon svg {
+  fill: #8952d5;
+  stroke: #8952d5;
+  stroke-width: 1;
+}
+
+/* Labels */
+
+.external-link-name {
+  display: block;
+  max-width: 180px;
+  color: var(--edutk-blue);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  transition: color 0.25s ease;
+}
+
+.external-link-arrow {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  color: var(--edutk-orange);
+  font-size: 16px;
+  opacity: 0;
+  transform: translate(-3px, 3px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Hover and keyboard focus */
+
+.external-link-card:hover .external-link-icon,
+.external-link-card:focus-visible .external-link-icon {
+  transform: translateY(-6px);
+  border-color: var(--edutk-orange);
+  box-shadow:
+    0 15px 32px var(--card-shadow, rgba(95, 105, 180, 0.12)),
+    0 0 0 3px rgba(255, 116, 23, 0.08);
+}
+
+.external-link-card:hover .external-link-icon svg,
+.external-link-card:focus-visible .external-link-icon svg {
+  transform: scale(1.08);
+}
+
+.external-link-card:hover .external-link-name,
+.external-link-card:focus-visible .external-link-name {
+  color: var(--edutk-orange);
+}
+
+.external-link-card:hover .external-link-arrow,
+.external-link-card:focus-visible .external-link-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.external-link-card:focus-visible .external-link-icon {
+  outline: 2px solid var(--edutk-orange);
+  outline-offset: 4px;
+}
+
+/* Entrance animation */
+
+@keyframes edutk-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+@keyframes edutk-sparkle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(18deg) scale(1.15);
+  }
+}
+
+/* Responsive layout */
+
+@media (max-width: 1000px) {
+  .external-links-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 18px;
+  }
+
+  .external-link-icon {
+    max-width: 135px;
+  }
+
+  .external-link-name {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .external-links-panel {
+    width: calc(100% - 24px);
+    margin: 28px auto;
+    padding: 12px 4px 24px;
+  }
+
+  .external-links-heading {
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+
+  .external-links-heading h2 {
+    padding: 10px 14px;
+    font-size: 17px;
+  }
+
+  .heading-line {
+    min-width: 15px;
+  }
+
+  .external-links-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px 12px;
+  }
+
+  .external-link-card {
+    gap: 11px;
+  }
+
+  .external-link-icon {
+    max-width: 125px;
+    border-radius: 27%;
+  }
+
+  .external-link-name {
+    max-width: 145px;
+    font-size: 13px;
+  }
+
+  .external-link-arrow {
+    right: 5px;
+    top: 5px;
+  }
+}
+
+/* Respect accessibility settings */
+
 @media (prefers-reduced-motion: reduce) {
-  .external-rotator a.external-icon {
+  .external-link-card,
+  .heading-sparkle {
+    animation: none;
+  }
+
+  .external-link-icon,
+  .external-link-icon svg,
+  .external-link-name,
+  .external-link-arrow {
     transition: none;
   }
 }
