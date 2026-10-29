@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#102f4a">
+
+  <title>Communauté | Eductik</title>
   <meta name="description" content="Un espace d’échange et d’entraide entre enseignants de langues.">
-  <meta name="robots" content="noindex, follow">
-  <title>Communauté — Eductik</title>
-  <link rel="icon" type="image/png" href="logo.png.png">
+  <link rel="icon" href="logo.png.png" type="image/png">
 
   <style>
     :root {
@@ -20,15 +20,13 @@
       --muted: #61717d;
       --white: #ffffff;
       --pale-blue: #edf4f7;
-      --border: #e3e9ec;
+      --border: #e2e9ed;
       --shadow: 0 12px 32px rgba(16, 47, 74, 0.1);
       --radius: 22px;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
@@ -36,10 +34,15 @@
     }
 
     body {
-      background: var(--cream);
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.7;
+      background: var(--cream);
+      line-height: 1.65;
+    }
+
+    body.modal-open {
+      overflow: hidden;
     }
 
     a {
@@ -59,30 +62,32 @@
     }
 
     .container {
-      width: min(1120px, 90%);
-      margin: 0 auto;
+      width: min(1160px, 92%);
+      margin-inline: auto;
     }
 
-    /* HEADER — même identité visuelle que index.html */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 250, 245, 0.97);
-      box-shadow: 0 3px 18px rgba(16, 47, 74, 0.08);
-      backdrop-filter: blur(10px);
-    }
+    /* =========================
+       NAVIGATION EDUCTIK
+    ========================= */
 
     .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 250, 245, 0.96);
+      border-bottom: 1px solid rgba(16, 47, 74, 0.09);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
       min-height: 92px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 28px;
+      gap: 24px;
     }
 
-    .logo {
+    .brand {
       display: inline-flex;
       align-items: center;
       gap: 12px;
@@ -90,140 +95,109 @@
     }
 
     .brand-mark {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px;
+      padding: 5px;
+      border-radius: 13px;
+      background: var(--navy);
+      transform: rotate(-3deg);
+    }
+
+    .brand-mark span {
       display: block;
-      width: 54px;
-      height: 54px;
-      flex-shrink: 0;
+      border-radius: 4px;
+      background: var(--white);
     }
 
-    .logo-copy {
-      display: flex;
-      flex-direction: column;
+    .brand-mark span:last-child {
+      position: relative;
+      background: var(--orange);
+    }
+
+    .brand-name {
+      display: block;
+      color: var(--navy);
+      font-size: 24px;
       line-height: 1.1;
+      font-weight: 850;
+      letter-spacing: -0.8px;
     }
 
-    .logo-name {
-      color: var(--navy);
-      font-size: 27px;
-      font-weight: 900;
-      letter-spacing: -1px;
+    .brand-name span {
+      color: var(--orange);
     }
 
-    .logo-tagline {
-      margin-top: 5px;
-      color: var(--navy);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+    .brand-tagline {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15px;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 23px;
       flex-wrap: wrap;
+      gap: 20px;
     }
 
-    .nav-links a {
-      display: inline-flex;
-      align-items: center;
-      font-size: 14px;
+    .nav-links > a:not(.external-icon) {
+      position: relative;
+      padding: 8px 0;
+      color: var(--navy);
+      font-size: 13px;
       font-weight: 700;
       white-space: nowrap;
-      transition: color 0.2s, background 0.2s;
+      transition: color 0.2s ease;
     }
 
-    .nav-links a:hover,
-    .nav-links a[aria-current="page"]:not(.nav-button) {
+    .nav-links > a:not(.external-icon)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-links > a:not(.external-icon):hover,
+    .nav-links > a.active {
       color: var(--orange);
     }
 
-    .nav-links .nav-button {
-      padding: 11px 18px;
-      border-radius: 30px;
-      background: var(--navy);
-      color: var(--white);
+    .nav-links > a:not(.external-icon):hover::after,
+    .nav-links > a.active::after {
+      transform: scaleX(1);
     }
 
-    .nav-links .nav-button:hover {
-      background: var(--orange);
-      color: var(--white);
-    }
-
-    /* HERO */
-
-    .hero {
-      background: var(--navy);
-      color: var(--white);
-      padding: 58px 0 64px;
-      overflow: hidden;
-    }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1.5fr 0.7fr;
-      align-items: center;
-      gap: 35px;
-    }
-
-    .eyebrow {
-      color: var(--peach);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    h1 {
-      font-size: clamp(32px, 5vw, 49px);
-      line-height: 1.15;
-      margin: 13px 0;
-      letter-spacing: -1px;
-    }
-
-    .hero p {
-      color: #e0eaf0;
-      max-width: 600px;
-      margin: 0 0 25px;
-    }
-
-    .hero-art {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 220px;
-      font-size: 90px;
-      position: relative;
-    }
-
-    .hero-art::before {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      background: rgba(255, 214, 163, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 50%;
-    }
-
-    .hero-art span {
-      position: relative;
-    }
-
-    /* BOUTONS */
+    /* =========================
+       BOUTONS
+    ========================= */
 
     .btn {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: 700;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: transform 0.2s, background 0.2s;
+      gap: 9px;
+      padding: 12px 19px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      font-weight: 750;
+      font-size: 14px;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
     }
 
     .btn:hover {
@@ -231,54 +205,174 @@
     }
 
     .btn-orange {
-      background: var(--orange);
       color: var(--white);
+      background: var(--orange);
+      box-shadow: 0 7px 18px rgba(255, 116, 23, 0.19);
     }
 
     .btn-orange:hover {
-      background: var(--navy-deep);
+      background: #e9630b;
+      box-shadow: 0 10px 22px rgba(255, 116, 23, 0.25);
     }
 
     .btn-white {
-      background: var(--white);
       color: var(--navy);
+      background: var(--white);
     }
 
     .btn-outline {
-      background: var(--white);
       color: var(--navy);
-      border: 1px solid var(--border);
+      background: var(--white);
+      border-color: var(--border);
     }
 
-    /* CONTENU PRINCIPAL */
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 66px 0 72px;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(255, 116, 23, 0.18),
+          transparent 28%
+        ),
+        linear-gradient(135deg, var(--navy-deep), var(--navy));
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      right: -100px;
+      bottom: -220px;
+      width: 420px;
+      height: 420px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.5fr 0.7fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--peach);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 16px 0;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.13;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      max-width: 610px;
+      margin: 0 0 27px;
+      color: #e0eaf0;
+      font-size: 16px;
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 225px;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-art::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border: 1px dashed rgba(255, 214, 163, 0.55);
+      border-radius: 50%;
+    }
+
+    .hero-bubble {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 115px;
+      height: 100px;
+      border-radius: 28px;
+      color: var(--navy);
+      background: var(--peach);
+      font-size: 51px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
+      transform: rotate(-5deg);
+    }
+
+    /* =========================
+       CONTENU PRINCIPAL
+    ========================= */
 
     main {
-      padding: 38px 0 65px;
+      padding: 44px 0 70px;
     }
 
     .welcome {
-      margin-bottom: 27px;
+      margin-bottom: 28px;
     }
 
     .welcome h2 {
+      margin: 0 0 5px;
       color: var(--navy);
-      margin-bottom: 5px;
-      font-size: 25px;
+      font-size: clamp(23px, 3vw, 29px);
+      letter-spacing: -0.5px;
     }
 
     .welcome p {
+      margin: 0;
       color: var(--muted);
+      font-size: 15px;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 285px;
-      gap: 25px;
+      grid-template-columns: minmax(0, 1fr) 305px;
       align-items: start;
+      gap: 26px;
     }
 
     .toolbar {
       display: flex;
+      align-items: stretch;
       gap: 12px;
       margin-bottom: 17px;
     }
@@ -286,55 +380,71 @@
     .search {
       width: 100%;
       min-width: 0;
-      padding: 12px 15px;
-      border: 1px solid var(--border);
+      padding: 13px 16px;
+      color: var(--text);
       background: var(--white);
-      border-radius: 10px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
       outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search::placeholder {
+      color: #8a99a3;
     }
 
     .search:focus,
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--navy);
-      outline: 2px solid rgba(16, 47, 74, 0.08);
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--orange);
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(255, 116, 23, 0.1);
     }
 
     .filters {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .filter {
+      padding: 8px 13px;
+      color: var(--muted);
       background: var(--white);
       border: 1px solid var(--border);
-      padding: 8px 12px;
       border-radius: 30px;
-      color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 650;
+      transition: all 0.2s ease;
+    }
+
+    .filter:hover {
+      color: var(--navy);
+      border-color: var(--peach);
+      background: #fff4e9;
     }
 
     .filter.active {
-      background: var(--pale-blue);
+      color: var(--white);
+      background: var(--navy);
       border-color: var(--navy);
-      color: var(--navy);
-      font-weight: 700;
     }
 
     .section-heading {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin: 20px 0 13px;
+      gap: 12px;
+      margin: 20px 0 15px;
     }
 
     .section-heading h3 {
+      margin: 0;
       color: var(--navy);
-      font-size: 19px;
+      font-size: 20px;
+      letter-spacing: -0.3px;
     }
 
     .meta {
@@ -344,38 +454,45 @@
 
     .question-list {
       display: grid;
-      gap: 13px;
+      gap: 15px;
     }
 
     .question-card {
+      padding: 21px;
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-      transition: border-color 0.2s, transform 0.2s;
+      border-radius: 17px;
+      box-shadow: 0 3px 12px rgba(16, 47, 74, 0.025);
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
     }
 
     .question-card:hover {
-      border-color: #b8ccd2;
-      transform: translateY(-1px);
+      border-color: #c3d3dc;
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
     }
 
     .question-top {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 13px;
     }
 
     .avatar {
-      flex-shrink: 0;
-      width: 42px;
-      height: 42px;
       display: grid;
       place-items: center;
-      border-radius: 12px;
-      background: var(--pale-blue);
+      flex-shrink: 0;
+      width: 45px;
+      height: 45px;
       color: var(--navy);
-      font-weight: 800;
+      background: var(--pale-blue);
+      border: 1px solid #e0eaf0;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 850;
     }
 
     .question-main {
@@ -384,128 +501,179 @@
     }
 
     .question-title {
-      margin-bottom: 6px;
+      margin: 1px 0 5px;
       color: var(--navy);
       font-size: 17px;
-      line-height: 1.4;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     .question-text {
-      margin: 13px 0;
-      color: #53636a;
+      margin: 15px 0;
+      color: #536777;
       font-size: 14px;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
     }
 
     .tag {
-      display: inline-block;
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 11px;
-      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
       color: var(--navy);
       background: var(--pale-blue);
+      border: 1px solid #e0eaf0;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 750;
     }
 
     .question-footer {
-      border-top: 1px solid #eff2f3;
-      padding-top: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
+      margin-top: 15px;
+      padding-top: 13px;
+      border-top: 1px solid #edf1f3;
     }
 
     .reply-count {
-      font-size: 13px;
       color: var(--muted);
+      font-size: 12px;
     }
 
-    /* SIDEBAR */
+    /* =========================
+       BARRE LATÉRALE
+    ========================= */
 
     .sidebar {
       display: grid;
-      gap: 16px;
+      gap: 17px;
     }
 
     .side-card {
+      padding: 21px;
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
+      border-radius: 17px;
+      box-shadow: 0 4px 15px rgba(16, 47, 74, 0.025);
     }
 
     .side-card h3 {
+      margin: 0 0 9px;
       color: var(--navy);
       font-size: 17px;
-      margin-bottom: 10px;
+      line-height: 1.4;
     }
 
     .side-card p {
-      font-size: 13px;
+      margin: 0 0 16px;
       color: var(--muted);
-      margin-bottom: 15px;
+      font-size: 13px;
     }
 
     .side-card .btn {
       width: 100%;
     }
 
+    .side-card .form-note {
+      margin: 13px 0 0;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
     .category-list {
       display: grid;
-      gap: 5px;
+      gap: 0;
     }
 
     .category-link {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 8px;
-      padding: 9px 0;
-      border: 0;
-      border-bottom: 1px solid #eff2f3;
-      background: transparent;
+      width: 100%;
+      padding: 11px 0;
       color: var(--text);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #edf1f3;
       text-align: left;
-      font-size: 13px;
+      font-size: 12px;
+      transition: color 0.2s;
     }
 
     .category-link:last-child {
       border-bottom: 0;
     }
 
+    .category-link span {
+      color: var(--orange);
+      font-size: 17px;
+      transition: transform 0.2s;
+    }
+
     .category-link:hover {
       color: var(--orange);
     }
 
+    .category-link:hover span {
+      transform: translateX(3px);
+    }
+
     .guideline {
-      font-size: 13px;
+      margin: 0;
+      padding-left: 19px;
       color: var(--muted);
-      padding-left: 18px;
+      font-size: 12px;
     }
 
     .guideline li {
-      margin: 8px 0;
+      margin: 9px 0;
+      padding-left: 2px;
     }
 
-    .form-note {
+    .guideline li::marker {
+      color: var(--orange);
+    }
+
+    /* =========================
+       ÉTAT VIDE
+    ========================= */
+
+    .empty-state {
+      padding: 38px 22px;
       color: var(--muted);
-      font-size: 12px;
-      margin-top: 10px;
+      background: var(--white);
+      border: 1px dashed #c9d7df;
+      border-radius: 17px;
+      text-align: center;
+      font-size: 14px;
     }
 
-    /* FENÊTRE DE CRÉATION */
+    .empty-state strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    /* =========================
+       FENÊTRE DE QUESTION
+    ========================= */
 
     .modal {
-      display: none;
       position: fixed;
       inset: 0;
-      z-index: 200;
-      background: rgba(15, 35, 42, 0.65);
-      padding: 20px;
-      overflow-y: auto;
+      z-index: 100;
+      display: none;
       align-items: center;
       justify-content: center;
+      overflow-y: auto;
+      padding: 20px;
+      background: rgba(7, 29, 46, 0.67);
+      backdrop-filter: blur(5px);
     }
 
     .modal.open {
@@ -514,101 +682,160 @@
 
     .modal-panel {
       width: min(560px, 100%);
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      padding: 26px;
       background: var(--white);
-      border-radius: 16px;
-      padding: 25px;
-      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 22px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+      animation: modalAppear 0.22s ease;
+    }
+
+    @keyframes modalAppear {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.99);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .modal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 15px;
+      gap: 15px;
+      margin-bottom: 22px;
     }
 
     .modal-header h2 {
+      margin: 0;
       color: var(--navy);
-      font-size: 23px;
+      font-size: 24px;
+      letter-spacing: -0.5px;
     }
 
     .close-btn {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 39px;
+      height: 39px;
+      color: var(--navy);
+      background: var(--pale-blue);
       border: 0;
-      background: var(--cream);
-      border-radius: 8px;
-      width: 38px;
-      height: 38px;
-      font-size: 22px;
+      border-radius: 11px;
+      font-size: 24px;
+      line-height: 1;
+      transition: background 0.2s;
+    }
+
+    .close-btn:hover {
+      color: var(--white);
+      background: var(--navy);
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 17px;
     }
 
     .form-group label {
       display: block;
-      font-weight: 700;
+      margin-bottom: 7px;
+      color: var(--navy);
       font-size: 13px;
-      margin-bottom: 6px;
+      font-weight: 750;
     }
 
     .form-group input,
     .form-group textarea,
     .form-group select {
       width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 11px 12px;
-      background: var(--white);
+      padding: 12px 13px;
       color: var(--text);
+      background: #fffdfb;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .form-group textarea {
+      min-height: 130px;
       resize: vertical;
-      min-height: 125px;
     }
 
-    /* ÉTAT VIDE ET PIED DE PAGE */
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #91a0a9;
+    }
 
-    .empty-state {
-      text-align: center;
-      padding: 38px 20px;
-      background: var(--white);
-      border: 1px dashed #cbd8dc;
-      border-radius: 14px;
+    .form-note {
+      margin-top: 11px;
       color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
     }
 
-    .empty-state strong {
-      display: block;
-      color: var(--navy);
-      font-size: 17px;
-      margin-bottom: 5px;
-    }
+    /* =========================
+       PIED DE PAGE
+    ========================= */
 
     footer {
       padding: 25px 0;
-      text-align: center;
+      color: var(--muted);
       background: var(--white);
       border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 13px;
+      text-align: center;
+      font-size: 12px;
     }
 
-    /* RESPONSIVE */
+    footer strong {
+      color: var(--navy);
+    }
 
-    @media (max-width: 850px) {
-      .navbar {
-        padding: 15px 0;
-        flex-direction: column;
-        gap: 17px;
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 980px) {
+      .nav-inner {
+        gap: 15px;
       }
 
       .nav-links {
-        justify-content: center;
-        flex-wrap: wrap;
+        gap: 13px;
+      }
+
+      .layout {
+        grid-template-columns: minmax(0, 1fr) 270px;
+        gap: 18px;
+      }
+
+      .nav-links > a:not(.external-icon) {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nav-inner {
+        padding: 14px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
         gap: 12px 18px;
+      }
+
+      .hero {
+        padding: 48px 0 54px;
       }
 
       .hero-content {
@@ -625,51 +852,50 @@
 
       .sidebar {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
       }
     }
 
     @media (max-width: 520px) {
       .container {
-        width: 92%;
+        width: 91%;
       }
 
-      .navbar {
-        align-items: center;
+      .nav-inner {
+        min-height: auto;
       }
 
       .brand-mark {
-        width: 46px;
-        height: 46px;
+        width: 39px;
+        height: 39px;
       }
 
-      .logo-name {
-        font-size: 23px;
-      }
-
-      .logo-tagline {
-        font-size: 7px;
-        letter-spacing: 1px;
+      .brand-name {
+        font-size: 22px;
       }
 
       .nav-links {
-        gap: 10px 13px;
+        gap: 8px 15px;
       }
 
-      .nav-links a {
+      .nav-links > a:not(.external-icon) {
         font-size: 12px;
       }
 
-      .nav-links .nav-button {
-        padding: 9px 13px;
-      }
-
       .hero {
-        padding: 40px 0;
+        padding: 39px 0 43px;
       }
 
       h1 {
-        font-size: 37px;
-        letter-spacing: -1px;
+        font-size: 35px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      main {
+        padding: 32px 0 48px;
       }
 
       .toolbar {
@@ -680,66 +906,78 @@
         width: 100%;
       }
 
+      .filters {
+        gap: 7px;
+      }
+
+      .filter {
+        padding: 7px 10px;
+        font-size: 11px;
+      }
+
       .sidebar {
         grid-template-columns: 1fr;
       }
 
       .question-card {
-        padding: 15px;
+        padding: 16px;
+      }
+
+      .question-title {
+        font-size: 15px;
+      }
+
+      .modal {
+        padding: 12px;
       }
 
       .modal-panel {
+        max-height: calc(100vh - 24px);
         padding: 20px;
+        border-radius: 17px;
+      }
+
+      .modal-header h2 {
+        font-size: 21px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
       *,
       *::before,
       *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
     }
   </style>
+
+  <!-- Feuille de style des liens externes -->
+  <link rel="stylesheet" href="external-links.css">
 </head>
 
 <body>
 
-  <!-- HEADER : logo et navigation sans icônes supplémentaires -->
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
 
-  <header>
-    <div class="container navbar">
+  <header class="navbar">
+    <div class="container nav-inner">
 
-      <a href="index.html" class="logo" aria-label="Eductik, accueil">
-        <svg
-          class="brand-mark"
-          viewBox="0 0 100 100"
-          role="img"
-          aria-label="Logo Eductik"
-        >
-          <rect x="4" y="4" width="42" height="42" rx="10" fill="#102f4a"/>
-          <circle cx="72" cy="25" r="21" fill="#ffd6a3"/>
-          <rect x="4" y="54" width="42" height="42" rx="10" fill="#ffd6a3"/>
-          <g transform="rotate(-9 72 75)">
-            <rect x="51" y="54" width="42" height="42" rx="10" fill="#ff7417"/>
-            <path
-              d="M61 75l8 8 16-19"
-              fill="none"
-              stroke="#fffaf5"
-              stroke-width="6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </g>
-        </svg>
+      <a class="brand" href="index.html" aria-label="Eductik — Accueil">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
 
-        <span class="logo-copy">
-          <span class="logo-name">eductik</span>
-          <span class="logo-tagline">Toutes vos ressources, un seul lieu</span>
+        <span>
+          <span class="brand-name">Educ<span>tik</span></span>
+          <span class="brand-tagline">Toutes vos ressources, un seul lieu</span>
         </span>
       </a>
 
@@ -747,47 +985,64 @@
         <a href="index.html">Accueil</a>
         <a href="niveaux.html">Niveaux</a>
         <a href="ressources.html">Ressources</a>
-        <a href="communaute.html" aria-current="page">Communauté</a>
-        <a href="index.html#apropos" class="nav-button">À propos</a>
+        <a class="active" href="communaute.html" aria-current="page">Communauté</a>
+        <a href="index.html#apropos">À propos</a>
+
+        <!-- external-links.js ajoutera ici les icônes externes -->
       </nav>
 
     </div>
   </header>
 
-  <!-- HERO -->
+  <!-- =========================
+       HERO
+  ========================= -->
 
   <section class="hero">
     <div class="container hero-content">
+
       <div>
         <span class="eyebrow">Eductik · Communauté pédagogique</span>
+
         <h1>Une question ?<br>Échangeons ensemble.</h1>
+
         <p>
           Un espace d’entraide dédié aux enseignants de langues pour
           poser des questions, partager leurs expériences et trouver
           des pistes pédagogiques.
         </p>
+
         <button class="btn btn-orange" id="heroAskButton" type="button">
-          + Poser une question
+          <span aria-hidden="true">＋</span>
+          Poser une question
         </button>
       </div>
 
       <div class="hero-art" aria-hidden="true">
-        <span>💬</span>
+        <div class="hero-bubble">💬</div>
       </div>
+
     </div>
   </section>
 
-  <!-- CONTENU -->
+  <!-- =========================
+       CONTENU PRINCIPAL
+  ========================= -->
 
   <main class="container">
+
     <section class="welcome">
       <h2>La parole aux enseignants</h2>
-      <p>Posez vos questions et échangez autour de vos pratiques de classe.</p>
+      <p>
+        Posez vos questions et échangez autour de vos pratiques de classe.
+      </p>
     </section>
 
     <div class="layout">
 
-      <section>
+      <!-- Questions et recherche -->
+      <section aria-label="Questions de la communauté">
+
         <div class="toolbar">
           <input
             class="search"
@@ -798,32 +1053,61 @@
           >
 
           <button class="btn btn-orange" id="askButton" type="button">
-            + Poser une question
+            <span aria-hidden="true">＋</span>
+            Poser une question
           </button>
         </div>
 
-        <div class="filters" id="filters">
-          <button class="filter active" data-category="Toutes" type="button">Toutes</button>
-          <button class="filter" data-category="Compréhension écrite" type="button">Compréhension écrite</button>
-          <button class="filter" data-category="Compréhension orale" type="button">Compréhension orale</button>
-          <button class="filter" data-category="Production écrite" type="button">Production écrite</button>
-          <button class="filter" data-category="Production orale" type="button">Production orale</button>
-          <button class="filter" data-category="Grammaire et langue" type="button">Grammaire et langue</button>
-          <button class="filter" data-category="Autre" type="button">Autre</button>
+        <!-- Filtres par thématique -->
+        <div class="filters" id="filters" aria-label="Filtrer par thématique">
+
+          <button class="filter active" data-category="Toutes" type="button">
+            Toutes
+          </button>
+
+          <button class="filter" data-category="Compréhension écrite" type="button">
+            Compréhension écrite
+          </button>
+
+          <button class="filter" data-category="Compréhension orale" type="button">
+            Compréhension orale
+          </button>
+
+          <button class="filter" data-category="Production écrite" type="button">
+            Production écrite
+          </button>
+
+          <button class="filter" data-category="Production orale" type="button">
+            Production orale
+          </button>
+
+          <button class="filter" data-category="Grammaire et langue" type="button">
+            Grammaire et langue
+          </button>
+
+          <button class="filter" data-category="Autre" type="button">
+            Autre
+          </button>
+
         </div>
 
         <div class="section-heading">
           <h3>Questions récentes</h3>
-          <span class="meta" id="questionCount">2 questions</span>
+          <span class="meta" id="questionCount" aria-live="polite">
+            2 questions
+          </span>
         </div>
 
         <div class="question-list" id="questionList" aria-live="polite"></div>
+
       </section>
 
+      <!-- Barre latérale -->
       <aside class="sidebar">
 
         <div class="side-card">
           <h3>Participez à la communauté</h3>
+
           <p>
             Une question pédagogique ? Décrivez votre difficulté
             pour lancer l’échange.
@@ -843,29 +1127,37 @@
           <h3>Thématiques</h3>
 
           <div class="category-list">
+
             <button class="category-link" data-side-category="Compréhension écrite" type="button">
-              Compréhension écrite <span>→</span>
+              Compréhension écrite <span aria-hidden="true">→</span>
             </button>
+
             <button class="category-link" data-side-category="Compréhension orale" type="button">
-              Compréhension orale <span>→</span>
+              Compréhension orale <span aria-hidden="true">→</span>
             </button>
+
             <button class="category-link" data-side-category="Production écrite" type="button">
-              Production écrite <span>→</span>
+              Production écrite <span aria-hidden="true">→</span>
             </button>
+
             <button class="category-link" data-side-category="Production orale" type="button">
-              Production orale <span>→</span>
+              Production orale <span aria-hidden="true">→</span>
             </button>
+
             <button class="category-link" data-side-category="Grammaire et langue" type="button">
-              Grammaire et langue <span>→</span>
+              Grammaire et langue <span aria-hidden="true">→</span>
             </button>
+
             <button class="category-link" data-side-category="Autre" type="button">
-              Autres questions <span>→</span>
+              Autres questions <span aria-hidden="true">→</span>
             </button>
+
           </div>
         </div>
 
         <div class="side-card">
           <h3>Quelques règles</h3>
+
           <ul class="guideline">
             <li>Respecter les autres membres.</li>
             <li>Poser des questions claires et précises.</li>
@@ -875,10 +1167,13 @@
         </div>
 
       </aside>
+
     </div>
   </main>
 
-  <!-- FENÊTRE POUR POSER UNE QUESTION -->
+  <!-- =========================
+       FENÊTRE POUR POSER UNE QUESTION
+  ========================= -->
 
   <div
     class="modal"
@@ -886,37 +1181,46 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="modalTitle"
+    aria-hidden="true"
   >
     <div class="modal-panel">
 
       <div class="modal-header">
         <h2 id="modalTitle">Poser une question</h2>
+
         <button
           class="close-btn"
           id="closeModal"
           type="button"
-          aria-label="Fermer"
-        >×</button>
+          aria-label="Fermer la fenêtre"
+        >
+          ×
+        </button>
       </div>
 
       <form id="questionForm">
 
         <div class="form-group">
           <label for="authorInput">Votre prénom ou nom d’enseignant</label>
+
           <input
             id="authorInput"
             name="author"
+            type="text"
             maxlength="60"
             required
+            autocomplete="name"
             placeholder="Ex. : Enseignant de français"
           >
         </div>
 
         <div class="form-group">
           <label for="titleInput">Titre de la question</label>
+
           <input
             id="titleInput"
             name="title"
+            type="text"
             maxlength="140"
             required
             placeholder="Ex. : Comment travailler la compréhension de l’écrit en 1AS ?"
@@ -925,6 +1229,7 @@
 
         <div class="form-group">
           <label for="categoryInput">Thématique</label>
+
           <select id="categoryInput" name="category" required>
             <option value="Compréhension écrite">Compréhension écrite</option>
             <option value="Compréhension orale">Compréhension orale</option>
@@ -937,6 +1242,7 @@
 
         <div class="form-group">
           <label for="bodyInput">Votre question</label>
+
           <textarea
             id="bodyInput"
             name="body"
@@ -951,21 +1257,31 @@
         </button>
 
         <p class="form-note">
-          Démo uniquement : les données restent dans le navigateur utilisé.
+          Démonstration uniquement : les données restent dans le navigateur utilisé.
         </p>
+
       </form>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- =========================
+       PIED DE PAGE
+  ========================= -->
 
   <footer>
     <div class="container">
-      © <span id="year"></span> Eductik — Échanger pour mieux enseigner.
+      © <span id="year"></span>
+      <strong>Eductik</strong> — Échanger pour mieux enseigner.
     </div>
   </footer>
 
+  <!-- =========================
+       LOGIQUE DE LA COMMUNAUTÉ
+  ========================= -->
+
   <script>
+    "use strict";
+
     const demoQuestions = [
       {
         id: "demo-1",
@@ -990,14 +1306,19 @@
     ];
 
     const storageKey = "eductik_community_demo_questions";
+
     let selectedCategory = "Toutes";
+    let questions = loadQuestions();
+    let previouslyFocusedElement = null;
 
     const questionList = document.getElementById("questionList");
     const questionCount = document.getElementById("questionCount");
     const searchInput = document.getElementById("searchInput");
     const modal = document.getElementById("questionModal");
     const questionForm = document.getElementById("questionForm");
+    const authorInput = document.getElementById("authorInput");
 
+    /* Charger les questions enregistrées localement */
     function loadQuestions() {
       try {
         const saved = localStorage.getItem(storageKey);
@@ -1007,16 +1328,18 @@
       }
     }
 
-    let questions = loadQuestions();
-
+    /* Enregistrer les questions dans ce navigateur */
     function saveQuestions() {
       try {
         localStorage.setItem(storageKey, JSON.stringify(questions));
+        return true;
       } catch (error) {
         alert("Impossible d’enregistrer les données dans ce navigateur.");
+        return false;
       }
     }
 
+    /* Sécuriser le texte affiché dans le HTML */
     function escapeHTML(value) {
       return String(value).replace(/[&<>"']/g, char => ({
         "&": "&amp;",
@@ -1027,8 +1350,10 @@
       })[char]);
     }
 
+    /* Créer les initiales de l'auteur */
     function initials(name) {
-      return name.trim()
+      return String(name)
+        .trim()
         .split(/\s+/)
         .slice(0, 2)
         .map(part => part[0] || "")
@@ -1036,6 +1361,7 @@
         .toUpperCase() || "E";
     }
 
+    /* Afficher les questions selon la recherche et le filtre */
     function renderQuestions() {
       const query = searchInput.value.trim().toLowerCase();
 
@@ -1044,9 +1370,12 @@
           selectedCategory === "Toutes" ||
           question.category === selectedCategory;
 
-        const searchableText =
-          `${question.title} ${question.body} ${question.author} ${question.category}`
-            .toLowerCase();
+        const searchableText = [
+          question.title,
+          question.body,
+          question.author,
+          question.category
+        ].join(" ").toLowerCase();
 
         return matchesCategory && searchableText.includes(query);
       });
@@ -1067,24 +1396,34 @@
       questionList.innerHTML = filtered.map(question => `
         <article class="question-card">
           <div class="question-top">
-            <div class="avatar">${escapeHTML(initials(question.author))}</div>
+
+            <div class="avatar" aria-hidden="true">
+              ${escapeHTML(initials(question.author))}
+            </div>
 
             <div class="question-main">
-              <h4 class="question-title">${escapeHTML(question.title)}</h4>
+              <h4 class="question-title">
+                ${escapeHTML(question.title)}
+              </h4>
+
               <div class="meta">
-                ${escapeHTML(question.author)} · ${escapeHTML(question.date)}
+                ${escapeHTML(question.author)}
+                ·
+                ${escapeHTML(question.date)}
               </div>
             </div>
+
           </div>
 
           <p class="question-text">${escapeHTML(question.body)}</p>
 
           <span class="tag">${escapeHTML(question.category)}</span>
 
-          <div class="question-footer" style="margin-top:14px">
+          <div class="question-footer">
             <span class="reply-count">
-              💬 ${question.replies || 0} réponse(s)
+              💬 ${Number(question.replies) || 0} réponse(s)
             </span>
+
             <span class="meta">
               ${question.demo ? "Exemple illustratif" : "Démo locale"}
             </span>
@@ -1093,18 +1432,32 @@
       `).join("");
     }
 
+    /* Ouvrir la fenêtre */
     function openModal() {
-      modal.classList.add("open");
-      document.body.style.overflow = "hidden";
+      previouslyFocusedElement = document.activeElement;
 
-      document.getElementById("authorInput").focus();
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+
+      window.setTimeout(() => authorInput.focus(), 50);
     }
 
+    /* Fermer la fenêtre */
     function closeModal() {
       modal.classList.remove("open");
-      document.body.style.overflow = "";
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+
+      if (
+        previouslyFocusedElement &&
+        typeof previouslyFocusedElement.focus === "function"
+      ) {
+        previouslyFocusedElement.focus();
+      }
     }
 
+    /* Boutons d'ouverture */
     document.getElementById("askButton")
       .addEventListener("click", openModal);
 
@@ -1114,24 +1467,29 @@
     document.getElementById("sideAskButton")
       .addEventListener("click", openModal);
 
+    /* Bouton de fermeture */
     document.getElementById("closeModal")
       .addEventListener("click", closeModal);
 
+    /* Fermer en cliquant sur l'arrière-plan */
     modal.addEventListener("click", event => {
       if (event.target === modal) {
         closeModal();
       }
     });
 
+    /* Fermer avec la touche Échap */
     document.addEventListener("keydown", event => {
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && modal.classList.contains("open")) {
         closeModal();
       }
     });
 
+    /* Filtres principaux */
     document.getElementById("filters")
       .addEventListener("click", event => {
         const button = event.target.closest("[data-category]");
+
         if (!button) return;
 
         selectedCategory = button.dataset.category;
@@ -1143,6 +1501,7 @@
         renderQuestions();
       });
 
+    /* Filtres de la barre latérale */
     document.querySelectorAll("[data-side-category]")
       .forEach(button => {
         button.addEventListener("click", () => {
@@ -1164,28 +1523,28 @@
         });
       });
 
+    /* Recherche en temps réel */
     searchInput.addEventListener("input", renderQuestions);
 
+    /* Publication d'une question dans la démonstration */
     questionForm.addEventListener("submit", event => {
       event.preventDefault();
 
-      const author =
-        document.getElementById("authorInput").value.trim();
+      const author = document.getElementById("authorInput").value.trim();
+      const title = document.getElementById("titleInput").value.trim();
+      const category = document.getElementById("categoryInput").value;
+      const body = document.getElementById("bodyInput").value.trim();
 
-      const title =
-        document.getElementById("titleInput").value.trim();
+      if (!author || !title || !body) {
+        questionForm.reportValidity();
+        return;
+      }
 
-      const category =
-        document.getElementById("categoryInput").value;
+      /* Retirer les exemples lorsqu'une vraie question est ajoutée */
+      const previousQuestions = questions;
+      const userQuestions = questions.filter(question => !question.demo);
 
-      const body =
-        document.getElementById("bodyInput").value.trim();
-
-      if (!author || !title || !body) return;
-
-      questions = questions.filter(question => !question.demo);
-
-      questions.unshift({
+      const newQuestion = {
         id: `local-${Date.now()}`,
         author,
         title,
@@ -1194,9 +1553,15 @@
         date: new Date().toLocaleDateString("fr-FR"),
         replies: 0,
         demo: false
-      });
+      };
 
-      saveQuestions();
+      questions = [newQuestion, ...userQuestions];
+
+      if (!saveQuestions()) {
+        questions = previousQuestions;
+        return;
+      }
+
       questionForm.reset();
       closeModal();
 
@@ -1218,11 +1583,17 @@
       );
     });
 
+    /* Année automatique dans le pied de page */
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
+    /* Premier affichage */
     renderQuestions();
   </script>
+
+  <!-- Icônes externes : ChatGPT, ministère, TV5MONDE,
+       Instagram, Facebook et centre de langues -->
+  <script src="external-links.js" defer></script>
 
 </body>
 </html>
