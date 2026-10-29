@@ -1,4 +1,3 @@
-
 (() => {
   "use strict";
 
@@ -7,28 +6,24 @@
   if (!nav || nav.querySelector(".external-rotator")) return;
 
   const links = [
-    
-
-{
-  name: "ChatGPT",
-  url: "https://chatgpt.com/",
-  svg: `
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      aria-hidden="true"
-    >
-      <path
-        fill="currentColor"
-        d="M22.281 9.821a5.985 5.985 0 0 0-.515-4.91 6.046 6.046 0 0 0-6.508-2.9A6.065 6.065 0 0 0 4.98 4.18a5.985 5.985 0 0 0-3.997 2.9 6.046 6.046 0 0 0 .742 7.097 5.98 5.98 0 0 0 .511 4.911 6.051 6.051 0 0 0 6.512 2.9 5.985 5.985 0 0 0 4.508 2.01 6.055 6.055 0 0 0 5.005-2.67 5.985 5.985 0 0 0 3.997-2.9 6.046 6.046 0 0 0-.742-7.097 5.98 5.98 0 0 0 .765-1.51ZM12.02 21.2a4.48 4.48 0 0 1-2.876-1.04l.142-.08 4.778-2.76a.77.77 0 0 0 .38-.66v-6.74l2.02 1.17a.07.07 0 0 1 .04.06v5.58a4.47 4.47 0 0 1-4.484 4.47ZM2.36 16.78a4.48 4.48 0 0 1-.537-3.02l.14.08 4.78 2.76a.77.77 0 0 0 .76 0l5.84-3.37v2.34a.07.07 0 0 1-.03.06l-4.82 2.78a4.47 4.47 0 0 1-6.133-1.63ZM1.1 7.9a4.48 4.48 0 0 1 2.34-2.03v5.68a.77.77 0 0 0 .38.66l5.84 3.37-2.02 1.17a.07.07 0 0 1-.07 0l-4.82-2.78A4.47 4.47 0 0 1 1.1 7.9Zm16.55 3.85-5.84-3.37 2.02-1.17a.07.07 0 0 1 .07 0l4.82 2.78a4.47 4.47 0 0 1-.69 8.15v-5.68a.77.77 0 0 0-.38-.71ZM19.66 9l-.14-.08-4.78-2.76a.77.77 0 0 0-.76 0l-5.84 3.37V7.19a.07.07 0 0 1 .03-.06l4.82-2.78a4.47 4.47 0 0 1 6.67 4.65ZM7.01 12.1l-2.02-1.17a.07.07 0 0 1-.04-.06V5.29a4.47 4.47 0 0 1 7.34-3.43l-.14.08-4.78 2.76a.77.77 0 0 0-.38.66v6.74Z"
-      />
-    </svg>
-  `
-},
-
-
+    {
+      name: "ChatGPT",
+      url: "https://chatgpt.com/",
+      svg: `
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M22.281 9.821a5.985 5.985 0 0 0-.515-4.91 6.046 6.046 0 0 0-6.508-2.9A6.065 6.065 0 0 0 4.98 4.18a5.985 5.985 0 0 0-3.997 2.9 6.046 6.046 0 0 0 .742 7.097 5.98 5.98 0 0 0 .511 4.911 6.051 6.051 0 0 0 6.512 2.9 5.985 5.985 0 0 0 4.508 2.01 6.055 6.055 0 0 0 5.005-2.67 5.985 5.985 0 0 0 3.997-2.9 6.046 6.046 0 0 0-.742-7.097 5.98 5.98 0 0 0 .765-1.51ZM12.02 21.2a4.48 4.48 0 0 1-2.876-1.04l.142-.08 4.778-2.76a.77.77 0 0 0 .38-.66v-6.74l2.02 1.17a.07.07 0 0 1 .04.06v5.58a4.47 4.47 0 0 1-4.484 4.47ZM2.36 16.78a4.48 4.48 0 0 1-.537-3.02l.14.08 4.78 2.76a.77.77 0 0 0 .76 0l5.84-3.37v2.34a.07.07 0 0 1-.03.06l-4.82 2.78a4.47 4.47 0 0 1-6.133-1.63ZM1.1 7.9a4.48 4.48 0 0 1 2.34-2.03v5.68a.77.77 0 0 0 .38.66l5.84 3.37-2.02 1.17a.07.07 0 0 1-.07 0l-4.82-2.78A4.47 4.47 0 0 1 1.1 7.9Zm16.55 3.85-5.84-3.37 2.02-1.17a.07.07 0 0 1 .07 0l4.82 2.78a.07.07 0 0 1 .03.06v5.58a4.47 4.47 0 0 1-.69 8.15v-5.68a.77.77 0 0 0-.38-.71ZM19.66 9l-.14-.08-4.78-2.76a.77.77 0 0 0-.76 0l-5.84 3.37V7.19a.07.07 0 0 1 .03-.06l4.82-2.78a4.47 4.47 0 0 1 6.67 4.65ZM7.01 12.1l-2.02-1.17a.07.07 0 0 1-.04-.06V5.29a4.47 4.47 0 0 1 7.34-3.43l-.14.08-4.78 2.76a.77.77 0 0 0-.38.66v6.74Z"
+          />
+        </svg>
+      `
+    },
     {
       name: "Ministère de l'Éducation nationale",
       url: "https://www.education.gov.dz/",
@@ -98,55 +93,55 @@
     rotator.appendChild(a);
   });
 
-  nav.appendChild(rotator);
   const widget = document.createElement("div");
-widget.className = "external-links-widget";
-widget.appendChild(rotator);
-nav.appendChild(widget);
+  widget.className = "external-links-widget";
+  nav.appendChild(widget);
+  widget.appendChild(rotator);
 
-const toggle = document.createElement("button");
-toggle.className = "external-toggle";
-toggle.type = "button";
-toggle.setAttribute("aria-label", "Afficher tous les liens externes");
-toggle.setAttribute("aria-expanded", "false");
-toggle.setAttribute("aria-controls", "external-links-menu");
-toggle.innerHTML = `
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="m7 10 5 5 5-5" />
-  </svg>
-`;
-widget.appendChild(toggle);
+  const toggle = document.createElement("button");
+  toggle.className = "external-toggle";
+  toggle.type = "button";
+  toggle.setAttribute("aria-label", "Afficher tous les liens externes");
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", "external-links-menu");
+  toggle.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m7 10 5 5 5-5" />
+    </svg>
+  `;
+  widget.appendChild(toggle);
 
-const menu = document.createElement("div");
-menu.className = "external-links-menu";
-menu.id = "external-links-menu";
-menu.setAttribute("aria-label", "Tous les liens externes");
-menu.hidden = true;
+  const menu = document.createElement("div");
+  menu.className = "external-links-menu";
+  menu.id = "external-links-menu";
+  menu.setAttribute("aria-label", "Tous les liens externes");
+  menu.hidden = true;
 
-const menuTitle = document.createElement("p");
-menuTitle.className = "external-menu-title";
-menuTitle.textContent = "Liens utiles";
-menu.appendChild(menuTitle);
+  const menuTitle = document.createElement("p");
+  menuTitle.className = "external-menu-title";
+  menuTitle.textContent = "Liens utiles";
+  menu.appendChild(menuTitle);
 
-links.forEach(item => {
-  const link = document.createElement("a");
-  link.className = "external-menu-link";
-  link.href = item.url;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
+  links.forEach(item => {
+    const a = document.createElement("a");
+    a.className = "external-menu-link";
+    a.href = item.url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
 
-  const icon = document.createElement("span");
-  icon.className = "external-menu-icon";
-  icon.innerHTML = item.svg;
+    const icon = document.createElement("span");
+    icon.className = "external-menu-icon";
+    icon.innerHTML = item.svg;
 
-  const label = document.createElement("span");
-  label.textContent = item.name;
+    const label = document.createElement("span");
+    label.className = "external-menu-label";
+    label.textContent = item.name;
 
-  link.append(icon, label);
-  menu.appendChild(link);
-});
+    a.append(icon, label);
+    menu.appendChild(a);
+  });
 
-widget.appendChild(menu);
+  widget.appendChild(menu);
 
   const icons = Array.from(rotator.querySelectorAll(".external-icon"));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -161,15 +156,9 @@ widget.appendChild(menu);
     icons[current].classList.add("active");
   }
 
-function start() {
-  if (timer || reducedMotion.matches) return;
-  timer = window.setInterval(showNext, 2500);
-}
-
-rotator.addEventListener("mouseenter", stop);
-rotator.addEventListener("mouseleave", start);
-rotator.addEventListener("focusin", stop);
-rotator.addEventListener("focusout", start);
+  function start() {
+    if (timer || reducedMotion.matches) return;
+    timer = window.setInterval(showNext, 2500);
   }
 
   function stop() {
@@ -178,41 +167,38 @@ rotator.addEventListener("focusout", start);
     timer = null;
   }
 
- function setMenuOpen(open) {
-  menuIsOpen = open;
-  menu.hidden = !open;
-  widget.classList.toggle("is-open", open);
-  toggle.setAttribute("aria-expanded", String(open));
-
-  if (open) stop();
-  else start();
-}
-
-toggle.addEventListener("click", () => {
-  setMenuOpen(!menuIsOpen);
-});
-
-document.addEventListener("click", event => {
-  if (menuIsOpen && !widget.contains(event.target)) {
-    setMenuOpen(false);
+  function setMenuOpen(open) {
+    menuIsOpen = open;
+    menu.hidden = !open;
+    widget.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute(
+      "aria-label",
+      open ? "Masquer les liens externes" : "Afficher tous les liens externes"
+    );
   }
-});
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape" && menuIsOpen) {
-    setMenuOpen(false);
-    toggle.focus();
-  }
-});
+  toggle.addEventListener("click", () => {
+    setMenuOpen(!menuIsOpen);
+  });
 
-widget.addEventListener("mouseenter", stop);
-widget.addEventListener("mouseleave", () => {
-  if (!menuIsOpen && !widget.contains(document.activeElement)) start();
-});
-widget.addEventListener("focusin", stop);
-widget.addEventListener("focusout", event => {
-  if (!menuIsOpen && !widget.contains(event.relatedTarget)) start();
-});
+  document.addEventListener("click", event => {
+    if (menuIsOpen && !widget.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && menuIsOpen) {
+      setMenuOpen(false);
+      toggle.focus();
+    }
+  });
+
+  rotator.addEventListener("mouseenter", stop);
+  rotator.addEventListener("mouseleave", start);
+  rotator.addEventListener("focusin", stop);
+  rotator.addEventListener("focusout", start);
 
   if (typeof reducedMotion.addEventListener === "function") {
     reducedMotion.addEventListener("change", () => {
