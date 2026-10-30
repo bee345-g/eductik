@@ -2,1238 +2,415 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#102f4a">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Communauté | Eductik</title>
-  <meta name="description" content="Un espace d’échange et d’entraide entre enseignants de langues.">
-  <link rel="icon" href="logo.png.png" type="image/png">
 
   <style>
     :root {
       --navy: #102f4a;
-      --navy-deep: #0b263d;
       --orange: #ff7417;
-      --peach: #ffd6a3;
       --cream: #fffaf5;
       --text: #243b4b;
       --muted: #61717d;
-      --white: #ffffff;
-      --pale-blue: #edf4f7;
       --border: #e2e9ed;
-      --shadow: 0 12px 32px rgba(16, 47, 74, 0.1);
-      --radius: 22px;
+      --pale: #edf4f7;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
       color: var(--text);
       background: var(--cream);
-      line-height: 1.7;
-    }
-
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin-inline: auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 250, 245, 0.97);
-      box-shadow: 0 3px 18px rgba(16, 47, 74, 0.08);
-      backdrop-filter: blur(10px);
-    }
-
-    .navbar {
-      min-height: 92px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .brand-mark {
-      display: block;
-      width: 54px;
-      height: 54px;
-      flex-shrink: 0;
-    }
-
-    .logo-copy {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .logo-name {
-      color: var(--navy);
-      font-size: 27px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .logo-tagline {
-      margin-top: 5px;
-      color: var(--navy);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 23px;
-    }
-
-    .nav-links > a:not(.external-icon) {
-      color: var(--navy);
-      font-size: 14px;
-      font-weight: 700;
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .nav-links > a:not(.external-icon):hover,
-    .nav-links > a.active:not(.nav-button) {
-      color: var(--orange);
-    }
-
-    .nav-links .nav-button {
-      padding: 11px 18px;
-      border-radius: 30px;
-      background: var(--navy);
-      color: var(--white);
-    }
-
-    .nav-links .nav-button:hover {
-      background: var(--orange);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    .nav-links > a.nav-button,
-    .nav-links > a.nav-button:hover,
-    .nav-links > a.nav-button:focus-visible {
-      color: #ffffff;
-    }
-
-    /* =========================
-       BOUTONS
-    ========================= */
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 12px 19px;
-      border: 1px solid transparent;
-      border-radius: 12px;
-      font-weight: 750;
-      font-size: 14px;
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-orange {
-      color: var(--white);
-      background: var(--orange);
-      box-shadow: 0 7px 18px rgba(255, 116, 23, 0.19);
-    }
-
-    .btn-orange:hover {
-      background: #e9630b;
-      box-shadow: 0 10px 22px rgba(255, 116, 23, 0.25);
-    }
-
-    .btn-white {
-      color: var(--navy);
-      background: var(--white);
-    }
-
-    .btn-outline {
-      color: var(--navy);
-      background: var(--white);
-      border-color: var(--border);
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 66px 0 72px;
-      color: var(--white);
-      background:
-        radial-gradient(
-          circle at 85% 20%,
-          rgba(255, 116, 23, 0.18),
-          transparent 28%
-        ),
-        linear-gradient(135deg, var(--navy-deep), var(--navy));
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      right: -100px;
-      bottom: -220px;
-      width: 420px;
-      height: 420px;
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1.5fr 0.7fr;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--peach);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 24px;
-      height: 2px;
-      background: var(--orange);
-    }
-
-    h1 {
-      max-width: 720px;
-      margin: 16px 0;
-      font-size: clamp(34px, 5vw, 52px);
-      line-height: 1.13;
-      letter-spacing: -1.5px;
-    }
-
-    .hero p {
-      max-width: 610px;
-      margin: 0 0 27px;
-      color: #e0eaf0;
-      font-size: 16px;
-    }
-
-    .hero-art {
-      position: relative;
-      display: grid;
-      place-items: center;
-      min-height: 225px;
-    }
-
-    .hero-art::before {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .hero-art::after {
-      content: "";
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      border: 1px dashed rgba(255, 214, 163, 0.55);
-      border-radius: 50%;
-    }
-
-    .hero-bubble {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      place-items: center;
-      width: 115px;
-      height: 100px;
-      border-radius: 28px;
-      color: var(--navy);
-      background: var(--peach);
-      font-size: 51px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
-      transform: rotate(-5deg);
-    }
-
-    /* =========================
-       CONTENU PRINCIPAL
-    ========================= */
-
-    main {
-      padding: 44px 0 70px;
-    }
-
-    .welcome {
-      margin-bottom: 28px;
-    }
-
-    .welcome h2 {
-      margin: 0 0 5px;
-      color: var(--navy);
-      font-size: clamp(23px, 3vw, 29px);
-      letter-spacing: -0.5px;
-    }
-
-    .welcome p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 305px;
-      align-items: start;
-      gap: 26px;
-    }
-
-    .toolbar {
-      display: flex;
-      align-items: stretch;
-      gap: 12px;
-      margin-bottom: 17px;
-    }
-
-    .search {
-      width: 100%;
-      min-width: 0;
-      padding: 13px 16px;
-      color: var(--text);
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .search::placeholder {
-      color: #8a99a3;
-    }
-
-    .search:focus,
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--orange);
-      outline: none;
-      box-shadow: 0 0 0 4px rgba(255, 116, 23, 0.1);
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 25px;
-    }
-
-    .filter {
-      padding: 8px 13px;
-      color: var(--muted);
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 650;
-      transition: all 0.2s ease;
-    }
-
-    .filter:hover {
-      color: var(--navy);
-      border-color: var(--peach);
-      background: #fff4e9;
-    }
-
-    .filter.active {
-      color: var(--white);
-      background: var(--navy);
-      border-color: var(--navy);
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 20px 0 15px;
-    }
-
-    .section-heading h3 {
-      margin: 0;
-      color: var(--navy);
-      font-size: 20px;
-      letter-spacing: -0.3px;
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .question-list {
-      display: grid;
-      gap: 15px;
-    }
-
-    .question-card {
-      padding: 21px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      box-shadow: 0 3px 12px rgba(16, 47, 74, 0.025);
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
-    }
-
-    .question-card:hover {
-      border-color: #c3d3dc;
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
-    }
-
-    .question-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 13px;
-    }
-
-    .avatar {
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      width: 45px;
-      height: 45px;
-      color: var(--navy);
-      background: var(--pale-blue);
-      border: 1px solid #e0eaf0;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 850;
-    }
-
-    .question-main {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .question-title {
-      margin: 1px 0 5px;
-      color: var(--navy);
-      font-size: 17px;
-      line-height: 1.45;
-      overflow-wrap: anywhere;
-    }
-
-    .question-text {
-      margin: 15px 0;
-      color: #536777;
-      font-size: 14px;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 10px;
-      color: var(--navy);
-      background: var(--pale-blue);
-      border: 1px solid #e0eaf0;
-      border-radius: 7px;
-      font-size: 11px;
-      font-weight: 750;
-    }
-
-    .question-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 15px;
-      padding-top: 13px;
-      border-top: 1px solid #edf1f3;
-    }
-
-    .reply-count {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* =========================
-       BARRE LATÉRALE
-    ========================= */
-
-    .sidebar {
-      display: grid;
-      gap: 17px;
-    }
-
-    .side-card {
-      padding: 21px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      box-shadow: 0 4px 15px rgba(16, 47, 74, 0.025);
-    }
-
-    .side-card h3 {
-      margin: 0 0 9px;
-      color: var(--navy);
-      font-size: 17px;
-      line-height: 1.4;
-    }
-
-    .side-card p {
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .side-card .btn {
-      width: 100%;
-    }
-
-    .side-card .form-note {
-      margin: 13px 0 0;
-      font-size: 11px;
       line-height: 1.6;
     }
 
-    .category-list {
-      display: grid;
-      gap: 0;
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .container { width: min(1100px, 92%); margin: auto; }
+
+    header {
+      padding: 15px 0;
+      background: white;
+      box-shadow: 0 3px 18px #102f4a14;
     }
 
-    .category-link {
+    .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 20px;
+    }
+
+    .brand { color: var(--navy); font-size: 25px; font-weight: 900; }
+    nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { color: var(--navy); text-decoration: none; font-weight: 700; }
+
+    .hero {
+  position: relative;
+  overflow: hidden;
+  padding: 66px 0 72px;
+  color: var(--white);
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255, 116, 23, 0.18),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #426b88, #668ba4);
+}
+    .hero h1 { margin: 0 0 12px; font-size: clamp(32px, 5vw, 48px); }
+    .hero p { max-width: 650px; color: #e0eaf0; }
+
+    main { padding: 35px 0 65px; }
+    .welcome { margin-bottom: 25px; }
+    .welcome h2 { color: var(--navy); margin-bottom: 4px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 290px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .toolbar { display: flex; gap: 10px; margin-bottom: 16px; }
+    .search, .reply-input {
       width: 100%;
-      padding: 11px 0;
-      color: var(--text);
-      background: transparent;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: white;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 11px;
+      padding: 11px 17px;
+      font-weight: 700;
+    }
+
+    .btn-orange { color: white; background: var(--orange); }
+    .btn-orange:hover { background: #e9630b; }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+    .filter {
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: white;
+      color: var(--muted);
+    }
+
+    .filter.active { color: white; background: var(--navy); border-color: var(--navy); }
+
+    .heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .heading h3 { margin: 0; color: var(--navy); }
+    .meta { color: var(--muted); font-size: 12px; }
+
+    .question-list { display: grid; gap: 14px; }
+
+    .question-card, .side-card {
+      padding: 19px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 4px 14px #102f4a08;
+    }
+
+    .question-top { display: flex; gap: 12px; align-items: flex-start; }
+    .avatar {
+      display: grid;
+      place-items: center;
+      flex: 0 0 43px;
+      height: 43px;
+      color: var(--navy);
+      background: var(--pale);
+      border-radius: 13px;
+      font-weight: 800;
+    }
+
+    .question-title { margin: 0 0 3px; color: var(--navy); }
+    .question-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+    .tag {
+      display: inline-block;
+      padding: 4px 9px;
+      background: var(--pale);
+      color: var(--navy);
+      border-radius: 7px;
+      font-size: 12px;
+    }
+
+    .discussion { margin-top: 15px; padding-top: 12px; border-top: 1px solid #edf1f3; }
+    .comment {
+      margin: 8px 0;
+      padding: 10px;
+      background: #f7fafb;
+      border-radius: 10px;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .comment strong { color: var(--navy); }
+    .comment-image {
+      display: block;
+      max-width: min(100%, 420px);
+      max-height: 320px;
+      margin-top: 9px;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .small-action {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: white;
+      color: var(--navy);
+    }
+
+    .small-action.liked { color: #d84d45; background: #fff7f6; }
+    .reply-form { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .reply-form input[type="file"] { flex-basis: 100%; padding: 7px; }
+
+    .side-card { margin-bottom: 14px; }
+    .side-card h3 { margin-top: 0; color: var(--navy); }
+    .category-link {
+      display: block;
+      width: 100%;
+      padding: 10px 0;
       border: 0;
       border-bottom: 1px solid #edf1f3;
+      background: white;
       text-align: left;
-      font-size: 12px;
-      transition: color 0.2s;
+      color: var(--text);
     }
 
-    .category-link:last-child {
-      border-bottom: 0;
-    }
-
-    .category-link span {
-      color: var(--orange);
-      font-size: 17px;
-      transition: transform 0.2s;
-    }
-
-    .category-link:hover {
-      color: var(--orange);
-    }
-
-    .category-link:hover span {
-      transform: translateX(3px);
-    }
-
-    .guideline {
-      margin: 0;
-      padding-left: 19px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .guideline li {
-      margin: 9px 0;
-      padding-left: 2px;
-    }
-
-    .guideline li::marker {
-      color: var(--orange);
-    }
-
-    /* =========================
-       ÉTAT VIDE
-    ========================= */
-
-    .empty-state {
-      padding: 38px 22px;
-      color: var(--muted);
-      background: var(--white);
-      border: 1px dashed #c9d7df;
-      border-radius: 17px;
+    .empty {
+      padding: 28px;
+      background: white;
+      border: 1px dashed var(--border);
+      border-radius: 14px;
       text-align: center;
-      font-size: 14px;
+      color: var(--muted);
     }
-
-    .empty-state strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--navy);
-      font-size: 17px;
-    }
-
-    /* =========================
-       FENÊTRE DE QUESTION
-    ========================= */
 
     .modal {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 10;
       display: none;
       align-items: center;
       justify-content: center;
-      overflow-y: auto;
-      padding: 20px;
-      background: rgba(7, 29, 46, 0.67);
-      backdrop-filter: blur(5px);
+      padding: 15px;
+      background: #071d2eaa;
     }
 
-    .modal.open {
-      display: flex;
-    }
-
+    .modal.open { display: flex; }
     .modal-panel {
-      width: min(560px, 100%);
-      max-height: calc(100vh - 40px);
-      overflow-y: auto;
-      padding: 26px;
-      background: var(--white);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 22px;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
-      animation: modalAppear 0.22s ease;
-    }
-
-    @keyframes modalAppear {
-      from {
-        opacity: 0;
-        transform: translateY(10px) scale(0.99);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      width: min(540px, 100%);
+      max-height: 95vh;
+      overflow: auto;
+      padding: 23px;
+      background: white;
+      border-radius: 18px;
     }
 
     .modal-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 22px;
+      align-items: center;
     }
 
-    .modal-header h2 {
-      margin: 0;
-      color: var(--navy);
-      font-size: 24px;
-      letter-spacing: -0.5px;
-    }
-
-    .close-btn {
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      width: 39px;
-      height: 39px;
-      color: var(--navy);
-      background: var(--pale-blue);
+    .modal-header h2 { color: var(--navy); }
+    .close {
       border: 0;
-      border-radius: 11px;
-      font-size: 24px;
-      line-height: 1;
-      transition: background 0.2s;
-    }
-
-    .close-btn:hover {
-      color: var(--white);
-      background: var(--navy);
-    }
-
-    .form-group {
-      margin-bottom: 17px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 7px;
+      background: var(--pale);
       color: var(--navy);
-      font-size: 13px;
-      font-weight: 750;
+      border-radius: 9px;
+      padding: 6px 12px;
+      font-size: 22px;
     }
 
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 700; color: var(--navy); }
+    .form-group input, .form-group textarea, .form-group select {
       width: 100%;
-      padding: 12px 13px;
-      color: var(--text);
-      background: #fffdfb;
+      padding: 11px;
       border: 1px solid var(--border);
-      border-radius: 11px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      border-radius: 10px;
     }
 
-    .form-group textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: #91a0a9;
-    }
-
-    .form-note {
-      margin-top: 11px;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    /* =========================
-       PIED DE PAGE
-    ========================= */
+    .form-group textarea { min-height: 110px; resize: vertical; }
 
     footer {
-      padding: 25px 0;
-      color: var(--muted);
-      background: var(--white);
-      border-top: 1px solid var(--border);
+      padding: 22px;
       text-align: center;
-      font-size: 12px;
-    }
-
-    footer strong {
-      color: var(--navy);
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 980px) {
-      .navbar {
-        gap: 15px;
-      }
-
-      .nav-links {
-        gap: 13px;
-      }
-
-      .layout {
-        grid-template-columns: minmax(0, 1fr) 270px;
-        gap: 18px;
-      }
-
-      .nav-links > a:not(.external-icon) {
-        font-size: 12px;
-      }
+      background: white;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
     }
 
     @media (max-width: 800px) {
-      .navbar {
-        padding: 15px 0;
-        flex-direction: column;
-        gap: 17px;
-      }
-
-      .nav-links {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px 18px;
-      }
-
-      .hero {
-        padding: 48px 0 54px;
-      }
-
-      .hero-content {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-art {
-        display: none;
-      }
-
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        align-items: start;
-      }
+      .layout { grid-template-columns: 1fr; }
+      .navbar { flex-direction: column; }
     }
 
     @media (max-width: 520px) {
-      .container {
-        width: 92%;
-      }
-
-      .brand-mark {
-        width: 46px;
-        height: 46px;
-      }
-
-      .logo-name {
-        font-size: 23px;
-      }
-
-      .logo-tagline {
-        font-size: 7px;
-        letter-spacing: 1px;
-      }
-
-      .nav-links {
-        gap: 10px 13px;
-      }
-
-      .nav-links > a:not(.external-icon) {
-        font-size: 12px;
-      }
-
-      .hero {
-        padding: 39px 0 43px;
-      }
-
-      h1 {
-        font-size: 35px;
-      }
-
-      .hero p {
-        font-size: 14px;
-      }
-
-      main {
-        padding: 32px 0 48px;
-      }
-
-      .toolbar {
-        flex-direction: column;
-      }
-
-      .toolbar .btn {
-        width: 100%;
-      }
-
-      .filters {
-        gap: 7px;
-      }
-
-      .filter {
-        padding: 7px 10px;
-        font-size: 11px;
-      }
-
-      .sidebar {
-        grid-template-columns: 1fr;
-      }
-
-      .question-card {
-        padding: 16px;
-      }
-
-      .question-title {
-        font-size: 15px;
-      }
-
-      .modal {
-        padding: 12px;
-      }
-
-      .modal-panel {
-        max-height: calc(100vh - 24px);
-        padding: 20px;
-        border-radius: 17px;
-      }
-
-      .modal-header h2 {
-        font-size: 21px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+      .toolbar { flex-direction: column; }
+      .toolbar .btn { width: 100%; }
+      nav { justify-content: center; }
+      .question-card { padding: 14px; }
     }
   </style>
-
-  <link rel="stylesheet" href="external-links.css">
 </head>
 
 <body>
-
   <header>
     <div class="container navbar">
-
-      <a href="index.html" class="logo" aria-label="Eductik, accueil">
-        <svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Eductik" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="42" height="42" rx="10" fill="#102f4a"/>
-          <circle cx="72" cy="25" r="21" fill="#ffd6a3"/>
-          <rect x="4" y="54" width="42" height="42" rx="10" fill="#ffd6a3"/>
-          <g transform="rotate(-9 72 75)">
-            <rect x="51" y="54" width="42" height="42" rx="10" fill="#ff7417"/>
-            <path d="M61 75l8 8 16-19" fill="none" stroke="#fffaf5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>
-
-        <span class="logo-copy">
-          <span class="logo-name">eductik</span>
-          <span class="logo-tagline">Toutes vos ressources, un seul lieu</span>
-        </span>
-      </a>
-
-      <nav class="nav-links" aria-label="Navigation principale">
+      <a class="brand" href="index.html">eductik</a>
+      <nav aria-label="Navigation principale">
         <a href="index.html">Accueil</a>
         <a href="niveaux.html">Niveaux</a>
         <a href="ressources.html">Ressources</a>
-        <a href="communaute.html" class="active" aria-current="page">Communaut&eacute;</a>
-        <a href="index.html#apropos" class="nav-button">&Agrave; propos</a>
+        <a href="communaute.html">Communauté</a>
+        <a href="index.html#apropos">À propos</a>
       </nav>
-
     </div>
   </header>
 
   <section class="hero">
-    <div class="container hero-content">
-
-      <div>
-        <span class="eyebrow">Eductik · Communauté pédagogique</span>
-
-        <h1>Une question ?<br>Échangeons ensemble.</h1>
-
-        <p>
-          Un espace d’entraide dédié aux enseignants de langues pour
-          poser des questions, partager leurs expériences et trouver
-          des pistes pédagogiques.
-        </p>
-
-        <button class="btn btn-orange" id="heroAskButton" type="button">
-          <span aria-hidden="true">＋</span>
-          Poser une question
-        </button>
-      </div>
-
-      <div class="hero-art" aria-hidden="true">
-        <div class="hero-bubble">💬</div>
-      </div>
-
+    <div class="container">
+      <h1>Une question ?<br>Échangeons ensemble.</h1>
+      <p>
+        Un espace d’entraide dédié aux enseignants de langues pour poser
+        des questions, partager leurs expériences et trouver des pistes pédagogiques.
+      </p>
     </div>
   </section>
 
   <main class="container">
-
     <section class="welcome">
       <h2>La parole aux enseignants</h2>
-      <p>
-        Posez vos questions et échangez autour de vos pratiques de classe.
-      </p>
+      <p>Posez vos questions et échangez autour de vos pratiques de classe.</p>
     </section>
 
     <div class="layout">
-
       <section aria-label="Questions de la communauté">
-
         <div class="toolbar">
-          <input
-            class="search"
-            type="search"
-            id="searchInput"
-            placeholder="Rechercher une question..."
-            aria-label="Rechercher une question"
-          >
-
+          <input class="search" id="searchInput" type="search"
+                 placeholder="Rechercher une question..." aria-label="Rechercher une question">
           <button class="btn btn-orange" id="askButton" type="button">
-            <span aria-hidden="true">＋</span>
-            Poser une question
+            ＋ Poser une question
           </button>
         </div>
 
-        <div class="filters" id="filters" aria-label="Filtrer par thématique">
-
-          <button class="filter active" data-category="Toutes" type="button">
-            Toutes
-          </button>
-
-          <button class="filter" data-category="Compréhension écrite" type="button">
-            Compréhension écrite
-          </button>
-
-          <button class="filter" data-category="Compréhension orale" type="button">
-            Compréhension orale
-          </button>
-
-          <button class="filter" data-category="Production écrite" type="button">
-            Production écrite
-          </button>
-
-          <button class="filter" data-category="Production orale" type="button">
-            Production orale
-          </button>
-
-          <button class="filter" data-category="Grammaire et langue" type="button">
-            Grammaire et langue
-          </button>
-
-          <button class="filter" data-category="Autre" type="button">
-            Autre
-          </button>
-
+        <div class="filters" id="filters">
+          <button class="filter active" data-category="Toutes">Toutes</button>
+          <button class="filter" data-category="Compréhension écrite">Compréhension écrite</button>
+          <button class="filter" data-category="Compréhension orale">Compréhension orale</button>
+          <button class="filter" data-category="Production écrite">Production écrite</button>
+          <button class="filter" data-category="Production orale">Production orale</button>
+          <button class="filter" data-category="Grammaire et langue">Grammaire et langue</button>
+          <button class="filter" data-category="Autre">Autre</button>
         </div>
 
-        <div class="section-heading">
+        <div class="heading">
           <h3>Questions récentes</h3>
-          <span class="meta" id="questionCount" aria-live="polite">
-            2 questions
-          </span>
+          <span class="meta" id="questionCount"></span>
         </div>
-
-        <div class="question-list" id="questionList" aria-live="polite"></div>
-
+        <div class="question-list" id="questionList"></div>
       </section>
 
-      <aside class="sidebar">
-
+      <aside>
         <div class="side-card">
           <h3>Participez à la communauté</h3>
-
-          <p>
-            Une question pédagogique ? Décrivez votre difficulté
-            pour lancer l’échange.
-          </p>
-
-          <button class="btn btn-orange" id="sideAskButton" type="button">
-            Poser une question
-          </button>
-
-          <p class="form-note">
-            Version de démonstration : les questions sont enregistrées
-            uniquement dans ce navigateur.
-          </p>
+          <p>Répondez aux questions et aimez les commentaires pour participer.</p>
         </div>
-
         <div class="side-card">
           <h3>Thématiques</h3>
-
-          <div class="category-list">
-
-            <button class="category-link" data-side-category="Compréhension écrite" type="button">
-              Compréhension écrite <span aria-hidden="true">→</span>
-            </button>
-
-            <button class="category-link" data-side-category="Compréhension orale" type="button">
-              Compréhension orale <span aria-hidden="true">→</span>
-            </button>
-
-            <button class="category-link" data-side-category="Production écrite" type="button">
-              Production écrite <span aria-hidden="true">→</span>
-            </button>
-
-            <button class="category-link" data-side-category="Production orale" type="button">
-              Production orale <span aria-hidden="true">→</span>
-            </button>
-
-            <button class="category-link" data-side-category="Grammaire et langue" type="button">
-              Grammaire et langue <span aria-hidden="true">→</span>
-            </button>
-
-            <button class="category-link" data-side-category="Autre" type="button">
-              Autres questions <span aria-hidden="true">→</span>
-            </button>
-
-          </div>
+          <button class="category-link" data-side-category="Compréhension écrite">Compréhension écrite →</button>
+          <button class="category-link" data-side-category="Compréhension orale">Compréhension orale →</button>
+          <button class="category-link" data-side-category="Production écrite">Production écrite →</button>
+          <button class="category-link" data-side-category="Production orale">Production orale →</button>
+          <button class="category-link" data-side-category="Grammaire et langue">Grammaire et langue →</button>
+          <button class="category-link" data-side-category="Autre">Autres questions →</button>
         </div>
-
         <div class="side-card">
           <h3>Quelques règles</h3>
-
-          <ul class="guideline">
+          <ul>
             <li>Respecter les autres membres.</li>
             <li>Poser des questions claires et précises.</li>
-            <li>Privilégier les échanges pédagogiques constructifs.</li>
+            <li>Privilégier les échanges constructifs.</li>
             <li>Ne pas publier de données personnelles sur les élèves.</li>
           </ul>
         </div>
-
       </aside>
-
     </div>
   </main>
 
-  <div
-    class="modal"
-    id="questionModal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modalTitle"
-    aria-hidden="true"
-  >
+  <div class="modal" id="questionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-panel">
-
       <div class="modal-header">
         <h2 id="modalTitle">Poser une question</h2>
-
-        <button
-          class="close-btn"
-          id="closeModal"
-          type="button"
-          aria-label="Fermer la fenêtre"
-        >
-          ×
-        </button>
+        <button class="close" id="closeModal" type="button" aria-label="Fermer">×</button>
       </div>
 
       <form id="questionForm">
-
         <div class="form-group">
           <label for="authorInput">Votre prénom ou nom d’enseignant</label>
-
-          <input
-            id="authorInput"
-            name="author"
-            type="text"
-            maxlength="60"
-            required
-            autocomplete="name"
-            placeholder="Ex. : Enseignant de français"
-          >
+          <input id="authorInput" name="author" maxlength="60" required
+                 placeholder="Ex. : Enseignant de français">
         </div>
-
         <div class="form-group">
           <label for="titleInput">Titre de la question</label>
-
-          <input
-            id="titleInput"
-            name="title"
-            type="text"
-            maxlength="140"
-            required
-            placeholder="Ex. : Comment travailler la compréhension de l’écrit en 1AS ?"
-          >
+          <input id="titleInput" name="title" maxlength="140" required
+                 placeholder="Ex. : Comment travailler la compréhension de l’écrit ?">
         </div>
-
         <div class="form-group">
           <label for="categoryInput">Thématique</label>
-
-          <select id="categoryInput" name="category" required>
-            <option value="Compréhension écrite">Compréhension écrite</option>
-            <option value="Compréhension orale">Compréhension orale</option>
-            <option value="Production écrite">Production écrite</option>
-            <option value="Production orale">Production orale</option>
-            <option value="Grammaire et langue">Grammaire et langue</option>
-            <option value="Autre">Autre</option>
+          <select id="categoryInput" name="category">
+            <option>Compréhension écrite</option>
+            <option>Compréhension orale</option>
+            <option>Production écrite</option>
+            <option>Production orale</option>
+            <option>Grammaire et langue</option>
+            <option>Autre</option>
           </select>
         </div>
-
         <div class="form-group">
           <label for="bodyInput">Votre question</label>
-
-          <textarea
-            id="bodyInput"
-            name="body"
-            maxlength="3000"
-            required
-            placeholder="Expliquez votre question ou la difficulté rencontrée..."
-          ></textarea>
+          <textarea id="bodyInput" name="body" maxlength="3000" required
+                    placeholder="Expliquez votre question ou la difficulté rencontrée..."></textarea>
         </div>
-
-        <button class="btn btn-orange" type="submit">
-          Publier la question
-        </button>
-
-        <p class="form-note">
-          Démonstration uniquement : les données restent dans le navigateur utilisé.
-        </p>
-
+        <button class="btn btn-orange" type="submit">Publier la question</button>
+        <p class="meta">Démo : les données sont enregistrées dans ce navigateur.</p>
       </form>
     </div>
   </div>
 
-  <footer>
-    <div class="container">
-      © <span id="year"></span>
-      <strong>Eductik</strong> — Échanger pour mieux enseigner.
-    </div>
-  </footer>
+  <footer>© <span id="year"></span> <strong>Eductik</strong> — Échanger pour mieux enseigner.</footer>
 
   <script>
     "use strict";
+
+    const storageKey = "eductik_community_questions_v2";
+    const categories = [
+      "Toutes",
+      "Compréhension écrite",
+      "Compréhension orale",
+      "Production écrite",
+      "Production orale",
+      "Grammaire et langue",
+      "Autre"
+    ];
 
     const demoQuestions = [
       {
@@ -1243,7 +420,7 @@
         category: "Compréhension écrite",
         body: "Quelles démarches utilisez-vous pour aider les apprenants à comprendre un texte et à repérer les informations essentielles ?",
         date: "Exemple de question",
-        replies: 0,
+        comments: [],
         demo: true
       },
       {
@@ -1251,63 +428,50 @@
         author: "Enseignant de langues",
         title: "Comment motiver les élèves en production orale ?",
         category: "Production orale",
-        body: "Je cherche des idées d’activités pour encourager la participation des apprenants et réduire leur peur de parler devant leurs camarades.",
+        body: "Je cherche des idées d’activités pour encourager la participation des apprenants.",
         date: "Exemple de question",
-        replies: 0,
+        comments: [],
         demo: true
       }
     ];
-
-    const storageKey = "eductik_community_demo_questions";
-
-    let selectedCategory = "Toutes";
-    let questions = loadQuestions();
-    let previouslyFocusedElement = null;
-
-    const questionList = document.getElementById("questionList");
-    const questionCount = document.getElementById("questionCount");
-    const searchInput = document.getElementById("searchInput");
-    const modal = document.getElementById("questionModal");
-    const questionForm = document.getElementById("questionForm");
-    const authorInput = document.getElementById("authorInput");
 
     function loadQuestions() {
       try {
         const saved = localStorage.getItem(storageKey);
         return saved ? JSON.parse(saved) : demoQuestions;
-      } catch (error) {
+      } catch {
         return demoQuestions;
       }
     }
+
+    let questions = loadQuestions();
+    let selectedCategory = "Toutes";
+
+    const questionList = document.getElementById("questionList");
+    const searchInput = document.getElementById("searchInput");
+    const modal = document.getElementById("questionModal");
+    const questionForm = document.getElementById("questionForm");
 
     function saveQuestions() {
       try {
         localStorage.setItem(storageKey, JSON.stringify(questions));
         return true;
-      } catch (error) {
-        alert("Impossible d’enregistrer les données dans ce navigateur.");
+      } catch {
+        alert("Impossible d’enregistrer les données. L’image est peut-être trop volumineuse.");
         return false;
       }
     }
 
     function escapeHTML(value) {
       return String(value).replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
+        "&": "&amp;", "<": "&lt;", ">": "&gt;",
+        '"': "&quot;", "'": "&#039;"
       })[char]);
     }
 
     function initials(name) {
-      return String(name)
-        .trim()
-        .split(/\s+/)
-        .slice(0, 2)
-        .map(part => part[0] || "")
-        .join("")
-        .toUpperCase() || "E";
+      return name.trim().split(/\s+/).slice(0, 2)
+        .map(word => word[0] || "").join("").toUpperCase() || "E";
     }
 
     function renderQuestions() {
@@ -1315,155 +479,173 @@
 
       const filtered = questions.filter(question => {
         const matchesCategory =
-          selectedCategory === "Toutes" ||
-          question.category === selectedCategory;
-
-        const searchableText = [
-          question.title,
-          question.body,
-          question.author,
-          question.category
+          selectedCategory === "Toutes" || question.category === selectedCategory;
+        const text = [
+          question.title, question.body, question.author, question.category
         ].join(" ").toLowerCase();
-
-        return matchesCategory && searchableText.includes(query);
+        return matchesCategory && text.includes(query);
       });
 
-      questionCount.textContent =
-        `${filtered.length} question${filtered.length !== 1 ? "s" : ""}`;
+      document.getElementById("questionCount").textContent =
+        `${filtered.length} question${filtered.length === 1 ? "" : "s"}`;
 
       if (!filtered.length) {
-        questionList.innerHTML = `
-          <div class="empty-state">
-            <strong>Aucune question trouvée</strong>
-            Essayez un autre mot-clé ou choisissez une autre thématique.
-          </div>
-        `;
+        questionList.innerHTML =
+          '<div class="empty"><strong>Aucune question trouvée</strong><br>Essayez un autre mot-clé ou une autre thématique.</div>';
         return;
       }
 
       questionList.innerHTML = filtered.map(question => `
         <article class="question-card">
           <div class="question-top">
-
-            <div class="avatar" aria-hidden="true">
-              ${escapeHTML(initials(question.author))}
+            <div class="avatar">${escapeHTML(initials(question.author))}</div>
+            <div>
+              <h3 class="question-title">${escapeHTML(question.title)}</h3>
+              <div class="meta">${escapeHTML(question.author)} · ${escapeHTML(question.date)}</div>
             </div>
-
-            <div class="question-main">
-              <h4 class="question-title">
-                ${escapeHTML(question.title)}
-              </h4>
-
-              <div class="meta">
-                ${escapeHTML(question.author)}
-                ·
-                ${escapeHTML(question.date)}
-              </div>
-            </div>
-
           </div>
 
           <p class="question-text">${escapeHTML(question.body)}</p>
-
           <span class="tag">${escapeHTML(question.category)}</span>
+          <p class="meta">💬 ${(question.comments || []).length} réponse(s) · ${question.demo ? "Exemple illustratif" : "Démo locale"}</p>
 
-          <div class="question-footer">
-            <span class="reply-count">
-              💬 ${Number(question.replies) || 0} réponse(s)
-            </span>
+          <div class="discussion">
+            ${(question.comments || []).map((comment, index) => `
+              <div class="comment">
+                <strong>${escapeHTML(comment.author)}</strong>
+                ${comment.text ? `· ${escapeHTML(comment.text)}` : ""}
+                ${comment.image ? `<img class="comment-image" src="${comment.image}" alt="Image partagée dans la réponse">` : ""}
+                <button class="small-action ${comment.liked ? "liked" : ""}"
+                        data-like="${escapeHTML(question.id)}" data-comment="${index}"
+                        type="button" aria-pressed="${!!comment.liked}">
+                  ♥ ${comment.likes || 0}
+                </button>
+              </div>
+            `).join("")}
 
-            <span class="meta">
-              ${question.demo ? "Exemple illustratif" : "Démo locale"}
-            </span>
+            <form class="reply-form" data-reply="${escapeHTML(question.id)}">
+              <input class="reply-input" name="reply" maxlength="500"
+                     placeholder="Écrivez une réponse…" aria-label="Votre réponse">
+              <input name="image" type="file" accept="image/*"
+                     aria-label="Ajouter une image à votre réponse">
+              <button class="small-action" type="submit">Répondre</button>
+            </form>
           </div>
         </article>
       `).join("");
     }
 
-    function openModal() {
-      previouslyFocusedElement = document.activeElement;
+    function resizeImage(file) {
+      return new Promise((resolve, reject) => {
+        if (!file) return resolve("");
+        if (!file.type.startsWith("image/")) {
+          return reject(new Error("Choisissez un fichier image."));
+        }
 
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error("Impossible de lire cette image."));
+        reader.onload = () => {
+          const image = new Image();
+          image.onerror = () => reject(new Error("Cette image ne peut pas être ouverte."));
+          image.onload = () => {
+            const scale = Math.min(1, 1000 / Math.max(image.width, image.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(image.width * scale));
+            canvas.height = Math.max(1, Math.round(image.height * scale));
+            canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", 0.78));
+          };
+          image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    document.getElementById("askButton").addEventListener("click", () => {
       modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("modal-open");
+      document.getElementById("authorInput").focus();
+    });
 
-      window.setTimeout(() => authorInput.focus(), 50);
-    }
-
-    function closeModal() {
+    document.getElementById("closeModal").addEventListener("click", () => {
       modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("modal-open");
-
-      if (
-        previouslyFocusedElement &&
-        typeof previouslyFocusedElement.focus === "function"
-      ) {
-        previouslyFocusedElement.focus();
-      }
-    }
-
-    document.getElementById("askButton")
-      .addEventListener("click", openModal);
-
-    document.getElementById("heroAskButton")
-      .addEventListener("click", openModal);
-
-    document.getElementById("sideAskButton")
-      .addEventListener("click", openModal);
-
-    document.getElementById("closeModal")
-      .addEventListener("click", closeModal);
+    });
 
     modal.addEventListener("click", event => {
-      if (event.target === modal) {
-        closeModal();
-      }
+      if (event.target === modal) modal.classList.remove("open");
     });
 
     document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && modal.classList.contains("open")) {
-        closeModal();
+      if (event.key === "Escape") modal.classList.remove("open");
+    });
+
+    document.getElementById("filters").addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+      selectedCategory = button.dataset.category;
+      document.querySelectorAll(".filter").forEach(item => {
+        item.classList.toggle("active", item === button);
+      });
+      renderQuestions();
+    });
+
+    document.querySelectorAll("[data-side-category]").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedCategory = button.dataset.sideCategory;
+        document.querySelectorAll(".filter").forEach(item => {
+          item.classList.toggle("active", item.dataset.category === selectedCategory);
+        });
+        renderQuestions();
+        document.querySelector(".heading").scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    searchInput.addEventListener("input", renderQuestions);
+
+    questionList.addEventListener("submit", async event => {
+      const form = event.target.closest("[data-reply]");
+      if (!form) return;
+      event.preventDefault();
+
+      const question = questions.find(item => item.id === form.dataset.reply);
+      const data = new FormData(form);
+      const text = data.get("reply").trim();
+      const file = data.get("image");
+
+      if (!question || (!text && !file.size)) {
+        alert("Écrivez une réponse ou choisissez une image.");
+        return;
+      }
+
+      try {
+        const image = await resizeImage(file.size ? file : null);
+        question.comments = question.comments || [];
+        question.comments.push({
+          author: "Enseignant(e)",
+          text,
+          image,
+          likes: 0,
+          liked: false
+        });
+
+        if (saveQuestions()) renderQuestions();
+      } catch (error) {
+        alert(error.message);
       }
     });
 
-    document.getElementById("filters")
-      .addEventListener("click", event => {
-        const button = event.target.closest("[data-category]");
+    questionList.addEventListener("click", event => {
+      const button = event.target.closest("[data-like]");
+      if (!button) return;
 
-        if (!button) return;
+      const question = questions.find(item => item.id === button.dataset.like);
+      const comment = question?.comments?.[Number(button.dataset.comment)];
+      if (!comment) return;
 
-        selectedCategory = button.dataset.category;
+      comment.liked = !comment.liked;
+      comment.likes = Math.max(0, (comment.likes || 0) + (comment.liked ? 1 : -1));
 
-        document.querySelectorAll(".filter").forEach(item => {
-          item.classList.toggle("active", item === button);
-        });
-
-        renderQuestions();
-      });
-
-    document.querySelectorAll("[data-side-category]")
-      .forEach(button => {
-        button.addEventListener("click", () => {
-          selectedCategory = button.dataset.sideCategory;
-
-          document.querySelectorAll(".filter").forEach(item => {
-            item.classList.toggle(
-              "active",
-              item.dataset.category === selectedCategory
-            );
-          });
-
-          renderQuestions();
-
-          document.querySelector(".section-heading").scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-        });
-      });
-
-    searchInput.addEventListener("input", renderQuestions);
+      if (saveQuestions()) renderQuestions();
+    });
 
     questionForm.addEventListener("submit", event => {
       event.preventDefault();
@@ -1478,55 +660,34 @@
         return;
       }
 
-      const previousQuestions = questions;
-      const userQuestions = questions.filter(question => !question.demo);
-
-      const newQuestion = {
+      questions = questions.filter(question => !question.demo);
+      questions.unshift({
         id: `local-${Date.now()}`,
         author,
         title,
         category,
         body,
         date: new Date().toLocaleDateString("fr-FR"),
-        replies: 0,
+        comments: [],
         demo: false
-      };
-
-      questions = [newQuestion, ...userQuestions];
-
-      if (!saveQuestions()) {
-        questions = previousQuestions;
-        return;
-      }
-
-      questionForm.reset();
-      closeModal();
-
-      selectedCategory = "Toutes";
-
-      document.querySelectorAll(".filter").forEach(item => {
-        item.classList.toggle(
-          "active",
-          item.dataset.category === "Toutes"
-        );
       });
 
+      if (!saveQuestions()) return;
+
+      questionForm.reset();
+      modal.classList.remove("open");
+      selectedCategory = "Toutes";
+      document.querySelectorAll(".filter").forEach(item => {
+        item.classList.toggle("active", item.dataset.category === "Toutes");
+      });
       searchInput.value = "";
       renderQuestions();
 
-      alert(
-        "Question ajoutée dans cette démonstration. " +
-        "Elle n’est pas encore visible par les autres utilisateurs."
-      );
+      alert("Question ajoutée. Elle est enregistrée dans ce navigateur.");
     });
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-
+    document.getElementById("year").textContent = new Date().getFullYear();
     renderQuestions();
   </script>
-
-  <script src="external-links.js" defer></script>
-
 </body>
 </html>
