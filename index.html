@@ -103,6 +103,27 @@
       font-weight: 900;
       letter-spacing: -1px;
     }
+    .brand-i {
+  position: relative;
+  display: inline-block;
+}
+
+.brand-i::after {
+  content: "✓";
+  position: absolute;
+  top: -0.08em;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  width: 0.48em;
+  height: 0.48em;
+  place-items: center;
+  border-radius: 0.12em;
+  background: var(--orange);
+  color: white;
+  font-size: 0.48em;
+  line-height: 1;
+}
 
     .logo-tagline {
       margin-top: 5px;
@@ -752,7 +773,7 @@
         </svg>
 
         <span class="logo-copy">
-          <span class="logo-name">eductik</span>
+          <span class="logo-name">educ<span class="brand-i">i</span>k</span>
           <span class="logo-tagline">Toutes vos ressources, un seul lieu</span>
         </span>
       </a>
@@ -966,7 +987,7 @@
 
       <div class="footer-brand">
         <a href="index.html" class="footer-logo">
-          educ<span>tik</span>
+          educ<span class="brand-i">i</span>k
         </a>
 
         <p class="footer-slogan">
