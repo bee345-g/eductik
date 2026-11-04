@@ -1,1035 +1,1762 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <link rel="stylesheet" href="external-links.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-site-verification" content="yLtt3JdcmcbVptQZrqP_KsDDtGfygiNq1tD38f1x38Y">
-  <meta name="google-site-verification" content="ajENK2aNa_ymNayu4mWEJHnasQOKn16gNVbbIZd4Sf8">
-  <meta name="theme-color" content="#102f4a">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#102f4a">
 
-  <title>Eductik — Toutes vos ressources, un seul lieu</title>
-  <meta
-    name="description"
-    content="Eductik : toutes vos ressources pédagogiques pour l’enseignement du français, réunies en un seul lieu."
-  >
+<title>Administration | Eductik</title>
+<link rel="icon" href="logo.png.png" type="image/png">
 
-  <link rel="icon" type="image/png" href="logo.png.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
 
-  <style>
-    :root {
-      --navy: #102f4a;
-      --navy-deep: #0b263d;
-      --orange: #ff7417;
-      --peach: #ffd6a3;
-      --cream: #fffaf5;
-      --text: #243b4b;
-      --muted: #61717d;
-      --white: #ffffff;
-      --pale-blue: #edf4f7;
-      --shadow: 0 12px 32px rgba(16, 47, 74, 0.1);
-      --radius: 22px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--cream);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.7;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin: 0 auto;
-    }
-
-    /* HEADER */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 250, 245, 0.97);
-      box-shadow: 0 3px 18px rgba(16, 47, 74, 0.08);
-      backdrop-filter: blur(10px);
-    }
-
-    .navbar {
-      min-height: 92px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .brand-mark {
-      display: block;
-      width: 54px;
-      height: 54px;
-      flex-shrink: 0;
-    }
-
-    .logo-copy {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .logo-name {
-      color: var(--navy);
-      font-size: 27px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-.brand-i {
-  position: relative;
-  display: inline-block;
+<style>
+:root {
+  --navy:#102f4a;
+  --navy-deep:#0b263d;
+  --orange:#ff7417;
+  --peach:#ffd6a3;
+  --cream:#fffaf5;
+  --white:#ffffff;
+  --text:#243b4b;
+  --muted:#7b8993;
+  --border:#e8e6e1;
+  --blue-pale:#edf4f7;
+  --green:#247a50;
+  --red:#b42318;
+  --shadow:0 5px 24px rgba(16,47,74,.055);
 }
 
-.brand-i::before {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-8deg);
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  background-color: var(--orange);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m5 12 4.5 4.5L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 85% 85%;
-}
-    
-    .logo-tagline {
-      margin-top: 5px;
-      color: var(--navy);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 23px;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 700;
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--orange);
-    }
-
-    .nav-links .nav-button {
-      padding: 11px 18px;
-      border-radius: 30px;
-      background: var(--navy);
-      color: var(--white);
-    }
-
-    .nav-links .nav-button:hover {
-      background: var(--orange);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 86px 0 90px;
-      background:
-        radial-gradient(circle at 90% 15%, rgba(255, 116, 23, 0.13), transparent 25%),
-        radial-gradient(circle at 5% 90%, rgba(16, 47, 74, 0.08), transparent 28%),
-        linear-gradient(135deg, #fffaf5, #fff4e8);
-    }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      align-items: center;
-      gap: 55px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 20px;
-      padding: 7px 15px;
-      border-radius: 30px;
-      background: #ffead8;
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .hero h1 {
-      max-width: 650px;
-      margin-bottom: 22px;
-      font-size: clamp(37px, 5vw, 59px);
-      line-height: 1.13;
-      letter-spacing: -1.8px;
-    }
-
-    .hero h1 span,
-    .about-content h2 span {
-      color: var(--orange);
-    }
-
-    .hero-description {
-      max-width: 550px;
-      margin-bottom: 30px;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.9;
-    }
-
-    .hero-buttons {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 13px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 13px 23px;
-      border-radius: 30px;
-      font-size: 14px;
-      font-weight: 800;
-      transition: 0.25s;
-    }
-
-    .btn-primary {
-      background: var(--navy);
-      color: var(--white);
-      box-shadow: 0 7px 18px rgba(16, 47, 74, 0.18);
-    }
-
-    .btn-primary:hover {
-      background: var(--orange);
-      transform: translateY(-3px);
-    }
-
-    .btn-secondary {
-      border: 1px solid #d9e3e8;
-      background: var(--white);
-      color: var(--navy);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--orange);
-      transform: translateY(-3px);
-    }
-
-    /* HERO CARD */
-
-    .hero-visual {
-      position: relative;
-      display: flex;
-      min-height: 390px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .visual-card {
-      position: relative;
-      z-index: 2;
-      width: min(100%, 390px);
-      padding: 32px;
-      border-radius: 30px;
-      background: var(--white);
-      box-shadow: var(--shadow);
-      transform: rotate(2deg);
-    }
-
-    .visual-card-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding-bottom: 23px;
-      border-bottom: 1px solid #e8edf0;
-    }
-
-    .visual-logo {
-      display: grid;
-      width: 58px;
-      height: 58px;
-      flex-shrink: 0;
-      place-items: center;
-      border-radius: 17px;
-      background: var(--navy);
-    }
-
-    .visual-logo svg {
-      width: 40px;
-      height: 40px;
-    }
-
-    .visual-card-top h3 {
-      color: var(--navy);
-      font-size: 22px;
-    }
-
-    .visual-card-top p {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .visual-card h2 {
-      margin: 24px 0 17px;
-      font-size: 24px;
-      line-height: 1.35;
-    }
-
-    .visual-item {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin-top: 11px;
-      padding: 13px;
-      border-radius: 15px;
-      background: #edf4f7;
-    }
-
-    .visual-item:nth-of-type(2) {
-      background: #fff3e5;
-    }
-
-    .visual-item:nth-of-type(3) {
-      background: #f2f3f4;
-    }
-
-    .visual-item .emoji {
-      display: grid;
-      width: 42px;
-      height: 42px;
-      flex-shrink: 0;
-      place-items: center;
-      border-radius: 13px;
-      background: var(--white);
-      font-size: 21px;
-    }
-
-    .visual-item strong {
-      display: block;
-      font-size: 14px;
-    }
-
-    .visual-item small {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .floating-shape {
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    .shape-one {
-      top: 0;
-      right: 0;
-      width: 115px;
-      height: 115px;
-      background: var(--peach);
-      opacity: 0.8;
-    }
-
-    .shape-two {
-      bottom: 12px;
-      left: 0;
-      width: 80px;
-      height: 80px;
-      background: #dbe8ee;
-      opacity: 0.9;
-    }
-
-    .shape-three {
-      top: 48%;
-      left: 1%;
-      width: 42px;
-      height: 42px;
-      background: var(--orange);
-      opacity: 0.8;
-    }
-
-    /* SECTIONS */
-
-    .section {
-      padding: 85px 0;
-    }
-
-    .about-section {
-      background: var(--white);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 55px;
-    }
-
-    .about-visual {
-      display: flex;
-      min-height: 320px;
-      align-items: center;
-      justify-content: center;
-      padding: 35px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, #e7f0f3, #ffe7cd);
-    }
-
-    .about-illustration {
-      width: 100%;
-      max-width: 360px;
-      padding: 32px;
-      border-radius: 25px;
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-    
-.about-teacher-image {
-  display: block;
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  margin: 0 auto 18px;
-  border-radius: 18px;
-  object-fit: contain;
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-    }
+body {
+  min-height:100vh;
+  background:var(--cream);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
 
-    .about-illustration h3 {
-      margin-bottom: 8px;
-      color: var(--navy);
-      font-size: 25px;
-    }
+button,input,select,textarea {font:inherit}
+button {cursor:pointer}
+.hidden {display:none!important}
 
-    .about-illustration p {
-      color: var(--muted);
-      font-size: 14px;
-    }
+/* LOGIN */
 
-    .about-content h2 {
-      margin-bottom: 20px;
-      font-size: clamp(30px, 4vw, 40px);
-      line-height: 1.3;
-    }
+.login-screen {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:var(--cream);
+}
 
-    .about-content > p {
-      margin-bottom: 18px;
-      color: var(--muted);
-      font-size: 16px;
-    }
+.login-card {
+  width:100%;
+  max-width:430px;
+  padding:38px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+}
 
-    .about-points {
-      display: grid;
-      gap: 15px;
-      margin-top: 25px;
-    }
+.login-logo {
+  width:190px;
+  max-width:100%;
+  height:auto;
+  object-fit:contain;
+  display:block;
+  margin:0 auto 30px;
+}
 
-    .about-point {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
+.login-card h1 {
+  color:var(--navy);
+  font-size:25px;
+  margin-bottom:8px;
+  text-align:center;
+}
 
-    .check-icon {
-      display: flex;
-      width: 28px;
-      height: 28px;
-      flex-shrink: 0;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: var(--navy);
-      color: var(--white);
-      font-weight: 900;
-    }
+.login-card>p {
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:28px;
+  font-size:14px;
+}
 
-    .about-point strong {
-      display: block;
-      margin-bottom: 3px;
-      font-size: 15px;
-    }
+.field {margin-bottom:19px}
 
-    .about-point p {
-      color: var(--muted);
-      font-size: 14px;
-    }
+.field label {
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:8px;
+}
 
-    /* CALL TO ACTION */
+.field input,.field select,.field textarea {
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:white;
+  outline:none;
+  color:var(--text);
+}
 
-    .cta-section {
-      padding: 70px 0;
-      background: linear-gradient(120deg, #dce9ee, #ffe8ce, #ffd19e);
-    }
+.field input:focus,.field select:focus,.field textarea:focus {
+  border-color:var(--orange);
+  box-shadow:0 0 0 3px rgba(255,116,23,.1);
+}
 
-    .cta-box {
-      text-align: center;
-    }
+.btn {
+  border:0;
+  border-radius:10px;
+  padding:12px 17px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:.2s;
+}
 
-    .cta-box h2 {
-      margin-bottom: 14px;
-      font-size: clamp(29px, 4vw, 40px);
-      line-height: 1.3;
-    }
+.btn:disabled {opacity:.55;cursor:not-allowed}
 
-    .cta-box p {
-      max-width: 620px;
-      margin: 0 auto 25px;
-      color: #405564;
-    }
+.btn-primary {
+  background:var(--orange);
+  color:white;
+}
 
-    .cta-box .btn {
-      background: var(--white);
-      color: var(--navy);
-      box-shadow: 0 5px 15px rgba(16, 47, 74, 0.08);
-    }
+.btn-primary:hover {background:#e9650e}
 
-    .cta-box .btn:hover {
-      background: var(--navy);
-      color: var(--white);
-      transform: translateY(-3px);
-    }
+.btn-dark {
+  background:var(--navy);
+  color:white;
+}
 
-    /* FOOTER */
+.btn-dark:hover {background:var(--navy-deep)}
 
-    footer {
-      padding: 45px 0 20px;
-      background: var(--navy);
-      color: var(--white);
-    }
+.btn-light {
+  background:white;
+  color:var(--navy);
+  border:1px solid var(--border);
+}
 
-    .footer-brand {
-      padding-bottom: 30px;
-      text-align: center;
-    }
+.btn-light:hover {border-color:var(--orange)}
 
-    .footer-logo {
-      font-size: 29px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
+.btn-block {width:100%}
 
-    .footer-logo span {
-      color: var(--orange);
-    }
+.message {
+  margin-top:15px;
+  padding:12px;
+  border-radius:9px;
+  font-size:13px;
+  display:none;
+  overflow-wrap:anywhere;
+}
 
-    .footer-slogan {
-      margin-top: 4px;
-      color: var(--peach);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+.message.success {display:block;background:#eaf7ef;color:var(--green)}
+.message.error {display:block;background:#fff0ee;color:var(--red)}
+.message.info {display:block;background:var(--blue-pale);color:var(--navy)}
 
-    .footer-description {
-      max-width: 360px;
-      margin: 10px auto 0;
-      color: #d9e4eb;
-      font-size: 13px;
-    }
+/* APP LAYOUT */
 
-    /* CONTACT */
+.app {min-height:100vh}
 
-    .contact-card {
-      max-width: 540px;
-      margin: 10px auto 32px;
-      padding: 32px 22px;
-      border: 2px solid #e5edf1;
-      border-radius: 26px;
-      background: var(--white);
-      box-shadow: 0 10px 30px rgba(16, 47, 74, 0.12);
-      text-align: center;
-      transition: 0.25s;
-    }
+.sidebar {
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  width:255px;
+  background:var(--navy);
+  color:white;
+  padding:25px 17px;
+  display:flex;
+  flex-direction:column;
+  z-index:20;
+}
 
-    .contact-card:hover {
-      box-shadow: 0 14px 35px rgba(16, 47, 74, 0.18);
-    }
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:5px 8px 28px;
+  border-bottom:1px solid rgba(255,255,255,.13);
+}
 
-    .contact-card h2 {
-      margin-bottom: 8px;
-      color: var(--navy);
-      font-size: clamp(21px, 4vw, 27px);
-      line-height: 1.4;
-    }
+.brand img {
+  width:47px;
+  height:47px;
+  object-fit:contain;
+  border-radius:10px;
+  background:var(--cream);
+}
 
-    .contact-intro {
-      margin-bottom: 20px;
-      color: var(--muted);
-      font-size: 15px;
-    }
+.brand h2 {
+  font-size:23px;
+  letter-spacing:-1px;
+}
 
-    .contact-button {
-      display: inline-flex;
-      max-width: 100%;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 22px;
-      overflow-wrap: anywhere;
-      border: 1px solid #d9e5eb;
-      border-radius: 30px;
-      background: #edf4f7;
-      color: var(--navy);
-      font-size: 16px;
-      font-weight: 800;
-      transition: 0.25s;
-    }
+.brand h2 span {color:var(--orange)}
 
-    .contact-button:hover {
-      background: #ffe9d4;
-      border-color: var(--orange);
-      transform: translateY(-2px);
-    }
+.brand small {
+  display:block;
+  color:#c3d0d9;
+  font-size:10px;
+  letter-spacing:1px;
+}
 
-    .contact-note {
-      margin-top: 15px;
-      color: var(--muted);
-      font-size: 12px;
-    }
+.side-label {
+  margin:27px 10px 12px;
+  color:#aebfca;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
 
-    .footer-bottom {
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.16);
-      color: #d9e4eb;
-      font-size: 12px;
-      text-align: center;
-    }
+.nav-list {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
 
-    /* RESPONSIVE */
+.nav-btn {
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 13px;
+  color:#d9e2e8;
+  background:transparent;
+  border:0;
+  border-radius:9px;
+  text-align:left;
+  font-size:13px;
+  transition:.2s;
+}
 
-    @media (max-width: 850px) {
-      .navbar {
-        padding: 15px 0;
-        flex-direction: column;
-        gap: 17px;
-      }
+.nav-btn i {width:18px;height:18px}
 
-      .nav-links {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px 18px;
-      }
+.nav-btn:hover,.nav-btn.active {
+  color:white;
+  background:rgba(255,255,255,.12);
+}
 
-      .hero {
-        padding: 55px 0 65px;
-      }
+.nav-btn.active {
+  border-left:3px solid var(--orange);
+}
 
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
+.side-bottom {
+  margin-top:auto;
+  border-top:1px solid rgba(255,255,255,.13);
+  padding-top:17px;
+}
 
-      .hero-text {
-        text-align: center;
-      }
+.admin-profile {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  margin-bottom:12px;
+}
 
-      .hero-description {
-        margin-right: auto;
-        margin-left: auto;
-      }
+.profile-icon {
+  width:36px;
+  height:36px;
+  background:var(--peach);
+  color:var(--navy);
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+}
 
-      .hero-buttons {
-        justify-content: center;
-      }
+.admin-profile strong {font-size:12px}
+.admin-profile small {display:block;color:#c3d0d9;font-size:10px}
 
-      .hero-visual {
-        min-height: 350px;
-      }
+.logout {
+  width:100%;
+  background:rgba(255,255,255,.08);
+  color:white;
+  border:0;
+  padding:11px;
+  border-radius:9px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+}
 
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 35px;
-      }
+.logout:hover {background:rgba(255,255,255,.17)}
 
-      .about-content {
-        order: -1;
-      }
-    }
+/* MAIN */
 
-    @media (max-width: 480px) {
-      .container {
-        width: 92%;
-      }
+.main {
+  margin-left:255px;
+  min-height:100vh;
+}
 
-      .brand-mark {
-        width: 46px;
-        height: 46px;
-      }
+.topbar {
+  height:75px;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 35px;
+}
 
-      .logo-name {
-        font-size: 23px;
-      }
+.topbar h2 {
+  color:var(--navy);
+  font-size:17px;
+}
 
-      .logo-tagline {
-        font-size: 7px;
-        letter-spacing: 1px;
-      }
+.topbar-right {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:12px;
+  color:var(--muted);
+}
 
-      .nav-links {
-        gap: 10px 13px;
-      }
+.status-dot {
+  width:8px;
+  height:8px;
+  display:inline-block;
+  background:#37a66d;
+  border-radius:50%;
+  margin-right:5px;
+}
 
-      .nav-links a {
-        font-size: 12px;
-      }
+.mobile-menu {
+  display:none;
+  background:transparent;
+  border:0;
+  color:var(--navy);
+}
 
-      .nav-links .nav-button {
-        padding: 9px 13px;
-      }
+.content {
+  max-width:1500px;
+  margin:auto;
+  padding:34px;
+}
 
-      .hero h1 {
-        font-size: 37px;
-        letter-spacing: -1px;
-      }
+.page-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:15px;
+  margin-bottom:27px;
+}
 
-      .hero-description {
-        font-size: 15px;
-      }
+.eyebrow {
+  display:inline-block;
+  padding:5px 11px;
+  background:var(--peach);
+  color:var(--navy);
+  border-radius:30px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.5px;
+  margin-bottom:10px;
+}
 
-      .hero-visual {
-        min-height: 330px;
-      }
+.page-heading h1 {
+  font-size:27px;
+  color:var(--navy);
+  margin-bottom:7px;
+}
 
-      .visual-card {
-        padding: 23px;
-      }
+.page-heading p {
+  color:var(--muted);
+  font-size:13px;
+}
 
-      .section {
-        padding: 60px 0;
-      }
+.date-label {
+  background:white;
+  border:1px solid var(--border);
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:12px;
+  color:var(--navy);
+}
 
-      .about-visual {
-        min-height: 260px;
-        padding: 20px;
-      }
+/* STAT CARDS */
 
-      .contact-card {
-        padding: 27px 14px;
-      }
+.stats-grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:17px;
+  margin-bottom:25px;
+}
 
-      .contact-button {
-        padding: 12px 14px;
-        font-size: 14px;
-      }
-    }
-  </style>
+.stat-card {
+  padding:21px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+
+.stat-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:17px;
+}
+
+.stat-icon {
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  background:var(--blue-pale);
+  color:var(--navy);
+  border-radius:11px;
+}
+
+.stat-card:nth-child(2) .stat-icon {background:#fff0e5;color:var(--orange)}
+.stat-card:nth-child(3) .stat-icon {background:#fff3db;color:#bd8125}
+.stat-card:nth-child(4) .stat-icon {background:#eaf7ef;color:var(--green)}
+
+.stat-card p {
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.stat-card h3 {
+  color:var(--navy);
+  font-size:29px;
+  font-weight:800;
+}
+
+/* PANELS */
+
+.panel {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:23px;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+
+.panel-heading {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.panel-heading h3 {
+  color:var(--navy);
+  font-size:16px;
+}
+
+.panel-heading p {
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+.dashboard-grid {
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:20px;
+}
+
+.level-row {margin-bottom:19px}
+
+.level-info {
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.level-info strong {color:var(--navy)}
+.level-info span {color:var(--muted)}
+
+.progress {
+  height:9px;
+  background:#edf1f3;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar {
+  height:100%;
+  background:var(--orange);
+  border-radius:20px;
+  transition:width .4s;
+}
+
+.progress-bar.second {background:var(--navy)}
+.progress-bar.third {background:#e6b978}
+
+.quick-actions {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+
+.quick-action {
+  min-height:105px;
+  padding:17px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--cream);
+  color:var(--navy);
+  text-align:left;
+  transition:.2s;
+}
+
+.quick-action:hover {
+  border-color:var(--orange);
+  transform:translateY(-2px);
+}
+
+.quick-action i {
+  color:var(--orange);
+  display:block;
+  margin-bottom:12px;
+}
+
+.quick-action strong {font-size:12px;display:block}
+.quick-action small {font-size:10px;color:var(--muted)}
+
+/* TABLE */
+
+.table-tools {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.search-box {
+  flex:1;
+  min-width:190px;
+  position:relative;
+}
+
+.search-box input {
+  width:100%;
+  padding:11px 13px 11px 38px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  outline:none;
+}
+
+.search-box i {
+  position:absolute;
+  left:12px;
+  top:12px;
+  color:var(--muted);
+  width:16px;
+}
+
+.table-tools select {
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:white;
+  color:var(--text);
+  outline:none;
+}
+
+.table-wrap {overflow-x:auto}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:680px;
+}
+
+th {
+  text-align:left;
+  padding:13px 12px;
+  color:var(--muted);
+  background:#faf9f6;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  white-space:nowrap;
+}
+
+td {
+  padding:14px 12px;
+  border-bottom:1px solid #f0efec;
+  font-size:12px;
+  vertical-align:middle;
+}
+
+td strong {color:var(--navy)}
+td small {display:block;color:var(--muted);margin-top:4px}
+
+.tag {
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:var(--blue-pale);
+  color:var(--navy);
+  font-size:10px;
+  white-space:nowrap;
+}
+
+.actions {display:flex;gap:6px}
+
+.icon-btn {
+  width:31px;
+  height:31px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:white;
+  color:var(--navy);
+  display:grid;
+  place-items:center;
+}
+
+.icon-btn:hover {border-color:var(--orange);color:var(--orange)}
+.icon-btn.delete:hover {border-color:var(--red);color:var(--red)}
+
+.empty {
+  text-align:center;
+  color:var(--muted);
+  padding:35px!important;
+}
+
+/* FORMS */
+
+.form-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 17px;
+}
+
+.form-grid .full {grid-column:1/-1}
+
+.file-input {
+  padding:13px;
+  border:1px dashed #cbd7de;
+  border-radius:10px;
+  background:var(--cream);
+  width:100%;
+}
+
+.form-note {
+  font-size:11px;
+  color:var(--muted);
+  margin-top:7px;
+}
+
+.form-buttons {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:15px;
+}
+
+.section-page {display:none}
+.section-page.active {display:block}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px) {
+  .stats-grid {grid-template-columns:repeat(2,1fr)}
+  .dashboard-grid {grid-template-columns:1fr}
+}
+
+@media(max-width:700px) {
+  .sidebar {
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open {transform:translateX(0)}
+
+  .main {margin-left:0}
+
+  .topbar {padding:0 17px;height:65px}
+
+  .mobile-menu {display:block}
+
+  .topbar h2 {font-size:14px}
+
+  .topbar-right {font-size:10px}
+
+  .content {padding:23px 15px}
+
+  .page-heading h1 {font-size:22px}
+
+  .stats-grid {gap:10px}
+
+  .stat-card {padding:15px}
+
+  .stat-card h3 {font-size:24px}
+
+  .stat-card p {font-size:10px}
+
+  .stat-icon {width:35px;height:35px}
+
+  .panel {padding:17px}
+
+  .form-grid {grid-template-columns:1fr}
+
+  .form-grid .full {grid-column:auto}
+
+  .login-card {padding:27px 21px}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container navbar">
+<!-- LOGIN -->
+<section id="login-screen" class="login-screen">
+  <div class="login-card">
+    <img src="logo.png.png" class="login-logo" alt="Eductik">
 
-      <a href="index.html" class="logo" aria-label="Eductik, accueil">
-        <!-- Logo Eductik en SVG -->
-        <svg class="brand-mark" viewBox="0 0 100 100" role="img" aria-label="Logo Eductik">
-          <rect x="4" y="4" width="42" height="42" rx="10" fill="#102f4a"/>
-          <circle cx="72" cy="25" r="21" fill="#ffd6a3"/>
-          <rect x="4" y="54" width="42" height="42" rx="10" fill="#ffd6a3"/>
-          <g transform="rotate(-9 72 75)">
-            <rect x="51" y="54" width="42" height="42" rx="10" fill="#ff7417"/>
-            <path d="M61 75l8 8 16-19" fill="none" stroke="#fffaf5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>
+    <h1>Administration</h1>
+    <p>Connectez-vous à votre espace de gestion privé.</p>
 
-        <span class="logo-copy">
-          <span class="logo-name">educt<span class="brand-i">ı</span>k</span>
-          <span class="logo-tagline">Toutes vos ressources, un seul lieu</span>
-        </span>
-      </a>
+    <form id="login-form">
+      <div class="field">
+        <label for="email">Adresse e-mail</label>
+        <input id="email" type="email" required
+          placeholder="Votre adresse e-mail"
+          autocomplete="username">
+      </div>
 
-      <nav class="nav-links" aria-label="Navigation principale">
-        <a href="index.html">Accueil</a>
-        <a href="niveaux.html">Niveaux</a>
-        <a href="ressources.html">Ressources</a>
-        <a href="communaute.html">Communauté</a>
-        <a href="index.html#apropos" class="nav-button">À propos</a>
-      </nav>
+      <div class="field">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" required
+          placeholder="Votre mot de passe"
+          autocomplete="current-password">
+      </div>
 
+      <button class="btn btn-primary btn-block" id="login-btn">
+        Se connecter
+      </button>
+      <div id="login-message" class="message" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ADMIN APP -->
+<div id="app" class="app hidden">
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <img src="logo.png.png" alt="Eductik">
+      <div>
+        <h2>eductik<span>.</span></h2>
+        <small>ADMINISTRATION</small>
+      </div>
     </div>
-  </header>
 
-  <main>
+    <div class="side-label">GESTION</div>
 
-    <!-- ACCUEIL -->
-    <section class="hero" id="accueil">
-      <div class="container hero-content">
+    <nav class="nav-list">
+      <button class="nav-btn active" data-page="dashboard">
+        <i data-lucide="layout-dashboard"></i>
+        Dashboard
+      </button>
 
-        <div class="hero-text">
-          <span class="eyebrow">
-            Un espace dédié à l’enseignement du français
-          </span>
+      <button class="nav-btn" data-page="resources">
+        <i data-lucide="folder-open"></i>
+        Gestion des ressources
+      </button>
 
-          <h1>
-            Toutes vos ressources,
-            <span>un seul lieu.</span>
-          </h1>
+      <button class="nav-btn" data-page="upload">
+        <i data-lucide="upload-cloud"></i>
+        Ajouter une ressource
+      </button>
+    </nav>
 
-          <p class="hero-description">
-            Eductik vous accompagne dans votre parcours pédagogique
-            en réunissant des ressources didactiques et des pratiques
-            d’enseignement du français langue étrangère.
-          </p>
+    <div class="side-label">ESPACE PRIVÉ</div>
 
-          <div class="hero-buttons">
-            <a href="ressources.html" class="btn btn-primary">
-              Explorer les ressources →
-            </a>
-
-            <a href="index.html#apropos" class="btn btn-secondary">
-              Découvrir Eductik
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-visual">
-          <div class="floating-shape shape-one"></div>
-          <div class="floating-shape shape-two"></div>
-          <div class="floating-shape shape-three"></div>
-
-          <div class="visual-card">
-            <div class="visual-card-top">
-
-              <div class="visual-logo" aria-hidden="true">
-                <svg viewBox="0 0 100 100">
-                  <rect x="5" y="5" width="40" height="40" rx="10" fill="#ff7417"/>
-                  <circle cx="72" cy="25" r="20" fill="#ffd6a3"/>
-                  <rect x="5" y="55" width="40" height="40" rx="10" fill="#ffd6a3"/>
-                  <g transform="rotate(-9 72 75)">
-                    <rect x="52" y="55" width="42" height="42" rx="10" fill="#ff7417"/>
-                    <path d="M62 76l8 8 15-19" fill="none" stroke="#fffaf5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </g>
-                </svg>
-              </div>
-
-              <div>
-                <h3>educt<span class="brand-i">ı</span>k</h3>
-                <p>Toutes vos ressources, un seul lieu</p>
-              </div>
-            </div>
-
-            <h2>Enseigner le français, autrement.</h2>
-
-            <div class="visual-item">
-              <div class="emoji">📚</div>
-              <div>
-                <strong>Ressources pédagogiques</strong>
-                <small>Des supports pour vos cours</small>
-              </div>
-            </div>
-
-            <div class="visual-item">
-              <div class="emoji">🎯</div>
-              <div>
-                <strong>Compétences linguistiques</strong>
-                <small>Des apprentissages organisés</small>
-              </div>
-            </div>
-
-            <div class="visual-item">
-              <div class="emoji">✨</div>
-              <div>
-                <strong>Accompagnement pédagogique</strong>
-                <small>Des idées pour enrichir vos pratiques</small>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- À PROPOS -->
-    <section class="section about-section" id="apropos">
-      <div class="container about-grid">
-
-        
-  <div class="about-visual">
-  <div class="about-illustration">
-    <img
-      src="eductik-prof.jpeg"
-      alt="Eductik — enseignante et ressources pédagogiques"
-      class="about-teacher-image"
-    />
-    
-            </p>
-          </div>
-        </div>
-
-        <div class="about-content">
-          <span class="eyebrow">À propos de nous</span>
-
-          <h2>
-            Eductik, <span>votre partenaire</span> en français.
-          </h2>
-
-          <p>
-            Eductik est un espace éducatif algérien consacré à l’enseignement
-            du français langue étrangère. Il a pour vocation de
-            faciliter l’accès aux ressources didactiques et de
-            proposer des pistes susceptibles d’enrichir les pratiques
-            pédagogiques des enseignants.
-          </p>
-
-          <p>
-            À travers une organisation claire des contenus selon
-            les niveaux scolaires, les compétences et les types
-            de ressources, Eductik souhaite rendre la recherche
-            pédagogique plus simple et plus accessible.
-          </p>
-
-          <div class="about-points">
-
-            <div class="about-point">
-              <div class="check-icon">✓</div>
-              <div>
-                <strong>Des ressources organisées</strong>
-                <p>
-                  Des contenus classés pour faciliter la recherche
-                  et la préparation des cours.
-                </p>
-              </div>
-            </div>
-
-            <div class="about-point">
-              <div class="check-icon">✓</div>
-              <div>
-                <strong>Une approche centrée sur l’enseignant</strong>
-                <p>
-                  Un espace conçu pour répondre aux besoins
-                  pédagogiques du terrain.
-                </p>
-              </div>
-            </div>
-
-            <div class="about-point">
-              <div class="check-icon">✓</div>
-              <div>
-                <strong>Une ouverture sur le numérique</strong>
-                <p>
-                  Une place accordée aux supports textuels,
-                  audio et vidéo dans l’enseignement du FLE.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CALL TO ACTION -->
-    <section class="cta-section">
-      <div class="container cta-box">
-
-        <h2>Prête à découvrir votre espace pédagogique ?</h2>
-
-        <p>
-          Explorez les niveaux, les compétences et les ressources
-          disponibles sur Eductik pour enrichir votre enseignement
-          du français.
-        </p>
-
-        <a href="niveaux.html" class="btn">
-          Découvrir les niveaux →
-        </a>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-
-      <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
-          educt<span class="brand-i">i</span>k
-        </a>
-
-        <p class="footer-slogan">
-          Toutes vos ressources, un seul lieu
-        </p>
-
-        <p class="footer-description">
-          Un espace dédié aux ressources didactiques et à
-          l’enseignement du français langue étrangère.
-        </p>
-      </div>
-
-      <!-- CONTACT -->
-      <div class="contact-card">
-        <h2>Une question ou une suggestion ?</h2>
-
-        <p class="contact-intro">
-          Contactez-nous ⬇️
-        </p>
-
-        <a href="mailto:eductik213@gmail.com" class="contact-button">
-          ✉️ eductik213@gmail.com
-        </a>
-
-        <p class="contact-note">
-          Nous serons ravis de recevoir vos messages et suggestions.
-        </p>
-      </div>
-
-      <div class="footer-bottom">
-        © <span id="year"></span> Eductik — Tous droits réservés.
-      </div>
-
+    <div class="nav-list">
+      <button class="nav-btn" data-page="settings">
+        <i data-lucide="settings"></i>
+        Informations système
+      </button>
     </div>
-  </footer>
 
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+    <div class="side-bottom">
+      <div class="admin-profile">
+        <div class="profile-icon">
+          <i data-lucide="user-round"></i>
+        </div>
+        <div>
+          <strong>Administratrice</strong>
+          <small id="admin-email">Compte connecté</small>
+        </div>
+      </div>
 
-  
-  <script src="external-links.js" defer></script>
+      <button class="logout" id="logout-btn">
+        <i data-lucide="log-out"></i>
+        Se déconnecter
+      </button>
+    </div>
 
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:13px">
+        <button class="mobile-menu" id="mobile-menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <h2 id="topbar-title">Vue d'ensemble</h2>
+      </div>
+
+      <div class="topbar-right">
+        <span><i class="status-dot"></i> Eductik en ligne</span>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- DASHBOARD -->
+      <section class="section-page active" id="page-dashboard">
+
+        <div class="page-heading">
+          <div>
+            <span class="eyebrow">ESPACE ADMINISTRATEUR</span>
+            <h1>Bienvenue sur Eductik</h1>
+            <p>Gérez votre plateforme et suivez son contenu depuis cet espace.</p>
+          </div>
+          <div class="date-label" id="current-date"></div>
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon"><i data-lucide="files"></i></div>
+            </div>
+            <p>Total des ressources</p>
+            <h3 id="stat-total">—</h3>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon"><i data-lucide="file-check"></i></div>
+            </div>
+            <p>Ressources publiées</p>
+            <h3 id="stat-published">—</h3>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon"><i data-lucide="graduation-cap"></i></div>
+            </div>
+            <p>Niveaux disponibles</p>
+            <h3 id="stat-levels">—</h3>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon"><i data-lucide="folder"></i></div>
+            </div>
+            <p>Types de ressources</p>
+            <h3 id="stat-types">—</h3>
+          </div>
+
+        </div>
+
+        <div class="dashboard-grid">
+
+          <div class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Ressources par niveau</h3>
+                <p>Répartition du contenu pédagogique</p>
+              </div>
+              <i data-lucide="chart-no-axes-column" style="color:var(--orange)"></i>
+            </div>
+
+            <div id="level-stats">
+              <p class="empty">Chargement des statistiques...</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Actions rapides</h3>
+                <p>Accédez directement aux outils de gestion</p>
+              </div>
+            </div>
+
+            <div class="quick-actions">
+              <button class="quick-action" data-go="upload">
+                <i data-lucide="plus-circle"></i>
+                <strong>Ajouter une ressource</strong>
+                <small>Publier un nouveau fichier</small>
+              </button>
+
+              <button class="quick-action" data-go="resources">
+                <i data-lucide="folder-search"></i>
+                <strong>Gérer les ressources</strong>
+                <small>Consulter et modifier</small>
+              </button>
+
+              <button class="quick-action" data-go="resources">
+                <i data-lucide="search"></i>
+                <strong>Rechercher</strong>
+                <small>Retrouver un document</small>
+              </button>
+
+              <button class="quick-action" data-go="settings">
+                <i data-lucide="settings"></i>
+                <strong>Informations système</strong>
+                <small>Configuration actuelle</small>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Dernières ressources</h3>
+              <p>Les ressources enregistrées sur Eductik</p>
+            </div>
+            <button class="btn btn-light" data-go="resources">
+              Tout afficher
+            </button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Niveau</th>
+                  <th>Compétence</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody id="recent-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RESOURCES -->
+      <section class="section-page" id="page-resources">
+
+        <div class="page-heading">
+          <div>
+            <span class="eyebrow">CONTENU DE LA PLATEFORME</span>
+            <h1>Gestion des ressources</h1>
+            <p>Consultez, recherchez, modifiez ou supprimez vos ressources.</p>
+          </div>
+
+          <button class="btn btn-primary" data-go="upload">
+            <i data-lucide="plus"></i>
+            Ajouter
+          </button>
+        </div>
+
+        <div class="panel">
+
+          <div class="table-tools">
+            <div class="search-box">
+              <i data-lucide="search"></i>
+              <input type="search" id="search-resource"
+                placeholder="Rechercher une ressource...">
+            </div>
+
+            <select id="filter-level">
+              <option value="">Tous les niveaux</option>
+              <option value="1AS">1AS</option>
+              <option value="2AS">2AS</option>
+              <option value="3AS">3AS</option>
+            </select>
+
+            <select id="filter-type">
+              <option value="">Tous les types</option>
+              <option value="Fiche pédagogique">Fiche pédagogique</option>
+              <option value="Support">Support</option>
+              <option value="Exercice">Exercice</option>
+              <option value="Évaluation">Évaluation</option>
+              <option value="Audio">Audio</option>
+              <option value="Vidéo">Vidéo</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ressource</th>
+                  <th>Niveau</th>
+                  <th>Compétence</th>
+                  <th>Type</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="resources-table"></tbody>
+            </table>
+          </div>
+
+          <p id="resource-count" class="form-note"></p>
+        </div>
+
+      </section>
+
+      <!-- UPLOAD -->
+      <section class="section-page" id="page-upload">
+
+        <div class="page-heading">
+          <div>
+            <span class="eyebrow">PUBLICATION</span>
+            <h1>Ajouter une ressource</h1>
+            <p>Ajoutez un nouveau document à votre bibliothèque pédagogique.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+
+          <div class="panel-heading">
+            <div>
+              <h3>Informations de la ressource</h3>
+              <p>Les champs marqués d'un * sont obligatoires.</p>
+            </div>
+            <i data-lucide="file-plus-2" style="color:var(--orange)"></i>
+          </div>
+
+          <form id="resource-form">
+
+            <div class="form-grid">
+
+              <div class="field full">
+                <label for="titre">Titre de la ressource *</label>
+                <input id="titre" type="text" maxlength="200"
+                  placeholder="Ex. : Compréhension de l'écrit — 1AS"
+                  required>
+              </div>
+
+              <div class="field full">
+                <label for="description">Description</label>
+                <textarea id="description" rows="4" maxlength="2000"
+                  placeholder="Présentez le contenu de la ressource..."></textarea>
+              </div>
+
+              <div class="field">
+                <label for="niveau">Niveau *</label>
+                <select id="niveau" required>
+                  <option value="">Choisir un niveau</option>
+                  <option value="1AS">1AS</option>
+                  <option value="2AS">2AS</option>
+                  <option value="3AS">3AS</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="competence">Compétence *</label>
+                <select id="competence" required>
+                  <option value="">Choisir une compétence</option>
+                  <option value="Compréhension de l'écrit">Compréhension de l'écrit</option>
+                  <option value="Compréhension de l'oral">Compréhension de l'oral</option>
+                  <option value="Production écrite">Production écrite</option>
+                  <option value="Production orale">Production orale</option>
+                  <option value="Points de langue">Points de langue</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="type_ressource">Type de ressource *</label>
+                <select id="type_ressource" required>
+                  <option value="">Choisir un type</option>
+                  <option value="Fiche pédagogique">Fiche pédagogique</option>
+                  <option value="Support">Support de cours</option>
+                  <option value="Exercice">Exercice</option>
+                  <option value="Évaluation">Évaluation</option>
+                  <option value="Audio">Audio</option>
+                  <option value="Vidéo">Vidéo</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="fichier">Fichier à publier *</label>
+                <input class="file-input" id="fichier" type="file"
+                  accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.webp,.mp3,.wav,.ogg,.mp4,.webm"
+                  required>
+                <p class="form-note">
+                  PDF, Word, PowerPoint, images, audio et vidéo.
+                  Taille maximale : 50 Mo.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="form-buttons">
+              <button class="btn btn-primary" id="publish-btn" type="submit">
+                <i data-lucide="upload-cloud"></i>
+                Publier la ressource
+              </button>
+
+              <button class="btn btn-light" type="reset">
+                Réinitialiser
+              </button>
+            </div>
+
+            <div id="upload-message" class="message" role="status"></div>
+
+          </form>
+        </div>
+
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="section-page" id="page-settings">
+
+        <div class="page-heading">
+          <div>
+            <span class="eyebrow">CONFIGURATION</span>
+            <h1>Informations système</h1>
+            <p>Informations relatives à votre espace d'administration.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>Identité de la plateforme</h3>
+          </div>
+          <p style="font-size:13px;margin-bottom:12px">
+            <strong>Nom :</strong> Eductik
+          </p>
+          <p style="font-size:13px;margin-bottom:12px">
+            <strong>Rôle :</strong> Administration privée
+          </p>
+          <p style="font-size:13px;margin-bottom:12px">
+            <strong>Stockage :</strong> Supabase Storage
+          </p>
+          <p style="font-size:13px">
+            <strong>Bucket :</strong> ressources
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>Compte administrateur</h3>
+          </div>
+          <p id="settings-email" style="font-size:13px;color:var(--muted)"></p>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+/* ===================================
+   CONFIGURATION SUPABASE
+=================================== */
+
+const SUPABASE_URL = "https://gxztteylmztlxikhrhwo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_...";
+const ADMIN_EMAIL = "kalaiabeer03@gmail.com";
+const BUCKET_NAME = "ressources";
+const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
+/*
+  Remplace cette adresse par ton adresse
+  e-mail administrateur Supabase.
+*/
+const ADMIN_EMAIL = "TON-EMAIL-ADMIN@EXEMPLE.COM";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+/* ===================================
+   ELEMENTS
+=================================== */
+
+const loginScreen = document.getElementById("login-screen");
+const app = document.getElementById("app");
+const loginForm = document.getElementById("login-form");
+const loginBtn = document.getElementById("login-btn");
+const loginMessage = document.getElementById("login-message");
+
+const resourceForm = document.getElementById("resource-form");
+const publishBtn = document.getElementById("publish-btn");
+const uploadMessage = document.getElementById("upload-message");
+
+let resources = [];
+
+/* ===================================
+   HELPERS
+=================================== */
+
+function message(element,text,type) {
+  element.textContent = text;
+  element.className = "message " + type;
+}
+
+function clearMessage(element) {
+  element.textContent = "";
+  element.className = "message";
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[char]);
+}
+
+function refreshIcons() {
+  if (window.lucide) lucide.createIcons();
+}
+
+function showLogin() {
+  loginScreen.classList.remove("hidden");
+  app.classList.add("hidden");
+}
+
+function showApp(user) {
+  loginScreen.classList.add("hidden");
+  app.classList.remove("hidden");
+
+  document.getElementById("admin-email").textContent = user.email || "";
+  document.getElementById("settings-email").textContent = user.email || "";
+
+  refreshIcons();
+  loadResources();
+}
+
+/* ===================================
+   AUTHENTICATION
+=================================== */
+
+function isAuthorized(user) {
+  return user &&
+    user.email &&
+    user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+}
+
+async function checkSession() {
+  const {data,error} = await supabaseClient.auth.getSession();
+
+  if (error || !data.session) {
+    showLogin();
+    return;
+  }
+
+  if (!isAuthorized(data.session.user)) {
+    await supabaseClient.auth.signOut();
+    showLogin();
+    message(
+      loginMessage,
+      "Ce compte n'est pas autorisé à accéder à l'administration.",
+      "error"
+    );
+    return;
+  }
+
+  showApp(data.session.user);
+}
+
+loginForm.addEventListener("submit",async event => {
+  event.preventDefault();
+  clearMessage(loginMessage);
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Connexion...";
+
+  try {
+    const {data,error} = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+
+    if (!isAuthorized(data.user)) {
+      await supabaseClient.auth.signOut();
+      throw new Error("Cette adresse e-mail n'est pas autorisée.");
+    }
+
+    loginForm.reset();
+    showApp(data.user);
+
+  } catch(error) {
+    message(loginMessage,error.message || "Connexion impossible.","error");
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Se connecter";
+  }
+});
+
+document.getElementById("logout-btn").addEventListener("click",async () => {
+  const {error} = await supabaseClient.auth.signOut();
+
+  if (error) {
+    alert("La déconnexion a échoué.");
+    return;
+  }
+
+  showLogin();
+});
+
+supabaseClient.auth.onAuthStateChange((_event,session) => {
+  if (!session) {
+    showLogin();
+    return;
+  }
+
+  if (!isAuthorized(session.user)) {
+    showLogin();
+  }
+});
+
+/* ===================================
+   NAVIGATION
+=================================== */
+
+const titles = {
+  dashboard:"Vue d'ensemble",
+  resources:"Gestion des ressources",
+  upload:"Ajouter une ressource",
+  settings:"Informations système"
+};
+
+function goTo(page) {
+  document.querySelectorAll(".section-page").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  document.getElementById("page-" + page).classList.add("active");
+
+  document.querySelectorAll(".nav-btn").forEach(button => {
+    button.classList.toggle("active",button.dataset.page === page);
+  });
+
+  document.getElementById("topbar-title").textContent = titles[page] || "Administration";
+
+  document.getElementById("sidebar").classList.remove("open");
+
+  if (page === "resources") renderResources();
+
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll("[data-page]").forEach(button => {
+  button.addEventListener("click",() => goTo(button.dataset.page));
+});
+
+document.querySelectorAll("[data-go]").forEach(button => {
+  button.addEventListener("click",() => goTo(button.dataset.go));
+});
+
+document.getElementById("mobile-menu").addEventListener("click",() => {
+  document.getElementById("sidebar").classList.toggle("open");
+});
+
+/* ===================================
+   LOAD RESOURCES
+=================================== */
+
+async function loadResources() {
+  const {data,error} = await supabaseClient
+    .from("ressources")
+    .select("*");
+
+  if (error) {
+    console.error(error);
+    document.getElementById("level-stats").innerHTML =
+      '<p class="empty">Impossible de charger les données. Vérifiez les permissions Supabase.</p>';
+
+    resources = [];
+    updateDashboard();
+    renderResources();
+    return;
+  }
+
+  resources = data || [];
+
+  resources.sort((a,b) => {
+    return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+  });
+
+  updateDashboard();
+  renderResources();
+}
+
+/* ===================================
+   DASHBOARD STATISTICS
+=================================== */
+
+function updateDashboard() {
+  const total = resources.length;
+
+  const published = resources.filter(item =>
+    item.publie === true
+  ).length;
+
+  const levels = ["1AS","2AS","3AS"].filter(level =>
+    resources.some(item => item.niveau === level)
+  );
+
+  const types = [...new Set(resources.map(item =>
+    item.type_ressource
+  ).filter(Boolean))];
+
+  document.getElementById("stat-total").textContent = total;
+  document.getElementById("stat-published").textContent = published;
+  document.getElementById("stat-levels").textContent = levels.length;
+  document.getElementById("stat-types").textContent = types.length;
+
+  const levelContainer = document.getElementById("level-stats");
+
+  if (!total) {
+    levelContainer.innerHTML =
+      '<p class="empty">Aucune ressource enregistrée pour le moment.</p>';
+  } else {
+    levelContainer.innerHTML = ["1AS","2AS","3AS"].map((level,index) => {
+      const count = resources.filter(item => item.niveau === level).length;
+      const percentage = Math.round((count / total) * 100);
+
+      return `
+        <div class="level-row">
+          <div class="level-info">
+            <strong>${level}</strong>
+            <span>${count} ressource(s) · ${percentage}%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar ${index===1?"second":index===2?"third":""}"
+              style="width:${percentage}%"></div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  const recent = resources.slice(0,5);
+  const recentTable = document.getElementById("recent-table");
+
+  recentTable.innerHTML = recent.length ? recent.map(item => `
+    <tr>
+      <td><strong>${escapeHTML(item.titre)}</strong></td>
+      <td><span class="tag">${escapeHTML(item.niveau)}</span></td>
+      <td>${escapeHTML(item.competence)}</td>
+      <td>${escapeHTML(item.type_ressource)}</td>
+    </tr>
+  `).join("") : '<tr><td colspan="4" class="empty">Aucune ressource disponible.</td></tr>';
+}
+
+/* ===================================
+   RESOURCE MANAGEMENT
+=================================== */
+
+function renderResources() {
+  const search = document.getElementById("search-resource").value.toLowerCase();
+  const level = document.getElementById("filter-level").value;
+  const type = document.getElementById("filter-type").value;
+
+  const filtered = resources.filter(item => {
+    const matchesSearch =
+      (item.titre || "").toLowerCase().includes(search) ||
+      (item.description || "").toLowerCase().includes(search) ||
+      (item.competence || "").toLowerCase().includes(search);
+
+    return matchesSearch &&
+      (!level || item.niveau === level) &&
+      (!type || item.type_ressource === type);
+  });
+
+  const tbody = document.getElementById("resources-table");
+
+  tbody.innerHTML = filtered.length ? filtered.map(item => `
+    <tr>
+      <td>
+        <strong>${escapeHTML(item.titre)}</strong>
+        <small>${escapeHTML(item.description || "Aucune description")}</small>
+      </td>
+      <td><span class="tag">${escapeHTML(item.niveau)}</span></td>
+      <td>${escapeHTML(item.competence)}</td>
+      <td>${escapeHTML(item.type_ressource)}</td>
+      <td>
+        <span class="tag">${item.publie ? "Publiée" : "Non publiée"}</span>
+      </td>
+      <td>
+        <div class="actions">
+          <button class="icon-btn" title="Voir le fichier"
+            data-action="view" data-id="${escapeHTML(item.id)}">
+            <i data-lucide="external-link"></i>
+          </button>
+          <button class="icon-btn" title="Modifier"
+            data-action="edit" data-id="${escapeHTML(item.id)}">
+            <i data-lucide="pencil"></i>
+          </button>
+          <button class="icon-btn delete" title="Supprimer"
+            data-action="delete" data-id="${escapeHTML(item.id)}">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join("") : '<tr><td colspan="6" class="empty">Aucune ressource trouvée.</td></tr>';
+
+  document.getElementById("resource-count").textContent =
+    filtered.length + " ressource(s) affichée(s) sur " + resources.length;
+
+  refreshIcons();
+}
+
+document.getElementById("search-resource").addEventListener("input",renderResources);
+document.getElementById("filter-level").addEventListener("change",renderResources);
+document.getElementById("filter-type").addEventListener("change",renderResources);
+
+/* ===================================
+   EDIT / DELETE / VIEW
+=================================== */
+
+document.getElementById("resources-table").addEventListener("click",async event => {
+  const button = event.target.closest("[data-action]");
+  if (!button) return;
+
+  const id = button.dataset.id;
+  const action = button.dataset.action;
+  const item = resources.find(resource => String(resource.id) === String(id));
+
+  if (!item) return;
+
+  if (action === "view") {
+    if (item.fichier_url) {
+      window.open(item.fichier_url,"_blank","noopener");
+    } else {
+      alert("Aucun fichier associé à cette ressource.");
+    }
+  }
+
+  if (action === "edit") {
+    const titre = prompt("Nouveau titre :",item.titre);
+    if (titre === null) return;
+    if (!titre.trim()) {
+      alert("Le titre ne peut pas être vide.");
+      return;
+    }
+
+    const description = prompt("Nouvelle description :",item.description || "");
+    if (description === null) return;
+
+    const {error} = await supabaseClient
+      .from("ressources")
+      .update({
+        titre:titre.trim(),
+        description:description.trim()
+      })
+      .eq("id",id);
+
+    if (error) {
+      alert("La modification a échoué : " + error.message);
+      return;
+    }
+
+    await loadResources();
+    alert("Ressource modifiée avec succès.");
+  }
+
+  if (action === "delete") {
+    const confirmed = confirm(
+      "Voulez-vous vraiment supprimer cette ressource ? Cette action est irréversible."
+    );
+
+    if (!confirmed) return;
+
+    const {error} = await supabaseClient
+      .from("ressources")
+      .delete()
+      .eq("id",id);
+
+    if (error) {
+      alert("La suppression a échoué : " + error.message);
+      return;
+    }
+
+    await loadResources();
+    alert("Ressource supprimée avec succès.");
+  }
+});
+
+/* ===================================
+   UPLOAD RESOURCE
+=================================== */
+
+resourceForm.addEventListener("submit",async event => {
+  event.preventDefault();
+  clearMessage(uploadMessage);
+
+  const {data:sessionData,error:sessionError} =
+    await supabaseClient.auth.getSession();
+
+  if (sessionError || !sessionData.session ||
+      !isAuthorized(sessionData.session.user)) {
+    showLogin();
+    message(uploadMessage,"Session non autorisée. Reconnectez-vous.","error");
+    return;
+  }
+
+  const titre = document.getElementById("titre").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const niveau = document.getElementById("niveau").value;
+  const competence = document.getElementById("competence").value;
+  const typeRessource = document.getElementById("type_ressource").value;
+  const file = document.getElementById("fichier").files[0];
+
+  if (!file) {
+    message(uploadMessage,"Veuillez sélectionner un fichier.","error");
+    return;
+  }
+
+  if (file.size > MAX_FILE_SIZE) {
+    message(uploadMessage,"Le fichier dépasse la limite de 50 Mo.","error");
+    return;
+  }
+
+  const allowed = [
+    "pdf","doc","docx","ppt","pptx",
+    "jpg","jpeg","png","webp",
+    "mp3","wav","ogg","mp4","webm"
+  ];
+
+  const extension = file.name.split(".").pop().toLowerCase();
+
+  if (!allowed.includes(extension)) {
+    message(uploadMessage,"Format de fichier non autorisé.","error");
+    return;
+  }
+
+  publishBtn.disabled = true;
+  publishBtn.textContent = "Publication en cours...";
+
+  let uploadedPath = null;
+
+  try {
+    const safeName = file.name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,"")
+      .replace(/[^a-zA-Z0-9._-]/g,"-");
+
+    const uniqueName =
+      Date.now() + "-" +
+      Math.random().toString(36).slice(2,8) +
+      "-" + safeName;
+
+    const {data:fileData,error:fileError} =
+      await supabaseClient.storage
+        .from(BUCKET_NAME)
+        .upload(uniqueName,file,{
+          cacheControl:"3600",
+          upsert:false
+        });
+
+    if (fileError) throw fileError;
+
+    uploadedPath = fileData.path;
+
+    const {data:publicData} = supabaseClient.storage
+      .from(BUCKET_NAME)
+      .getPublicUrl(uploadedPath);
+
+    const fichierUrl = publicData.publicUrl;
+
+    const {error:insertError} = await supabaseClient
+      .from("ressources")
+      .insert([{
+        titre,
+        description,
+        niveau,
+        competence,
+        type_ressource:typeRessource,
+        fichier_url:fichierUrl,
+        publie:true
+      }]);
+
+    if (insertError) throw insertError;
+
+    message(
+      uploadMessage,
+      "Ressource publiée avec succès !",
+      "success"
+    );
+
+    resourceForm.reset();
+    await loadResources();
+
+  } catch(error) {
+    console.error(error);
+
+    if (uploadedPath) {
+      await supabaseClient.storage
+        .from(BUCKET_NAME)
+        .remove([uploadedPath]);
+    }
+
+    message(
+      uploadMessage,
+      "Erreur de publication : " + (error.message || "Veuillez réessayer."),
+      "error"
+    );
+
+  } finally {
+    publishBtn.disabled = false;
+    publishBtn.innerHTML = '<i data-lucide="upload-cloud"></i> Publier la ressource';
+    refreshIcons();
+  }
+});
+
+/* ===================================
+   DATE & INITIALIZATION
+=================================== */
+
+document.getElementById("current-date").textContent =
+  new Intl.DateTimeFormat("fr-FR",{
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  }).format(new Date());
+
+checkSession();
+refreshIcons();
+
+</script>
 </body>
 </html>
